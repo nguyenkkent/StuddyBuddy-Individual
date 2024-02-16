@@ -1,4 +1,5 @@
 # Commands to Start
+In the terminal:\
 `cd application`\
 `npm install` to make a node_modules folder\
 `npm start`
