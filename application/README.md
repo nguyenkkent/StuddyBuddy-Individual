@@ -1,7 +1,7 @@
 # Commands to Start
 In the terminal:\
 `cd application`\
-`npm install` to make a node_modules folder (only needed to do this once, pulling from the repo won't discard it)\
+`npm install` to make a node_modules folder (only needed to do this once, pulling from the repo won't discard it and pushing it won't push the folder through b/c of .gitignore)\
 `npm start`
 
 Update anything that it says needs updating.
