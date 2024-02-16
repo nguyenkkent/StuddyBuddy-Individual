@@ -1,6 +1,7 @@
 # Commands to Start
 `cd application`\
-`npm install react-scripts --save` to make a node_modules folder
+`npm install` to make a node_modules folder\
+`npm start`
 
 # Basic Info
 CSC 648-04\
