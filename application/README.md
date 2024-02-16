@@ -1,10 +1,10 @@
 # Commands to Start
 In the terminal:\
 `cd application`\
-`npm install` to make a node_modules folder\
+`npm install` to make a node_modules folder (only needed to do this once, pulling from the repo won't discard it)\
 `npm start`
 
-Update anything that it says it needs updating.
+Update anything that it says needs updating.
 
 # Basic Info
 CSC 648-04\
