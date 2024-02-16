@@ -2,7 +2,9 @@
 In the terminal:\
 `cd application`\
 `npm install` to make a node_modules folder\
-`npm start`
+`npm start`\
+
+Update anything that it says it needs updating.
 
 # Basic Info
 CSC 648-04\
