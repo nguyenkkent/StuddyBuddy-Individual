@@ -6,6 +6,10 @@ In the terminal:\
 
 Update anything that it says needs updating.
 
+To Terminate/ Stop running Localhost:3000\
+'Crtl + C' (Extra step on Windows as it will prompt a (Y)/(N), just type y or Y)
+
+
 # Basic Info
 CSC 648-04\
 Team 06
