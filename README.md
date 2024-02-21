@@ -1,4 +1,4 @@
-# CSC648-SectionName-sp24-teamNum Repository
+# CSC648-04-sp24-Team06 Repository
 
 **Application URL: <https://example.com>**
 
@@ -16,9 +16,14 @@
    ACCEPT the invite**.
 3. Fill out the table below
 
-| Student Name | Student Email | GitHub Username | Student's role |
-| :----------: | :-----------: | :-------------: | :------------: |
-|   John Doe   | jdoe@sfsu.edu |      jdoe       |  Team Leader   |
+| Student Name  |     Student Email     | GitHub Username | Student's role |
+| :-----------: | :-------------------: | :-------------: | :------------: |
+| Ashley Ching  |   aching4@sfsu.edu    |     aching4     |  Team Leader   |
+|   Yuquan Xu   |  yxu15@mail.sfsu.edu  |    yyyuquan     | Front End Lead |
+|  Kent Nguyen  | ngkkent@mail.sfsu.edu |   nguyenkkent   | Back End Lead  |
+|  Nhan Nguyen  |  nnguyen14@sfsu.edu   |  nhannguyensf   |   Git Master   |
+| Brenden Lapuz | blapuz@mail.sfsu.edu  |    cornbren     |  Scrum Master  |
+| Pierre Harbin |   pharbin@sfsu.edu    |    SirKentut    |  Team Member   |
 
 **NO code should be stored in the root of your repository. You may rename the
 `application/` folder to your team's application name if you'd like, but all the
