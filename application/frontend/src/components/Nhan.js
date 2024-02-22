@@ -9,9 +9,10 @@ function Nhan() {
         <h2 className='team-member-role'>
             Git Master
         </h2>
-            <img className='team-member-image' src="/test.jpg" alt="Nhan" />
+            <img className='team-member-image' src="/nhan-profile.jpg" alt="Nhan" />
         <p className='team-member-bio'>
-            Small bio
+            Computer Science senior at SFSU. Love playing soccer and listening to
+        music.
         </p>
     </div>
   );
