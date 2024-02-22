@@ -9,9 +9,10 @@ function Ashley() {
         <h2 className='team-member-role'>
             Team Lead
         </h2>
-            <img className='team-member-image' src="/test.jpg" alt="Ashley" />
+            <img className='team-member-image' src="/ashley-profile.jpg" alt="Ashley" />
         <p className='team-member-bio'>
-            Small bio
+            Hi, I'm a junior at San Francisco State Univeristy. 
+            I enjoy drawing, going on adventures, and hanging out with friends.
         </p>
     </div>
   );
