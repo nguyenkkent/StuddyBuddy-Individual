@@ -11,8 +11,8 @@ function Brenden() {
         </h2>
             <img className='team-member-image' src="/test.jpg" alt="Brenden" />
         <p className='team-member-bio'>
-            Small bio
-        </p>
+        Hey everyone, my name is Brenden Lapuz, I'm a fourth year hear in SFSU.
+            I enjoy anime and collecting high end action figures.        </p>
     </div>
   );
 }
