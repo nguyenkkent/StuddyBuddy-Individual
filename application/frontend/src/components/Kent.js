@@ -9,9 +9,9 @@ function Kent() {
         <h2 className='team-member-role'>
             Back-End Lead
         </h2>
-            <img className='team-member-image' src="/test.jpg" alt="Kent" />
+            <img className='team-member-image' src="/shibaInu.jpeg" alt="Kent" />
         <p className='team-member-bio'>
-            Small bio
+            A senior at SFSU who enjoys movies, cooking, and food. 
         </p>
     </div>
   );
