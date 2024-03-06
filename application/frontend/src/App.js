@@ -11,6 +11,9 @@ import Nhan from './components/Nhan';
 import Pierre from './components/Pierre';
 import Yuquan from './components/Yuquan';
 
+import Registration from './components/Registration';
+import Login from './components/Login';
+
 function App() {
   return (
     <Router>
@@ -24,6 +27,8 @@ function App() {
           <Route path="/nhan" element={<Nhan />} />
           <Route path="/pierre" element={<Pierre />} />
           <Route path="/yuquan" element={<Yuquan />} />
+          <Route path="/register" element={<Registration />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </div>
     </Router>

@@ -1,6 +1,6 @@
 # Commands to Start Localhost:3000
 In the terminal:\
-`cd application`\
+`cd application\frontend`\
 `npm install` to make a node_modules folder (only needed to do this once, pulling from the repo won't discard it and pushing it won't push the folder through b/c of .gitignore)\
 `npm start`
 
