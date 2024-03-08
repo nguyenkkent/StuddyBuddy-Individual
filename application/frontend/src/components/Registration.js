@@ -72,7 +72,7 @@ function Registration() {
       try {
         console.log('Sending data:', user);
         const response = await axios.post('http://localhost:3000/register', {
-          userObj: user,
+          user
         });
         console.log('Success:', response.data);
       } catch (error) {
