@@ -72,9 +72,9 @@ function Registration() {
       try {
         console.log('Sending data:', user);
         const response = await axios.post('http://localhost:3000/register', {
-          usernameField: user.username,
-          passwordField: user.password,
-          emailField: user.email
+          username: user.username,
+          password: user.password,
+          email: user.email
         });
         //console.log('Success:', response.data);
       } catch (error) {
@@ -84,7 +84,7 @@ function Registration() {
       console.log('Nope, fill out the form correctly bro or miss');
     }
   };
-  
+
   return (
     <div className="registrationForm">
       <h2>Registration</h2>

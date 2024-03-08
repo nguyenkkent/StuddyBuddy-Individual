@@ -1,15 +1,11 @@
 import express from "express";
 import mongoose from "mongoose";
 import {PORT, mongoURL} from "./config.js";
-import {userRouter} from "./routes/users.js"
+import userRouter from "./routes/users.js"
 
 const app = express();
 app.use(express.json());
 app.use('/register', userRouter);
-//temp homepage router
-app.get('/', (request, response)=>{
-    return response.status(200).send("Hi this is a backend");
-});
 
 //connect to mongoDB
 mongoose
