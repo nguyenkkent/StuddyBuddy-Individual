@@ -11,9 +11,6 @@ function Registration() {
   });
   
   const [errors, setErrors] = useState({});
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
 
   // Handles changes in the form's fields, like checking the box or types in a field box
   const handleChange = (e) => {
@@ -69,15 +66,18 @@ function Registration() {
   };
 
   // Can edit this for sending user data to backend, right now, it console.logs
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log('Success');
-      axios.post('http://localhost:3000/register/', {
-        usernameField: username,
-        passwordField: password,
-        emailField: email
-  })
+      try {
+        console.log('Sending data:', user);
+        const response = await axios.post('http://localhost:3000/register', {
+          userObj: user,
+        });
+        console.log('Success:', response.data);
+      } catch (error) {
+        console.error('Error:', error.message);
+      }
     } else {
       console.log('Nope, fill out the form correctly bro or miss');
     }
