@@ -1,14 +1,20 @@
 import express from "express";
-import {User} from "../models/userSchema.js";
+import {Users} from "../models/userSchema.js";
 const router = express.Router();
 
 router.post('/', async (request, response)=>{
 try{
     console.log(request.body);
-    const {username, password, email} = request.body;
-    console.log(username);
-    console.log(password);
-    console.log(email);
+    const newUser = {
+        username : request.body.username,
+        password: request.body.password,
+        email: request.body.email,
+        tags: [],
+        history:[],
+        isVerified: false,
+        isGuess: false
+    }
+    const user = await Users.create()
     
 
     //placeholder
