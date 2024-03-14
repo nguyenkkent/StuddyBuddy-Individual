@@ -8,8 +8,8 @@ function Registration() {
     password: '',
     confirmPassword: '',
     agreeToTerms: false,
-  });
-  
+  });  
+
   const [errors, setErrors] = useState({});
 
   // Handles changes in the form's fields, like checking the box or types in a field box
