@@ -13,6 +13,7 @@ import Yuquan from './components/Yuquan';
 
 import Registration from './components/Registration';
 import Login from './components/Login';
+import AboutUs from './components/AboutUs';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/yuquan" element={<Yuquan />} />
           <Route path="/register" element={<Registration />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/aboutus" element={<AboutUs />} />
         </Routes>
       </div>
     </Router>
