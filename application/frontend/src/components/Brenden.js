@@ -9,10 +9,10 @@ function Brenden() {
         <h2 className='team-member-role'>
             Scrum Master
         </h2>
-            <img className='team-member-image' src="/test.jpg" alt="Brenden" />
+            <img className='team-member-image' src="/bren.JPG" alt="Brenden" />
         <p className='team-member-bio'>
-            Small bio
-        </p>
+        Hey everyone, my name is Brenden Lapuz, I'm a fourth year here in SFSU.
+        I enjoy playing basketball with my friends on campus. #intramuralchampion2024        </p>
     </div>
   );
 }
