@@ -7,9 +7,6 @@ router.post('/', async (request, response)=>{
     try{
         const item = Users.findOne({email: request.body.email})
         if (item==null){
-            console.log("email is in used");
-        }
-        else{
             console.log("User does not exists");
 
             const newUser = {
@@ -21,8 +18,13 @@ router.post('/', async (request, response)=>{
             isVerified: false,
             isGuess: false
             }
+            const result = await Users.collection.insertOne(newUser);
+            console.log(`A document was inserted with the _id: ${result.insertedId}`);
+            
+        }
+        else{
 
-            Users.collection.insertOne(newUser);
+            console.log("email is in used");
         }
     }
     catch(error){
