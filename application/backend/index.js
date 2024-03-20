@@ -1,14 +1,13 @@
 import express from "express";
 import mongoose from "mongoose";
 import {PORT, mongoURL} from "./config.js";
+import userRouter from "./routes/users.js"
+import dashboardRouter from "./routes/dashboard.js"
 
 const app = express();
 app.use(express.json());
-
-//temp homepage router
-app.get('/', (request, response)=>{
-    return response.status(200).send("Hi this is a backend");
-});
+app.use('/register', userRouter);
+app.use('/dashboard', dashboardRouter);
 
 //connect to mongoDB
 mongoose
@@ -23,9 +22,4 @@ mongoose
         console.log(error);
     });
 
-app.post('/register', (request, response)=>{
-    const{username, password, email} = request.body;
-    console.log(request.body);
-    return response.status(200).send("Received data from backend")
-});
 
