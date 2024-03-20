@@ -16,12 +16,12 @@ function Dashboard(){
       <div>
         <template>
             <div class='users'>
-                <div class='header'>Name </div>
-                <div class='body'>Email</div>
+                <div class='header'></div>
+                <div class='body'></div>
             </div>
         </template>
     </div>
     </div>
   );
-          }
+}
 export default Dashboard;
