@@ -1,18 +1,18 @@
 import express from "express";
 import mongoose from "mongoose";
 import {PORT, mongoURL} from "./config.js";
+import userRouter from "./routes/users.js"
+import dashboardRouter from "./routes/dashboard.js"
 
 const app = express();
-
-//temp homepage router
-app.get('/', (request, response)=>{
-    return response.status(200).send("Hi this is a backend");
-});
+app.use(express.json());
+app.use('/register', userRouter);
+app.use('/dashboard', dashboardRouter);
 
 //connect to mongoDB
 mongoose
     .connect(mongoURL)
-    .then(()=> {
+    .then(()=> {    
         console.log('App successfully connected to database');
         app.listen(PORT, () => {
             console.log(`App is listening on port: ${PORT}`);//use backquotes for template literals
@@ -21,4 +21,5 @@ mongoose
     .catch((error)=>{
         console.log(error);
     });
+
 
