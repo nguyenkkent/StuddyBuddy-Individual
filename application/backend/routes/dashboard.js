@@ -9,14 +9,14 @@ const router = express.Router();
 router.get("/", async (request, response) =>{
     try{
         const userData = await Users.collection.find({}).toArray();
-        // const groupData = Groups.find({});
-        // const messageData = Messages.find({});
+        const groupData = await Groups.collection.find({}).toArray();
+        const messageData = await Messages.collection.find({}).toArray();
+        var jsonData = {};
+        jsonData.userData = userData;
+        jsonData.groupData = groupData;
+        jsonData.messageData = messageData;
 
-        console.log(userData);
-        // console.log(groupData);  
-        // console.log(messageData);
-        return response.status(200);
-
+        return response.status(200).json(jsonData);
     }
     catch(error){
         console.log("Error: ", error.message);
