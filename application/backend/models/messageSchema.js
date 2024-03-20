@@ -6,4 +6,4 @@ const messageSchema = new mongoose.Schema({
     contents: [String]
 })
  
-export const Users = mongoose.model("Messages", messageSchema);
+export const Messages = mongoose.model("Messages", messageSchema);

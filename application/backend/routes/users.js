@@ -1,7 +1,7 @@
 import express from "express";
 import {Users} from "../models/userSchema.js";
 const router = express.Router();
-const bcrypt = require("bcrypt")
+import bcrypt from "bcrypt";
 
 router.post('/', async (request, response)=>{
 
@@ -30,16 +30,9 @@ router.post('/', async (request, response)=>{
         console.log("Error: ", error.message);
         response.status(500).send({message: error.message})
     }
-    
-
-
 })
 
     
-
-
-
-
 
 //router.get
 
