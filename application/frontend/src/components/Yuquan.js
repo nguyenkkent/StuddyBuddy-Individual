@@ -10,9 +10,9 @@ function Yuquan() {
         <h2 className='team-member-role'>
             Front-End Lead
         </h2>
-            <img className="team-member-image" src="/test.jpg" alt="Yuquan Xu" />
+            <img className="team-member-image" src="/yuquan.png" alt="Yuquan Xu" />
         <p className='team-member-bio'>
-        Loading...
+        I have made grave mistakes trying to cook meat balls before. I am also a student.
         </p>
     </div>
   );
