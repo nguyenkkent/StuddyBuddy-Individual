@@ -8,7 +8,7 @@ function Registration() {
     password: '',
     confirmPassword: '',
     agreeToTerms: false,
-  });
+  });  
 
   const [errors, setErrors] = useState({});
 
@@ -72,13 +72,14 @@ function Registration() {
       try {
         console.log('Sending data:', user);
         const response = await axios.post('http://localhost:3000/register', {
-          user
+          username: user.username,
+          password: user.password,
+          email: user.email
         });
-        console.log('Success:', response.data);
+        //console.log('Success:', response.data);
       } catch (error) {
         console.error('Error:', error.message);
       }
-
     } else {
       console.log('Nope, fill out the form correctly bro or miss');
     }
