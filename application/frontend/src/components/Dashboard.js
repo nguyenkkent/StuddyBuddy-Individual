@@ -10,30 +10,30 @@ function Dashboard(){
         setSearchTerm(event.target.value);
     };
     // If search term is empty, this is not going to display any users 
-    // till you type something that matches with register users
+    // till you type something that matches with register users/ in the db
     const fetchSearch = async () => {
         if (searchTerm.trim() === '') {
             setUsers([]);
             return;
     }
     try {
-        // Replace the backend api here
+        // Can replace the backend APIIII here
         const response = await axios.get("http://localhost:3000/dashboard", {
-            params: { searchTerm } // might change this to username: serachTerm
+            params: { searchTerm } // Can change in the future to match the backend
         });
-        setUsers(response.data.userData); // I hope this is the correct response
+        setUsers(response.data.userData); // From the db
     } catch (error) {
         console.error("Error fetching search results:", error);
-        setUsers([]);
+        setUsers([]); // If there is an error, set users to an empty array for cleaning
     }
 };
 
-    // Run fetchSearch when searchTerm changes
+    // useEffect for reducing the # of API calls, less lag and probably performance up
     useEffect(() => {
         const delayDebounceFn = setTimeout(() => {
             fetchSearch();
-        }, 300);
-
+        }, 300); // 300ms delay before the API call is made
+        // Cleans up for timeout if value changes
         return () => clearTimeout(delayDebounceFn);
     }, [searchTerm]);
 
