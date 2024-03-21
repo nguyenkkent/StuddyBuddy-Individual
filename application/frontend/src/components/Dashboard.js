@@ -2,40 +2,37 @@ import React, { useState, useEffect } from "react";
 import "../css/Home.css";
 import axios from 'axios';
 
-function Dashboard(){
+function Dashboard() {
     const [searchTerm, setSearchTerm] = useState("");
-    const [users, setUsers] = useState([]);
+    const [allUsers, setAllUsers] = useState([]);
+    const [filteredUsers, setFilteredUsers] = useState([]);
 
     const handleChange = (event) => {
         setSearchTerm(event.target.value);
     };
-    // If search term is empty, this is not going to display any users 
-    // till you type something that matches with register users/ in the db
-    const fetchSearch = async () => {
-        if (searchTerm.trim() === '') {
-            setUsers([]);
-            return;
-    }
-    try {
-        // Can replace the backend APIIII here
-        const response = await axios.get("http://localhost:3000/dashboard", {
-            params: { searchTerm } // Can change in the future to match the backend
-        });
-        setUsers(response.data.userData); // From the db
-    } catch (error) {
-        console.error("Error fetching search results:", error);
-        setUsers([]); // If there is an error, set users to an empty array for cleaning
-    }
-};
 
-    // useEffect for reducing the # of API calls, less lag and probably performance up
     useEffect(() => {
-        const delayDebounceFn = setTimeout(() => {
-            fetchSearch();
-        }, 300); // 300ms delay before the API call is made
-        // Cleans up for timeout if value changes
-        return () => clearTimeout(delayDebounceFn);
-    }, [searchTerm]);
+        const fetchUsers = async () => {
+            try {
+                const response = await axios.get("http://localhost:3000/dashboard");
+                setAllUsers(response.data.userData);
+                setFilteredUsers(response.data.userData);
+            } catch (error) {
+                console.error("Error fetching users:", error);
+                setAllUsers([]);
+                setFilteredUsers([]);
+            }
+        };
+        fetchUsers();
+    }, []);
+
+    useEffect(() => {
+        const filtered = allUsers.filter(user =>
+            user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            user.email.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setFilteredUsers(filtered);
+    }, [searchTerm, allUsers]);
 
     return (
         <div className="dashboard">
@@ -47,10 +44,9 @@ function Dashboard(){
                     value={searchTerm}
                     onChange={handleChange}
                 />
-                <button onClick={fetchSearch}>Search</button>
             </div>
             <div className="user-results">
-                {users.map(user => (
+                {filteredUsers.map(user => (
                     <div key={user._id} className='user-entry'>
                         <div className='username'>Username: {user.username}</div>
                         <div className='email'>Email: {user.email}</div>
