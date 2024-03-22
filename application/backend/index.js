@@ -1,12 +1,12 @@
 import express from "express";
 import mongoose from "mongoose";
 import {PORT, mongoURL} from "./config.js";
-import userRouter from "./routes/users.js"
+import registerRouter from "./routes/register.js"
 import dashboardRouter from "./routes/dashboard.js"
 
 const app = express();
 app.use(express.json());
-app.use('/register', userRouter);
+app.use('/register', registerRouter);
 app.use('/dashboard', dashboardRouter);
 
 //connect to mongoDB
