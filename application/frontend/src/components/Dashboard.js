@@ -14,7 +14,7 @@ function Dashboard() {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get("http:192.9.228.148/api/dashboard");
+                const response = await axios.get("/api/dashboard");
                 setAllUsers(response.data.userData);
                 setFilteredUsers(response.data.userData);
             } catch (error) {
@@ -27,7 +27,7 @@ function Dashboard() {
     }, []);
 
     useEffect(() => {
-        const filtered = allUsers.filter(user =>
+        const filtered = allUsers && allUsers.filter(user =>
             user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
             user.email.toLowerCase().includes(searchTerm.toLowerCase())
         );
@@ -46,7 +46,7 @@ function Dashboard() {
                 />
             </div>
             <div className="user-results">
-                {filteredUsers().map(user => (
+                {filteredUsers && filteredUsers.map(user => (
                     <div key={user._id} className='user-entry'>
                         <div className='username'>Username: {user.username}</div>
                         <div className='email'>Email: {user.email}</div>
