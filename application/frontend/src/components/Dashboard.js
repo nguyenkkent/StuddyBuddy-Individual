@@ -46,7 +46,7 @@ function Dashboard() {
                 />
             </div>
             <div className="user-results">
-                {filteredUsers.map(user => (
+                {filteredUsers().map(user => (
                     <div key={user._id} className='user-entry'>
                         <div className='username'>Username: {user.username}</div>
                         <div className='email'>Email: {user.email}</div>
