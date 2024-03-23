@@ -71,8 +71,7 @@ function Registration() {
     if (validateForm()) {
       try {
         console.log('Sending data:', user);
-        // FIXME: cors is being bypass at the moment
-        const response = await axios.post('http://cors.jpkit.us/192.9.228.148:3000/register', {
+        const response = await axios.post('http://192.9.228.148:3000/register', {
           username: user.username,
           password: user.password,
           email: user.email
