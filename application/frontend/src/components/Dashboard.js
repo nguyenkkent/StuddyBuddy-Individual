@@ -14,7 +14,7 @@ function Dashboard() {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get("http:192.9.228.148:81/api/dashboard");
+                const response = await axios.get("http:192.9.228.148/api/dashboard");
                 setAllUsers(response.data.userData);
                 setFilteredUsers(response.data.userData);
             } catch (error) {

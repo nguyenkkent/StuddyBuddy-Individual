@@ -71,7 +71,7 @@ function Registration() {
     if (validateForm()) {
       try {
         console.log('Sending data:', user);
-        const response = await axios.post('http://192.9.228.148:81/api/register', {
+        const response = await axios.post('http://192.9.228.148/api/register', {
           username: user.username,
           password: user.password,
           email: user.email
