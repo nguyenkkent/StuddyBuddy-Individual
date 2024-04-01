@@ -1,6 +1,5 @@
 import express from "express";
 import mongoose from "mongoose";
-import cors from "cors";
 
 import {PORT, mongoURL} from "./config.js";
 import registerRouter from "./routes/register.js"
@@ -9,9 +8,10 @@ import messageRouter from "./routes/message.js";
 
 const app = express();
 
+//middleware
 app.use(express.json());
-app.use(cors);
 
+//routes
 app.use('/register', registerRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/message', messageRouter);
