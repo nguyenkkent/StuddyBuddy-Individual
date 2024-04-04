@@ -6,8 +6,8 @@ import dashboardRouter from "./routes/dashboard.js"
 
 const app = express();
 app.use(express.json());
-app.use('/register', userRouter);
-app.use('/dashboard', dashboardRouter);
+app.use('/api/register', userRouter);
+app.use('/api/dashboard', dashboardRouter);
 
 //connect to mongoDB
 mongoose

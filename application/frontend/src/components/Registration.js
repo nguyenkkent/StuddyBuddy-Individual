@@ -20,7 +20,7 @@ function Registration() {
       [name]: name === 'agreeToTerms' ? checked : value,
     });
   };
-
+  
   const validateForm = () => {
     let formIsValid = true;
     let errors = {};
