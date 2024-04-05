@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import SideNavbar from '../components/Sidebar';
 import "../css/Home.css";
 import axios from 'axios';
 
@@ -35,7 +36,9 @@ function Dashboard() {
     }, [searchTerm, allUsers]);
 
     return (
-        <div className="dashboard">
+        <div className="dashboard-container"> 
+            <SideNavbar />
+            <div className="dashboard-content">
             <h1>Welcome back!</h1>
             <div>
                 <input
@@ -54,6 +57,7 @@ function Dashboard() {
                 ))}
             </div>
         </div>
+    </div>
     );
 }
 
