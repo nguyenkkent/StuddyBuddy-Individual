@@ -9,7 +9,7 @@ function Registration() {
     confirmPassword: '',
     agreeToTerms: false,
   });  
-
+  
   const [errors, setErrors] = useState({});
 
   // Handles changes in the form's fields, like checking the box or types in a field box
@@ -71,7 +71,7 @@ function Registration() {
     if (validateForm()) {
       try {
         console.log('Sending data:', user);
-        const response = await axios.post('http://localhost:3000/register', {
+        const response = await axios.post('/api/register', {
           username: user.username,
           password: user.password,
           email: user.email

@@ -1,7 +1,7 @@
 import express from "express";
 import {Users} from "../models/userSchema.js";
 import {Groups} from "../models/groupSchema.js";
-import {Messages} from "../models/MessageSchema.js";
+import {Messages} from "../models/messageSchema.js";
 const router = express.Router();
 
 // const app = express();

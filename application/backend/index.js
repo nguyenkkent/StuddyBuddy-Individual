@@ -11,10 +11,12 @@ const app = express();
 //middleware
 app.use(express.json());
 
+
 //routes
-app.use('/register', registerRouter);
-app.use('/dashboard', dashboardRouter);
-app.use('/message', messageRouter);
+app.use('/api/register', registerRouter);
+app.use('/api/dashboard', dashboardRouter);
+app.use('api/message', messageRouter);
+
 
 //connect to mongoDB
 mongoose
