@@ -76,6 +76,7 @@ function Registration() {
         });
   
         if (response.status === 200) {
+          
           alert("User created!");
         } 
         else if (response.status === 409) {
