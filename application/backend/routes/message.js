@@ -1,7 +1,9 @@
 import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
+import {Message} from "../models/messageSchema";
 import cors from "cors";
+
 
 //create an instance of the application object
 const app = express();
@@ -18,6 +20,18 @@ const io = new Server(httpServer, {
 });
 
 const router = express.Router();
+
+io.on('connection', (socket) => {
+    console.log('a user connected');
+
+    socket.on('disconnect', () => {
+      console.log('user disconnected');
+    });
+
+    socket.on("message", msg =>{
+        io.emit("chatMessage", msg);
+    })
+  });
 
 
 
