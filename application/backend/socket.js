@@ -2,6 +2,7 @@ import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import cors from "cors";
+import { log } from "console";
 // import {Messages} from "../models/messageSchema.js";
 
 //create an instance of the application object
@@ -22,13 +23,16 @@ const io = new Server(server, {
 io.on('connection', (socket) => {
     console.log(`User connected: ${socket.id}`);
 
-    // socket.on('disconnect', () => {
-    //   console.log('user disconnected');
-    // });
-
-    // socket.on("message", msg =>{
-    //     io.emit("chatMessage", msg);
-    // })
+    socket.on('disconnect', () => {
+      console.log('user disconnected');
+    });
+    
+    //when 
+    socket.on("sendMessage", data=>{
+        //send the message to all but the sender
+        console.log(data);
+        socket.broadcast.emit("receiveMessage", data);
+    })
   });
 
 
