@@ -9,7 +9,7 @@ function Registration() {
     confirmPassword: '',
     agreeToTerms: false,
   });  
-
+  
   const [errors, setErrors] = useState({});
 
   // Handles changes in the form's fields, like checking the box or types in a field box
@@ -20,7 +20,7 @@ function Registration() {
       [name]: name === 'agreeToTerms' ? checked : value,
     });
   };
-  
+
   const validateForm = () => {
     let formIsValid = true;
     let errors = {};
