@@ -65,26 +65,28 @@ function Registration() {
     return formIsValid;
   };
 
-  // Can edit this for sending user data to backend, right now, it console.logs
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        //need to change the post to "/api/register" for deployment
-        axios.post('http://localhost:3001/api/register', {
+        const response = await axios.post('http://localhost:3001/api/register', {
           username: user.username,
           password: user.password,
           email: user.email
-        })
-        .then((response) => {
-          console.log(response.status, response.data.token);
-          alert("User created!")  
-        })  
-      } catch (error) {
+        });
+  
+        if (response.status === 200) {
+          alert("User created!");
+        } 
+        else if (response.status === 409) {
+          alert("Email exists");
+        }
+      }
+      catch (error) {
         console.error('Error:', error.message);
       }
     } else {
-      alert("Missing fields") 
+      alert("Missing fields");
     }
   };
 
