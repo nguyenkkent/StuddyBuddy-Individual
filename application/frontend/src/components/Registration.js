@@ -70,18 +70,21 @@ function Registration() {
     e.preventDefault();
     if (validateForm()) {
       try {
-        console.log('Sending data:', user);
-        const response = await axios.post('/api/register', {
+        //need to change the post to "/api/register" for deployment
+        axios.post('http://localhost:3001/api/register', {
           username: user.username,
           password: user.password,
           email: user.email
-        });
-        //console.log('Success:', response.data);
+        })
+        .then((response) => {
+          console.log(response.status, response.data.token);
+          alert("User created!")  
+        })  
       } catch (error) {
         console.error('Error:', error.message);
       }
     } else {
-      console.log('Nope, fill out the form correctly bro or miss');
+      alert("Missing fields") 
     }
   };
 
