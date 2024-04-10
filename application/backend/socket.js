@@ -2,7 +2,6 @@ import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import cors from "cors";
-import { log } from "console";
 // import {Messages} from "../models/messageSchema.js";
 
 //create an instance of the application object
@@ -27,7 +26,7 @@ io.on('connection', (socket) => {
       console.log('user disconnected');
     });
     
-    //when 
+    //getting data from the front end and sending it back
     socket.on("sendMessage", data=>{
         //send the message to all but the sender
         console.log(data);

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Login() {
     const navigate = useNavigate();
@@ -16,11 +17,26 @@ function Login() {
         });
     };
 
-    // Can add validation here for backend, unless you have another way.
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log('Login Successful', loginData);
-        navigate('/dashboard');    
+        try{
+            const response = await axios.post('http://localhost:3001/api/login', {
+                email: loginData.email,
+                password: loginData.password
+                });   
+            console.log(`login message: ${response.message}`);
+            if (response.status === 200){
+                navigate('/api/dashboard');  
+            }
+            else{
+                alert(response.message);
+            }        
+        }
+        catch (error){
+            console.error('Error:', error.message);
+        }
+
+
     };
 
     return (
