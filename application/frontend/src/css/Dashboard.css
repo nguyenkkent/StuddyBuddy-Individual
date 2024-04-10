@@ -13,15 +13,20 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
-  background-color: rgb(221, 180, 75);
-  max-width: 300px;
+  background-color: #bf9270;
   margin: 0 auto;
   margin-top: 20px;
   text-align: left;
+  width: 80%;
+}
+
+.user-container {
+  display: flex;
+  justify-content: space-between;
 }
 
 .username {
-  font-size: 17px;
+  font-size: 24px;
   font-weight: bold;
   color: #333333;
 }
@@ -40,4 +45,24 @@
   margin-left: 250px;
   flex-grow: 1;
   padding: 20px;
+}
+
+/* FIXME: create single file for button class */
+.user-entry a {
+  color: black;
+  background: #edcdbb;
+  text-align: center;
+  padding: 14px 24px;
+  text-decoration: none;
+  font-size: 20px;
+  transition: color 0.3s, background-color 0.3s, transform 0.3s;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.user-entry a:hover,
+.user-entry a:focus {
+  background: #e3b7a0;
+  transform: scale(0.90);
+  border-radius: 10px;
 }

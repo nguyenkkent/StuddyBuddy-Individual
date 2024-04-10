@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import SideNavbar from '../common/Sidebar';
 import "../../css/Dashboard.css";
 import axiosClient from "../../axiosClient";
+import { Link } from "react-router-dom";
 
 function Dashboard() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -50,8 +51,15 @@ function Dashboard() {
         <div className="user-results">
           {filteredUsers && filteredUsers.map(user => (
             <div key={user._id} className='user-entry'>
-              <div className='username'>Username: {user.username}</div>
-              <div className='email'>Email: {user.email}</div>
+              <div className="user-container">
+                <div>
+                  <div className='username'>{user.username}</div>
+                  <div>Tags: {user.tags.join(", ") || "N/A"}</div>
+                </div>
+                <Link to="#" onClick={() => {
+                  alert("WIP");
+                }}>Chat</Link>
+              </div>
             </div>
           ))}
         </div>

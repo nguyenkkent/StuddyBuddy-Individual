@@ -27,6 +27,7 @@
   justify-content: flex-end;
 }
 
+/* FIXME: create single file for button class */
 .navbar-component > a {
   color: black;
   background: #edcdbb;
