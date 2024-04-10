@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Home from './components/Home';
+import Home from './components/pages/Home';
 import Navbar from './components/Navbar';
 
 import Ashley from './components/profiles/Ashley';
@@ -11,12 +11,12 @@ import Nhan from './components/profiles/Nhan';
 import Pierre from './components/profiles/Pierre';
 import Yuquan from './components/profiles/Yuquan';
 
-import Registration from './components/Registration';
-import Login from './components/Login';
-import AboutUs from './components/AboutUs';
-import Dashboard from './components/Dashboard';
+import Registration from './components/pages/Registration';
+import Login from './components/pages/Login';
+import AboutUs from './components/pages/AboutUs';
+import Dashboard from './components/pages/Dashboard';
 
-import Chats from "./components/Chats";
+import Chats from "./components/pages/Chats";
 
 function App() {
   return (
