@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from "axios";
+import { Navigate } from 'react-router-dom';
 
 function Registration() {
   const [user, setUser] = useState({
@@ -76,8 +77,8 @@ function Registration() {
         });
   
         if (response.status === 200) {
-          
           alert("User created!");
+          Navigate("/api/dashboard");
         } 
         else if (response.status === 409) {
           alert("Email exists");
