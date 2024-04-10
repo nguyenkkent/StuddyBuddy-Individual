@@ -11,7 +11,6 @@ function Dashboard() {
     const handleChange = (event) => {
         setSearchTerm(event.target.value);
     };
-
     useEffect(() => {
         const fetchUsers = async () => {
             try {

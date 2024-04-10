@@ -4,18 +4,18 @@ const router = express.Router();
 import bcrypt from "bcrypt";
 
 router.post('/', async (request, response)=>{
-
     try{
-        console.log(request.body.email);
         const item = await Users.findOne({email: request.body.email});
         if (item){
-            console.log("email is in used");
-            return response.status(400).send("Email is already in used")         
+            alert("Email is already in used");
+            response.status(409).send("Email is already in used")         
         }
         else{
+            const salt = await bcrypt.genSalt(10);
+            const hashedPassword = await bcrypt.hash(request.body.password, salt);
             const newUser = {
                 username : request.body.username,
-                password: request.body.password,
+                password: hashedPassword,
                 email: request.body.email,
                 tags: [],
                 history:[],
@@ -24,6 +24,7 @@ router.post('/', async (request, response)=>{
                 }
                 const result = await Users.collection.insertOne(newUser);
                 console.log(`A document was inserted with the _id: ${result.insertedId}`);
+                response.status(200);
         }
     }
     catch(error){
@@ -31,9 +32,5 @@ router.post('/', async (request, response)=>{
         response.status(500).send({message: error.message})
     }
 })
-
-    
-
-//router.get
 
 export default router;

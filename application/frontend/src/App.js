@@ -16,6 +16,8 @@ import Login from './components/Login';
 import AboutUs from './components/AboutUs';
 import Dashboard from './components/Dashboard';
 
+import Chats from "./components/Chats";
+
 function App() {
   return (
     <Router>
@@ -31,8 +33,9 @@ function App() {
           <Route path="/yuquan" element={<Yuquan />} />
           <Route path="/api/register" element={<Registration />} />
           <Route path="/api/login" element={<Login />} />
-          <Route path="/api//aboutus" element={<AboutUs />} />
+          <Route path="/api/aboutus" element={<AboutUs />} />
           <Route path="/api/dashboard" element={<Dashboard />} />
+          <Route path="/chats" element={<Chats />}/>
         </Routes>
       </div>
     </Router>
