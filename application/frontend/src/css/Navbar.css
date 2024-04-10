@@ -1,9 +1,9 @@
 .navbar {
     background: gray;
     overflow: hidden;
-    padding: 14px 20px;
+    padding: 0px 20px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     transition: background-color 0.3s;
     position: relative;
@@ -25,3 +25,9 @@
     transform: scale(0.80);
     border-radius: 10px;
 }
+
+.navbar-center {
+    flex: 1;
+    text-align: center;
+}
+
