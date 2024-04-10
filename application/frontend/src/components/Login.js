@@ -3,19 +3,26 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function Login() {
-    const navigate = useNavigate();
-    const [loginData, setLoginData] = useState({
-        email: '',
-        password: '',
-    });
+  const navigate = useNavigate();
+  const [loginData, setLoginData] = useState({
+    email: '',
+    password: '',
+  });
 
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setLoginData({
-            ...loginData,
-            [name]: value,
-        });
-    };
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setLoginData({
+      ...loginData,
+      [name]: value,
+    });
+  };
+
+  // Can add validation here for backend, unless you have another way.
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('Login Successful', loginData);
+    navigate('/dashboard');
+  };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
