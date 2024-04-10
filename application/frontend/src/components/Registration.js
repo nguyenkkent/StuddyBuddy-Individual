@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from "axios";
 import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 function Registration() {
   const [user, setUser] = useState({
@@ -10,7 +12,7 @@ function Registration() {
     confirmPassword: '',
     agreeToTerms: false,
   });  
-  
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
 
   // Handles changes in the form's fields, like checking the box or types in a field box
@@ -75,14 +77,14 @@ function Registration() {
           password: user.password,
           email: user.email
         });
-  
-        if (response.status === 200) {
+        if (response.status === 200 ) {          
           alert("User created!");
-          Navigate("/api/dashboard");
+          navigate("/api/dashboard"); 
         } 
-        else if (response.status === 409) {
-          alert("Email exists");
+        else{
+          alert("Email is already in used");
         }
+
       }
       catch (error) {
         console.error('Error:', error.message);
@@ -126,6 +128,7 @@ function Registration() {
         </div>
         <button type="submit">Register</button>
       </form>
+
     </div>
   );
 }

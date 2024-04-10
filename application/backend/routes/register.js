@@ -30,9 +30,11 @@ router.post('/', async (request, response)=>{
                 isGuess: false
                 }
             const result = await Users.collection.insertOne(newUser);
+            const username = newUser.username;
+            const email = newUser.email;
             const token = createToken(result.insertedId);
             console.log(`A document was inserted with the _id: ${result.insertedId}`);
-            return response.status(200).json({token});
+            return response.status(200).json({username, email, token});
         }
     }
     catch(error){
