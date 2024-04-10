@@ -4,12 +4,12 @@ import './App.css';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
 
-import Ashley from './components/Ashley';
-import Brenden from './components/Brenden';
-import Kent from './components/Kent';
-import Nhan from './components/Nhan';
-import Pierre from './components/Pierre';
-import Yuquan from './components/Yuquan';
+import Ashley from './components/profiles/Ashley';
+import Brenden from './components/profiles/Brenden';
+import Kent from './components/profiles/Kent';
+import Nhan from './components/profiles/Nhan';
+import Pierre from './components/profiles/Pierre';
+import Yuquan from './components/profiles/Yuquan';
 
 import Registration from './components/Registration';
 import Login from './components/Login';
