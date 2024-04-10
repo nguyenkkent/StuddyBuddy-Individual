@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import SideNavbar from '../Sidebar';
+import SideNavbar from '../common/Sidebar';
 import "../../css/Dashboard.css";
 import axiosClient from "../../axiosClient";
 
