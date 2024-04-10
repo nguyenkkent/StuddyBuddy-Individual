@@ -1,4 +1,39 @@
 /*Dashboard css */
+.dashboard-search {
+  width: 80%;
+  display: flex;
+  margin: auto;
+}
+
+.dashboard-search-bar {
+  flex-grow: 1;
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+  padding: 10px;
+  border-width: 2px;
+  border-color: black;
+  border-style: solid;
+}
+
+.dashboard-search-button {
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 10px;
+  background-color: white;
+  border-width: 2px;
+  border-color: black;
+  border-style: solid;
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+.dashboard-filter {
+  width: 80%;
+  margin: auto;
+  margin-top: 16px;
+  text-align: left;
+}
+
 .user-results {
   display: flex;
   flex-direction: column;
