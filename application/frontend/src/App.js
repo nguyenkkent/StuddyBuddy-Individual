@@ -29,10 +29,10 @@ function App() {
           <Route path="/nhan" element={<Nhan />} />
           <Route path="/pierre" element={<Pierre />} />
           <Route path="/yuquan" element={<Yuquan />} />
-          <Route path="/api/register" element={<Registration />} />
-          <Route path="/api/login" element={<Login />} />
-          <Route path="/api//aboutus" element={<AboutUs />} />
-          <Route path="/api/dashboard" element={<Dashboard />} />
+          <Route path="/register" element={<Registration />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </div>
     </Router>
