@@ -4,21 +4,18 @@ import '../css/Navbar.css';
 
 function Navbar() {
   const location = useLocation();
-  const isLoginPage = location.pathname === '/login';
-  const isRegistrationPage = location.pathname === '/register';
+  const isLoginPage = location.pathname === "/login";
 
   return (
-    <nav className='navbar'>
+    <nav className="navbar">
       <Link to="/aboutus">About Us</Link>
 
-      <div className="navbar-center">
+      <h1 className="navbar-header">
         <Link to="/">Study Buddy</Link>
-      </div>
+      </h1>
 
-      <div className="navbar-right">
-        {!isLoginPage && !isRegistrationPage && <Link to="/login">Login</Link>}
-        {isLoginPage && <Link to="/register">Register</Link>}
-      </div>
+      {!isLoginPage && <Link to="/login">Login</Link>}
+      {isLoginPage && <Link to="/register">Register</Link>}
     </nav>
   );
 }

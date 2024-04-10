@@ -1,5 +1,5 @@
 .navbar {
-  background: gray;
+  background: #bf9270;
   overflow: hidden;
   padding: 0px 20px;
   display: flex;
@@ -8,10 +8,12 @@
   transition: background-color 0.3s;
   position: relative;
   z-index: 1000;
+  text-align: center;
 }
 
-.navbar a {
-  color: goldenrod;
+.navbar > a {
+  color: black;
+  background: #edcdbb;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -20,15 +22,15 @@
   border-radius: 10px;
 }
 
-.navbar a:hover,
-.navbar a:focus {
-  background-color: goldenrod;
-  color: black;
-  transform: scale(0.80);
+.navbar > a:hover,
+.navbar > a:focus {
+  background: #e3b7a0;
+  transform: scale(0.90);
   border-radius: 10px;
 }
 
-.navbar-center {
-  flex: 1;
-  text-align: center;
+.navbar-header > a {
+  color: black;
+  text-decoration: none;
+  font-size: 1.5em;
 }
