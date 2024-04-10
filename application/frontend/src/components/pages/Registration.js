@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axiosClient from '../../axiosClient';
+import { Link } from 'react-router-dom';
 
 function Registration() {
   const [user, setUser] = useState({
@@ -125,6 +126,7 @@ function Registration() {
         </div>
         <button type="submit">Register</button>
       </form>
+      <Link to="/dashboard">Or continue as Guest</Link>
     </div>
   );
 }
