@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SideNavbar from '../components/Sidebar';
-import "../css/Home.css";
+import "../css/Dashboard.css";
 import axios from 'axios';
 
 function Dashboard() {
