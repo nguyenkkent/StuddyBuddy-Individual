@@ -77,9 +77,7 @@ function Dashboard() {
                   <div className='username'>{user.username}</div>
                   <div>Tags: {user.tags.join(", ") || "N/A"}</div>
                 </div>
-                <Link to="#" onClick={() => {
-                  alert("WIP");
-                }}>Chat</Link>
+                <Link to="/chats">Chat</Link>
               </div>
             </div>
           ))}
