@@ -13,8 +13,8 @@ const createToken = (_id) => {
 
 router.post('/', async (request, response)=>{
     try{
-        const item = await Users.findOne({email: request.body.email});
-        if (item){
+        const user = await Users.findOne({email: request.body.email});
+        if (user){
             return response.status(409).json("Email is already in use");         
         }
         else{

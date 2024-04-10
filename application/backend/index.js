@@ -1,11 +1,10 @@
 import express from "express";
 import mongoose from "mongoose";
 import {app, server} from "./socket.js";
-// import {PORT, mongoURL} from "./config.js";
 import "dotenv/config";
 import registerRouter from "./routes/register.js"
 import dashboardRouter from "./routes/dashboard.js";
-
+import loginRouter from "./routes/login.js";
 
 //middleware
 app.use(express.json());
@@ -13,7 +12,7 @@ app.use(express.json());
 //routes
 app.use('/api/register', registerRouter);
 app.use('/api/dashboard', dashboardRouter);
-
+app.use('/api/login', loginRouter);
 
 //connect to mongoDB
 mongoose
