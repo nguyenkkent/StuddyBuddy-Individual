@@ -8,14 +8,18 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <Link to="/aboutus">About Us</Link>
+      <div className="navbar-component navbar-component-left">
+        <Link to="/aboutus">About Us</Link>
+      </div>
 
       <h1 className="navbar-header">
         <Link to="/">Study Buddy</Link>
       </h1>
 
-      {!isLoginPage && <Link to="/login">Login</Link>}
-      {isLoginPage && <Link to="/register">Register</Link>}
+      <div className="navbar-component navbar-component-right">
+        {!isLoginPage && <Link to="/login">Login</Link>}
+        {isLoginPage && <Link to="/register">Register</Link>}
+      </div>
     </nav>
   );
 }
