@@ -3,7 +3,7 @@ import io from "socket.io-client";
 import { useEffect, useState } from 'react';
 import "../../css/Chats.css"
 
-const socket = io(process.env.NODE_ENV == 'production' ? '/' : 'http://localhost:3001/');
+const socket = io(process.env.NODE_ENV == 'production' ? '/' : 'http://localhost:3001/'); // FIXME: edit paths as needed
 
 function Chats() {
 
