@@ -1,0 +1,37 @@
+.home-main {
+  /* background-image: url("../../public/home-background.webp"); */
+  background-color: #b68973;
+  background-repeat: no-repeat;
+  object-fit: cover;
+  padding: 200px 0px;
+}
+
+.home-phrase {
+  background-color: white;
+  margin: auto;
+  width: 33%;
+  padding: 100px 0px;
+}
+
+.home-start {
+  margin-top: 80px;
+}
+
+.home-start > a {
+  color: black;
+  background: #edcdbb;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  transition: color 0.3s, background-color 0.3s, transform 0.3s;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.home-start > a:hover,
+.home-start > a:focus {
+  background: #e3b7a0;
+  transform: scale(0.90);
+  border-radius: 10px;
+}
