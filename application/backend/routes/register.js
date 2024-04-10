@@ -1,7 +1,15 @@
 import express from "express";
 import {Users} from "../models/userSchema.js";
-const router = express.Router();
 import bcrypt from "bcrypt";
+import "dotenv/config";
+import jwt from "jsonwebtoken";
+
+
+const router = express.Router();
+
+const createToken = (_id) => {
+    return jwt.sign({_id}, process.env.SECRET, {expiresIn: '3d'});
+}
 
 router.post('/', async (request, response)=>{
     try{
@@ -21,9 +29,10 @@ router.post('/', async (request, response)=>{
                 isVerified: false,
                 isGuess: false
                 }
-                const result = await Users.collection.insertOne(newUser);
-                console.log(`A document was inserted with the _id: ${result.insertedId}`);
-                return response.status(200).json("User created");
+            const result = await Users.collection.insertOne(newUser);
+            const token = createToken(result.insertedId);
+            console.log(`A document was inserted with the _id: ${result.insertedId}`);
+            return response.status(200).json({token});
         }
     }
     catch(error){
