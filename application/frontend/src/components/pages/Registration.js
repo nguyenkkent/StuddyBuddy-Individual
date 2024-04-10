@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from "axios";
+import axiosClient from '../../axiosClient';
 
 function Registration() {
   const [user, setUser] = useState({
@@ -69,7 +69,7 @@ function Registration() {
     e.preventDefault();
     if (validateForm()) {
       try {
-        const response = await axios.post('http://localhost:3001/api/register', {
+        const response = await axiosClient.post('/api/register', {
           username: user.username,
           password: user.password,
           email: user.email

@@ -1,4 +1,4 @@
-import SideNavbar from '../Sidebar';
+import SideNavbar from '../common/Sidebar';
 import io from "socket.io-client";
 import { useEffect, useState } from 'react';
 

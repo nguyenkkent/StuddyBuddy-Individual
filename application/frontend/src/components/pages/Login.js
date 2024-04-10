@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axiosClient from '../../axiosClient';
 
 function Login() {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3001/api/login', {
+      const response = await axiosClient.post('/api/login', {
         email: loginData.email,
         password: loginData.password
       });

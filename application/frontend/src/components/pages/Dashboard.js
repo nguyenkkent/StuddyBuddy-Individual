@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import SideNavbar from '../Sidebar';
+import SideNavbar from '../common/Sidebar';
 import "../../css/Dashboard.css";
-import axios from 'axios';
+import axiosClient from "../../axiosClient";
 
 function Dashboard() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -14,7 +14,7 @@ function Dashboard() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("/api/dashboard");
+        const response = await axiosClient.get("/api/dashboard");
         setAllUsers(response.data.userData);
         setFilteredUsers(response.data.userData);
       } catch (error) {
