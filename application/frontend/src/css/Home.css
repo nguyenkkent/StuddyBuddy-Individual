@@ -1,19 +1,20 @@
-.home-main {
-  /* background-image: url("../../public/home-background.webp"); */
-  background-color: #b68973;
+.home-main-wrapper {
+  background-image: url("../../public/home-background.webp");
   background-repeat: no-repeat;
-  object-fit: cover;
-  padding: 20px 0px;
+  background-size: cover;
+}
+
+.home-main {
+  backdrop-filter: blur(10px);
+  padding: 200px 0px;
 }
 
 .home-phrase {
-  background-color: white;
   margin: auto;
   width: 33%;
   padding: 100px 0px;
 }
 
-/* FIXME: create single file for button class */
 .home-start {
   margin-top: 80px;
 }
