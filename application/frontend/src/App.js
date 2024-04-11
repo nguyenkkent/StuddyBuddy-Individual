@@ -17,6 +17,7 @@ import AboutUs from './components/pages/AboutUs';
 import Dashboard from './components/pages/Dashboard';
 
 import MyFriends from "./components/pages/MyFriends";
+import MyGroups from "./components/pages/MyGroups";
 import Chats from "./components/pages/Chats";
 import Settings from "./components/pages/Settings";
 
@@ -38,6 +39,7 @@ function App() {
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/my-friends" element={<MyFriends />} />
+          <Route path="/my-groups" element={<MyGroups />} />
           <Route path="/chats" element={<Chats />} />
           <Route path="/settings" element={<Settings />} />
         </Routes>
