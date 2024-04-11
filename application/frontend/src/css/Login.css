@@ -1,0 +1,59 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+  
+.loginform {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+  
+.logintitle {
+    margin-bottom: 20px;
+}
+  
+.formgroup {
+    margin-bottom: 10px;
+    width: 100%;
+}
+  
+.formlabel {
+    display: block;
+    margin-bottom: 5px;
+}
+  
+.forminput {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+  
+.loginsubmit {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    width: auto;
+    max-width: 200px;
+    display: block;
+    box-sizing: border-box;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+  
+  
+.loginsubmit:hover {
+    background-color: #0056b3;
+}
+  
