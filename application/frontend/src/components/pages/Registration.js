@@ -9,7 +9,7 @@ function Registration() {
     confirmPassword: '',
     agreeToTerms: false,
   });  
-
+  
   const [errors, setErrors] = useState({});
 
   // Handles changes in the form's fields, like checking the box or types in a field box
@@ -20,7 +20,7 @@ function Registration() {
       [name]: name === 'agreeToTerms' ? checked : value,
     });
   };
-  
+
   const validateForm = () => {
     let formIsValid = true;
     let errors = {};
@@ -65,23 +65,29 @@ function Registration() {
     return formIsValid;
   };
 
-  // Can edit this for sending user data to backend, right now, it console.logs
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        console.log('Sending data:', user);
-        const response = await axios.post('/api/register', {
+        const response = await axios.post('http://localhost:3001/api/register', {
           username: user.username,
           password: user.password,
           email: user.email
         });
-        //console.log('Success:', response.data);
-      } catch (error) {
+  
+        if (response.status === 200) {
+          
+          alert("User created!");
+        } 
+        else if (response.status === 409) {
+          alert("Email exists");
+        }
+      }
+      catch (error) {
         console.error('Error:', error.message);
       }
     } else {
-      console.log('Nope, fill out the form correctly bro or miss');
+      alert("Missing fields");
     }
   };
 

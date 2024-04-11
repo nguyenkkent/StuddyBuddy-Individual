@@ -1,21 +1,26 @@
 import express from "express";
 import mongoose from "mongoose";
-import {PORT, mongoURL} from "./config.js";
-import userRouter from "./routes/users.js"
-import dashboardRouter from "./routes/dashboard.js"
+import {app, server} from "./socket.js";
+import "dotenv/config";
+import registerRouter from "./routes/register.js"
+import dashboardRouter from "./routes/dashboard.js";
+import loginRouter from "./routes/login.js";
 
-const app = express();
+//middleware
 app.use(express.json());
-app.use('/api/register', userRouter);
+
+//routes
+app.use('/api/register', registerRouter);
 app.use('/api/dashboard', dashboardRouter);
+app.use('/api/login', loginRouter);
 
 //connect to mongoDB
 mongoose
-    .connect(mongoURL)
+    .connect(process.env.mongoURL)
     .then(()=> {    
         console.log('App successfully connected to database');
-        app.listen(PORT, () => {
-            console.log(`App is listening on port: ${PORT}`);//use backquotes for template literals
+        server.listen(process.env.PORT, () => {
+            console.log(`App is listening on port: ${process.env.PORT}`);//use backquotes for template literals
         });        
     })
     .catch((error)=>{

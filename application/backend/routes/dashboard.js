@@ -9,12 +9,12 @@ const router = express.Router();
 router.get("/", async (request, response) =>{
     try{
         const userData = await Users.collection.find({}).toArray();
-        const groupData = await Groups.collection.find({}).toArray();
-        const messageData = await Messages.collection.find({}).toArray();
+        // const groupData = await Groups.collection.find({}).toArray();
+        // const messageData = await Messages.collection.find({}).toArray();
         var jsonData = {};
         jsonData.userData = userData;
-        jsonData.groupData = groupData;
-        jsonData.messageData = messageData;
+        // jsonData.groupData = groupData;
+        // jsonData.messageData = messageData;
 
         return response.status(200).json(jsonData);
     }
