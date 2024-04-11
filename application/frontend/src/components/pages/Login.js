@@ -27,7 +27,7 @@ function Login() {
       });
       console.log(`login message: ${response.message}`);
       if (response.status === 200) {
-        navigate('/api/dashboard');
+        navigate('/dashboard');
       }
       else {
         alert(response.message);

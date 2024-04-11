@@ -7,20 +7,22 @@ function Navbar() {
   const isLoginPage = location.pathname === "/login";
 
   return (
-    <nav className="navbar">
-      <div className="navbar-component navbar-component-left">
-        <Link to="/aboutus">About Us</Link>
-      </div>
+    <div className="navbar-wrapper">
+      <nav className="navbar">
+        <div className="navbar-component navbar-component-left">
+          <Link to="/aboutus">About Us</Link>
+        </div>
 
-      <h1 className="navbar-header">
-        <Link to="/">Study Buddy</Link>
-      </h1>
+        <h1 className="navbar-header">
+          <Link to="/">Study Buddy</Link>
+        </h1>
 
-      <div className="navbar-component navbar-component-right">
-        {!isLoginPage && <Link to="/login">Login</Link>}
-        {isLoginPage && <Link to="/register">Register</Link>}
-      </div>
-    </nav>
+        <div className="navbar-component navbar-component-right">
+          {!isLoginPage && <Link to="/login">Login</Link>}
+          {isLoginPage && <Link to="/register">Register</Link>}
+        </div>
+      </nav>
+    </div>
   );
 }
 export default Navbar;
