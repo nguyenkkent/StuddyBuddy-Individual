@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axiosClient from '../../axiosClient';
 import { Link } from 'react-router-dom';
+import '../../css/Register.css';
+
 
 function Registration() {
   const [user, setUser] = useState({
@@ -94,39 +96,40 @@ function Registration() {
 
   return (
     <div className="registrationForm">
-      <h2>Registration</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email:</label>
+      <h2 className="registrationtitle">Registration</h2>
+      <form onSubmit={handleSubmit} className="registrationform">
+        <div className="formgroup">
+          <label className="formlabel">Email:</label>
           <input type="email" name="email" value={user.email} onChange={handleChange} />
           {errors.email && <div className="error">{errors.email}</div>}
         </div>
         <div>
-          <label>Username:</label>
+          <label className="formlabel">Username:</label>
           <input type="text" name="username" value={user.username} onChange={handleChange} />
           {errors.username && <div className="error">{errors.username}</div>}
         </div>
         <div>
-          <label>Password:</label>
+          <label className="formlabel">Password:</label>
           <input type="password" name="password" value={user.password} onChange={handleChange} />
           {errors.password && <div className="error">{errors.password}</div>}
         </div>
         <div>
-          <label>Confirm Password:</label>
+          <label className="formlabel">Confirm Password:</label>
           <input type="password" name="confirmPassword" value={user.confirmPassword} onChange={handleChange} />
           {errors.confirmPassword && <div className="error">{errors.confirmPassword}</div>}
           {errors.passwordMatch && <div className="error">{errors.passwordMatch}</div>}
         </div>
         <div>
-          <label>
+          <label className="formlabel">
             <input type="checkbox" name="agreeToTerms" checked={user.agreeToTerms} onChange={handleChange} />
             I agree to the Terms of Service
           </label>
           {errors.agreeToTerms && <div className="error">{errors.agreeToTerms}</div>}
         </div>
-        <button type="submit">Register</button>
+        <button className="registerbutton" type="submit">Register</button>
       </form>
-      <Link to="/dashboard">Or continue as Guest</Link>
+      <div className="divider"></div>
+      <Link to="/dashboard" className="guestlink">Or continue as Guest</Link>
     </div>
   );
 }
