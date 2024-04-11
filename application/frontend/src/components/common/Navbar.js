@@ -32,7 +32,7 @@ function Navbar() {
         {showProfile && <Link to="/profile">Profile</Link>}
       </div>
     </nav>
-
+    </div>
   );
 }
 export default Navbar;
