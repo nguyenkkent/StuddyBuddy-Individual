@@ -3,44 +3,76 @@ import SideNavbar from '../common/Sidebar';
 import '../../css/Settings.css';
 
 function Settings() {
-    // Example state for a profile setting, add more as needed
+    // MOST OF THESE ARE SUBJECT TO CHANGE IN THE FUTURE, IT JUST LOOKS OK FOR NOW
     const [email, setEmail] = useState('');
-  
-    // Handler for email change, create more handlers for other inputs
+    const [emailNotifications, setEmailNotifications] = useState(false);
+    const [studyReminders, setStudyReminders] = useState(false);
+    const [accountVisibility, setAccountVisibility] = useState(false);
+
     const handleEmailChange = (e) => {
-      setEmail(e.target.value);
+        setEmail(e.target.value);
     };
-  
-    // Example submission handler
+
+    const handleEmailNotificationsChange = (e) => {
+        setEmailNotifications(e.target.checked);
+    };
+
+    const handleStudyRemindersChange = (e) => {
+        setStudyReminders(e.target.checked);
+    };
+
+    const handleAccountVisibilityChange = (e) => {
+        setAccountVisibility(e.target.checked);
+    };
+
     const handleSubmit = (e) => {
-      e.preventDefault();
-      // Process the changes here, such as sending to an API
-      alert('Settings Saved!');
+        e.preventDefault();
+        alert('Settings Saved!');
     };
-  
+
+    // MOST OF THESE ARE SUBJECT TO CHANGE IN THE FUTURE, IT JUST LOOKS OK FOR NOW
     return (
-      <div className="settings-container">
-        <SideNavbar />
-        <form onSubmit={handleSubmit} className="settings-form">
-          <h2>Profile Settings</h2>
-          <label>Email:</label>
-          <input type="email" value={email} onChange={handleEmailChange} />
-          
-          {/* Add more input fields for profile settings here */}
-  
-          <h2>Notification Settings</h2>
-          {/* Add checkboxes for notifications */}
-  
-          <h2>Study Preferences</h2>
-          {/* Add inputs/selectors for study preferences */}
-  
-          <h2>Account Management</h2>
-          {/* Add buttons/links for account management */}
-  
-          <button type="submit">Save Changes</button>
-        </form>
-      </div>
+        <div className="settings-container">
+            <SideNavbar />
+            <form onSubmit={handleSubmit} className="settings-form">
+                <h2>Profile Settings</h2>
+                <label>Email:</label>
+                <input type="email" value={email} onChange={handleEmailChange} />
+            
+                <h2>Notification Settings</h2>
+                <label>
+                    <input
+                        type="checkbox"
+                        checked={emailNotifications}
+                        onChange={handleEmailNotificationsChange}
+                    />
+                    Email Notifications
+                </label>
+
+                <h2>Study Preferences</h2>
+                <label>
+                    <input
+                        type="checkbox"
+                        checked={studyReminders}
+                        onChange={handleStudyRemindersChange}
+                    />
+                    Study Reminders
+                </label>
+
+                <h2>Account Management</h2>
+                <label>
+                    <input
+                        type="checkbox"
+                        checked={accountVisibility}
+                        onChange={handleAccountVisibilityChange}
+                    />
+                    Make Account Private
+                </label>
+
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
     );
-  }
+}
 
 export default Settings;

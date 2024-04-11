@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosClient from '../../axiosClient';
+import '../../css/Login.css';
+
 
 function Login() {
   const navigate = useNavigate();
@@ -39,17 +41,17 @@ function Login() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Login</h2>
+    <form onSubmit={handleSubmit} className='loginform'>
+      <h2 className="logintitle">Login</h2>
       <div>
-        <label>Email:</label>
-        <input type="email" name="email" value={loginData.email} onChange={handleInputChange} required />
+        <label className="formgroup">Email:</label>
+        <input className="forminput" type="email" name="email" value={loginData.email} onChange={handleInputChange} required />
       </div>
       <div>
-        <label>Password:</label>
-        <input type="password" name="password" value={loginData.password} onChange={handleInputChange} required />
+        <label className="formgroup">Password:</label>
+        <input className="forminput" type="password" name="password" value={loginData.password} onChange={handleInputChange} required />
       </div>
-      <button type="submit">Login</button>
+      <button className="loginsubmit" type="submit">Login</button>
     </form>
   );
 }
