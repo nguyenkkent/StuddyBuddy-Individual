@@ -15,14 +15,16 @@ function Navbar() {
     const showRegister = isLoginPage;
 
   return (
-    <nav className="navbar">
-      <div className="navbar-component navbar-component-left">
-        <Link to="/aboutus">About Us</Link>
-      </div>
+    <div className="navbar-wrapper">
+      <nav className="navbar">
+        <div className="navbar-component navbar-component-left">
+          <Link to="/aboutus">About Us</Link>
+        </div>
 
-      <h1 className="navbar-header">
-        <Link to="/">Study Buddy</Link>
-      </h1>
+        <h1 className="navbar-header">
+          <Link to="/">Study Buddy</Link>
+        </h1>
+
 
       <div className="navbar-component navbar-component-right">
         {showLogin && <Link to="/login">Login</Link>}
@@ -30,6 +32,7 @@ function Navbar() {
         {showProfile && <Link to="/profile">Profile</Link>}
       </div>
     </nav>
+
   );
 }
 export default Navbar;

@@ -1,3 +1,11 @@
+.chat-container {
+  display: flex;
+}
+
+.chat-content {
+  flex-grow: 1;
+}
+
 .chat-box {
   background-color: white;
   min-height: 24rem;

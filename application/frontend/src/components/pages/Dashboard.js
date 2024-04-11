@@ -9,6 +9,7 @@ function Dashboard() {
   const [searchTerm, setSearchTerm] = useState("");
   const [allUsers, setAllUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
+  const [tags, setTags] = useState([]);
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
@@ -16,7 +17,7 @@ function Dashboard() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axiosClient.get("/api/dashboard");
+        const response = await axiosClient.get("/api/dashboard"); // FIXME: do not return sensitive information like email and password
         setAllUsers(response.data.userData);
         setFilteredUsers(response.data.userData);
       } catch (error) {
@@ -29,12 +30,17 @@ function Dashboard() {
   }, []);
 
   useEffect(() => {
-    const filtered = allUsers && allUsers.filter(user =>
+    let filtered = allUsers && allUsers.filter(user =>
       user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
       user.email.toLowerCase().includes(searchTerm.toLowerCase())
     );
+    if (tags.length) {
+      filtered = filtered.filter(user =>
+        user.tags.some(t => tags.includes(t))
+      );
+    }
     setFilteredUsers(filtered);
-  }, [searchTerm, allUsers]);
+  }, [searchTerm, allUsers, tags]);
 
   // tag options
   const options = [
@@ -59,14 +65,17 @@ function Dashboard() {
             value={searchTerm}
             onChange={handleChange}
           />
-          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="dashboard-search-button">
-            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+          <svg fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="dashboard-search-button">
+            <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
           </svg>
         </div>
         <Select
           className="dashboard-filter"
           placeholder="Filter Tags"
           options={options}
+          onChange={(t) => {
+            setTags(t.map(v => v.label));
+          }}
           isMulti
           />
         <div className="user-results">
