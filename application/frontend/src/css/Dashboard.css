@@ -6,13 +6,15 @@
 }
 
 .dashboard-search-bar {
-  flex-grow: 1;
-  border-top-left-radius: 16px;
-  border-bottom-left-radius: 16px;
-  padding: 10px;
-  border-width: 2px;
-  border-color: black;
-  border-style: solid;
+  /* FIXME: override global input styling (input tags should not have a global style) */
+  flex-grow: 1 !important; 
+  border-top-left-radius: 16px !important;
+  border-bottom-left-radius: 16px !important;
+  padding: 10px !important;
+  border-width: 2px !important;
+  border-color: black !important;
+  border-style: solid !important;
+  margin-bottom: 0px !important;
 }
 
 .dashboard-search-button {
