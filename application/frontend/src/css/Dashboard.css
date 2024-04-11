@@ -73,12 +73,18 @@
 
 .dashboard-container {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  /* FIXME: remove hardcoded alignment fix */
+  padding-top: 50px;
+  padding-left: 150px;
 }
 
 .dashboard-content {
   flex-grow: 1;
   height: calc(100vh - 92px);
-  overflow-y: scroll;
 }
 
 /* FIXME: create single file for button class */
