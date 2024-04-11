@@ -68,6 +68,7 @@ function Settings() {
                     />
                     Make Account Private
                 </label>
+
                 <button type="submit">Save Changes</button>
             </form>
         </div>
