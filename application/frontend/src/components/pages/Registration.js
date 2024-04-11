@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import axios from "axios";
+import axiosClient from '../../axiosClient';
+import { Link } from 'react-router-dom';
 
 function Registration() {
   const [user, setUser] = useState({
@@ -69,7 +70,7 @@ function Registration() {
     e.preventDefault();
     if (validateForm()) {
       try {
-        const response = await axios.post('http://localhost:3001/api/register', {
+        const response = await axiosClient.post('/api/register', {
           username: user.username,
           password: user.password,
           email: user.email
@@ -125,6 +126,7 @@ function Registration() {
         </div>
         <button type="submit">Register</button>
       </form>
+      <Link to="/dashboard">Or continue as Guest</Link>
     </div>
   );
 }

@@ -9,6 +9,9 @@
   position: relative;
   z-index: 1000;
   text-align: center;
+  border-bottom: black;
+  border-bottom-width: 4px;
+  border-bottom-style: solid;
 }
 
 .navbar-component {
@@ -24,6 +27,7 @@
   justify-content: flex-end;
 }
 
+/* FIXME: create single file for button class */
 .navbar-component > a {
   color: black;
   background: #edcdbb;
