@@ -1,8 +1,15 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import '../../css/Sidebar.css';
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    navigate("/login");
+    
+  }
+
   return (
     <div className="sidebar">
       <NavLink activeclassname="active" to="/dashboard">Dashboard</NavLink>
@@ -14,10 +21,6 @@ const Sidebar = () => {
       <button onClick={handleLogout}>Logout</button>
     </div>
   );
-
-  function handleLogout() {
-    console.log('User logged out');
-  }
 };
 
 export default Sidebar;
