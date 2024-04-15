@@ -33,7 +33,6 @@ function Settings() {
   // MOST OF THESE ARE SUBJECT TO CHANGE IN THE FUTURE, IT JUST LOOKS OK FOR NOW
   return (
     <div className="settings-container">
-      <SideNavbar />
       <form onSubmit={handleSubmit} className="settings-form">
         <h2>Profile Settings</h2>
         <label>Email:</label>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import SideNavbar from '../common/Sidebar';
 import "../../css/Dashboard.css";
 import axiosClient from "../../axiosClient";
 import { Link } from "react-router-dom";
@@ -54,7 +53,6 @@ function Dashboard() {
 
   return (
     <div className="dashboard-container">
-      <SideNavbar />
       <div className="dashboard-content">
         <h1>Welcome back!</h1>
         <div className="dashboard-search">

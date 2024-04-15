@@ -35,7 +35,12 @@ body {
   background-size: cover;
 }
 
+.App-main-wrapper {
+  display: flex;
+}
+
 .App-main {
   overflow-y: auto;
   height: calc(100vh - 92px);
+  flex-grow: 1;
 }

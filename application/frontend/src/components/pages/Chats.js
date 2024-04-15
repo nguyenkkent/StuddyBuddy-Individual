@@ -28,7 +28,6 @@ function Chats() {
   }
   return (
     <div className="chat-container">
-      <Sidebar />
       <div className="chat-content">
         <h1>Chatting with &lt;Placeholder&gt;</h1>
         <div className="chat-box">

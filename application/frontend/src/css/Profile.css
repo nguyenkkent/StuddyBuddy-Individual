@@ -4,11 +4,6 @@
   justify-content: center;
   align-items: center;
   min-height: calc(100vh - 70px);
-  padding: 20px;
-  /* FIXME: remove hardcoded alignment fix */
-  padding-top: 70px;
-  padding-bottom: 0px;
-  padding-left: 150px;
 }
 
 .profile-content {

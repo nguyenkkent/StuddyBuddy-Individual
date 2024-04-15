@@ -43,7 +43,6 @@ function MyFriends() {
 
   return (
     <div className="dashboard-container">
-      <SideNavbar />
       <div className="dashboard-content">
         <h1>Your Friends</h1>
         <div className="dashboard-search">
