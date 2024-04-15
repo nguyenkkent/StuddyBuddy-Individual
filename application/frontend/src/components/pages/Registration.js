@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axiosClient from '../../axiosClient';
 import { Link } from 'react-router-dom';
 import '../../css/Register.css';
+import TextField from '../common/TextField';
 
 
 function Registration() {
@@ -98,27 +99,42 @@ function Registration() {
     <div className="registrationForm">
       <h2 className="registrationtitle">Registration</h2>
       <form onSubmit={handleSubmit} className="registrationform">
-        <div className="formgroup">
-          <label className="formlabel">Email:</label>
-          <input type="email" name="email" value={user.email} onChange={handleChange} />
-          {errors.email && <div className="error">{errors.email}</div>}
-        </div>
-        <div>
-          <label className="formlabel">Username:</label>
-          <input type="text" name="username" value={user.username} onChange={handleChange} />
-          {errors.username && <div className="error">{errors.username}</div>}
-        </div>
-        <div>
-          <label className="formlabel">Password:</label>
-          <input type="password" name="password" value={user.password} onChange={handleChange} />
-          {errors.password && <div className="error">{errors.password}</div>}
-        </div>
-        <div>
-          <label className="formlabel">Confirm Password:</label>
-          <input type="password" name="confirmPassword" value={user.confirmPassword} onChange={handleChange} />
-          {errors.confirmPassword && <div className="error">{errors.confirmPassword}</div>}
-          {errors.passwordMatch && <div className="error">{errors.passwordMatch}</div>}
-        </div>
+        <TextField
+          label="Email:"
+          type="email"
+          name="email"
+          value={user.email}
+          onChange={handleChange}
+          errors={errors.email}
+        />
+        
+        <TextField
+          label="Username:"
+          type="text"
+          name="username"
+          value={user.username}
+          onChange={handleChange}
+          errors={errors.username}
+        />
+      
+        <TextField
+          label="Password:"
+          type="password"
+          name="password"
+          value={user.password}
+          onChange={handleChange}
+          errors={errors.password}
+        />
+
+        <TextField
+          label="Confirm Password:"
+          type="password"
+          name="confirmPassword"
+          value={user.confirmPassword}
+          onChange={handleChange}
+          errors={[errors.confirmPassword, errors.passwordMatch]}
+        />
+
         <div>
           <label className="formlabel">
             <input type="checkbox" name="agreeToTerms" checked={user.agreeToTerms} onChange={handleChange} />
@@ -128,7 +144,9 @@ function Registration() {
         </div>
         <button className="registerbutton" type="submit">Register</button>
       </form>
+
       <div className="divider"></div>
+      
       <Link to="/dashboard" className="guestlink">Or continue as Guest</Link>
     </div>
   );
