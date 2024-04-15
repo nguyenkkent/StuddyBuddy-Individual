@@ -136,10 +136,12 @@ function Registration() {
         />
 
         <div>
-          <label className="formlabel">
-            <input type="checkbox" name="agreeToTerms" checked={user.agreeToTerms} onChange={handleChange} />
-            I agree to the Terms of Service
-          </label>
+          <div className='agreeBox'>
+            <input type="checkbox" name="agreeToTerms" id="agreeToTerms" checked={user.agreeToTerms} onChange={handleChange} />
+            <label className="formlabel" for="agreeToTerms">
+              I agree to the Terms of Service
+            </label>
+          </div>
           {errors.agreeToTerms && <div className="error">{errors.agreeToTerms}</div>}
         </div>
         <button className="registerbutton" type="submit">Register</button>
