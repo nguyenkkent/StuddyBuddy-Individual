@@ -34,3 +34,8 @@ body {
   background-attachment: fixed;
   background-size: cover;
 }
+
+.App-main {
+  overflow-y: auto;
+  height: calc(100vh - 92px);
+}

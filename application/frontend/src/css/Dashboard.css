@@ -77,7 +77,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
   padding: 20px;
   /* FIXME: remove hardcoded alignment fix */
   padding-top: 50px;
