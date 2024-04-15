@@ -1,9 +1,9 @@
 import React from 'react';
-import Profile from '../common/profile';
+import AboutMe from '../common/AboutMe';
 
 function Yuquan() {
   return (
-    <Profile
+    <AboutMe
       name="Yuquan Xu"
       role="Front-End Lead"
       bio="I have made grave mistakes trying to cook meat balls before.

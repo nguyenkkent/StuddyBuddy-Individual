@@ -1,9 +1,9 @@
 import React from 'react';
-import Profile from '../common/profile';
+import AboutMe from '../common/AboutMe';
 
 function Pierre() {
   return (
-    <Profile
+    <AboutMe
       name="Pierre Harbin"
       role="Team Member"
       bio="My name is Pierre, I'm a 3rd Year CS major with a minor

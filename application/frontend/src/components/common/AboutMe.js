@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../css/Team.css';
 
-function Profile(props) {
+function AboutMe(props) {
   return (
     <div>
         <h1 className='team-member-name'>
@@ -18,4 +18,4 @@ function Profile(props) {
   );
 }
 
-export default Profile;
+export default AboutMe;
