@@ -1,9 +1,9 @@
 import React from 'react';
-import Profile from '../common/profile';
+import AboutMe from '../common/AboutMe';
 
 function Ashley() {
   return (
-    <Profile
+    <AboutMe
       name="Ashley Ching"
       role="Team Lead"
       bio="Hi, I'm a junior at San Francisco State Univeristy. 

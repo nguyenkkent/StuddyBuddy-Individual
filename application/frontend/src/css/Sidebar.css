@@ -1,8 +1,7 @@
 .sidebar {
-    position: fixed;
     top: 90px;
     left: 0;
-    height: 100vh;
+    height: calc(100vh - 92px);
     width: 150px;
     background-color: #333;
     display: flex;
@@ -40,7 +39,7 @@
   text-align: center;
   width: 100%;
   cursor: pointer;
-  margin-bottom: 100px;
+  margin-bottom: 30px;
 }
 
 .sidebar button:hover {

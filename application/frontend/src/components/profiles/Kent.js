@@ -1,9 +1,9 @@
 import React from 'react';
-import Profile from '../common/profile';
+import AboutMe from '../common/AboutMe';
 
 function Kent() {
   return (
-    <Profile
+    <AboutMe
       name="Kent Nguyen"
       role="Back-End Lead"
       bio="A senior at SFSU who enjoys movies, cooking, and food. "

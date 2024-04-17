@@ -4,7 +4,7 @@ import '../../css/Navbar.css';
 
 function Navbar() {
     const location = useLocation();
-    const showProfilePages = ["/dashboard", "/chats", "/mygroups", "/myfriends", "/settings"];
+    const showProfilePages = ["/dashboard", "/chats", "/my-groups", "/my-friends", "/settings"];
     const isLoginPage = location.pathname === "/login";
     const isRegisterPage = location.pathname === "/register";
     const isHomePage = location.pathname === "/";

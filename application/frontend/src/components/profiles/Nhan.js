@@ -1,9 +1,9 @@
 import React from 'react';
-import Profile from '../common/profile';
+import AboutMe from '../common/AboutMe';
 
 function Nhan() {
   return (
-    <Profile
+    <AboutMe
       name="Nhan Nguyen"
       role="Git Master"
       bio="Computer Science senior at SFSU. Love playing soccer and listening to

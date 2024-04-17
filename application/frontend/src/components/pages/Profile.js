@@ -30,7 +30,6 @@ function Profile() {
 
   return (
     <div className="profile-container">
-      <Sidebar />
       <div className="profile-content">
         <h1>Profile</h1>
         <div className="profile-info">

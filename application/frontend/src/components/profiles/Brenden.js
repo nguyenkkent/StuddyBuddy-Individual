@@ -1,9 +1,9 @@
 import React from 'react';
-import Profile from '../common/profile';
+import AboutMe from '../common/AboutMe';
 
 function Brenden() {
   return (
-    <Profile
+    <AboutMe
       name="Brenden B Lapuz"
       role="Scrum Master"
       bio="Hey everyone, my name is Brenden Lapuz, I'm a fourth year here in SFSU.
