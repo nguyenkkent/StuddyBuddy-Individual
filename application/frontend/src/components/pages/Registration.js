@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axiosClient from '../../axiosClient';
 import { Link } from 'react-router-dom';
 import '../../css/Register.css';
@@ -6,7 +7,8 @@ import TextField from '../common/TextField';
 
 
 function Registration() {
-  const [user, setUser] = useState({
+    const navigate = useNavigate();
+    const [user, setUser] = useState({
     email: '',
     username: '',
     password: '',
@@ -78,14 +80,22 @@ function Registration() {
           password: user.password,
           email: user.email
         });
-  
+        
+        const res = await response.json();
+        
         if (response.status === 200) {
-          
-          alert("User created!");
-        } 
-        else if (response.status === 409) {
-          alert("Email exists");
-        }
+            const res = await response.json();
+            alert("User created!");
+            // Storing a JSON called user with properties token, username, email
+            localStorage.setItem("user", JSON.stringify(res));
+            navigate("/dashboard");
+          } 
+          else if (response.status === 409) {
+            alert("Email exists");
+          } 
+          else {
+            alert("An error occurred while registering.");
+          }
       }
       catch (error) {
         console.error('Error:', error.message);
@@ -94,6 +104,20 @@ function Registration() {
       alert("Missing fields");
     }
   };
+
+
+  const handleGuestLogin = async () => {
+    try {
+      const response = await axiosClient.post('/api/register', {
+        username: "Guest",
+        password: "Guest"
+      });
+      
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  };
+
 
   return (
     <div className="registrationForm">
@@ -149,7 +173,8 @@ function Registration() {
 
       <div className="divider"></div>
       
-      <Link to="/dashboard" className="guestlink">Or continue as Guest</Link>
+      {/* <Link to="/dashboard" className="guestlink">Or continue as Guest</Link> */}
+      <button className="guestlink" onClick={handleGuestLogin}>Or continue as Guest</button>
     </div>
   );
 }
