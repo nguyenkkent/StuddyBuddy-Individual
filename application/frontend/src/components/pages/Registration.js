@@ -13,7 +13,7 @@ function Registration() {
     confirmPassword: '',
     agreeToTerms: false,
   });  
-  const navigate = useNavigate();
+  
   const [errors, setErrors] = useState({});
 
   // Handles changes in the form's fields, like checking the box or types in a field box
@@ -78,16 +78,14 @@ function Registration() {
           password: user.password,
           email: user.email
         });
-        if (response.status === 200 ) {          
+  
+        if (response.status === 200) {
+          
           alert("User created!");
-          const json = response.json();
-          console.log("got passed the json line");
-          navigate("/dashboard"); 
         } 
-        else{
-          alert("Email is already in used");
+        else if (response.status === 409) {
+          alert("Email exists");
         }
-
       }
       catch (error) {
         console.error('Error:', error.message);
