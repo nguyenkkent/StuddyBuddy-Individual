@@ -1,0 +1,49 @@
+/* Profile css */
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 70px);
+}
+
+.profile-content {
+  flex-grow: 1;
+  height: calc(100vh - 92px);
+}
+
+.profile-info {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: auto;
+  text-align: left;
+}
+
+.profile-detail-main {
+  font-size: 32px;
+}
+
+.profile-detail-verify {
+  font-size: 20px;
+  margin-left: 16px;
+  margin-top: -24px;
+  margin-bottom: 24px;
+}
+
+.profile-img {
+  width: 16rem;
+  height: 16rem;
+}
+
+.profile-tags {
+  display: flex;
+  column-gap: 0.5rem;
+  align-items: center;
+  width: 80%;
+  margin: auto;
+}
+
+.profile-tags-selector {
+  flex-grow: 1;
+  text-align: left;
+}

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import axios from "axios";
-import { Navigate } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../hooks/useAuthContext';
+import axiosClient from '../../axiosClient';
+import { Link } from 'react-router-dom';
+import '../../css/Register.css';
+import TextField from '../common/TextField';
+
 
 function Registration() {
   const [user, setUser] = useState({
@@ -72,7 +73,7 @@ function Registration() {
     e.preventDefault();
     if (validateForm()) {
       try {
-        const response = await axios.post('http://localhost:3001/api/register', {
+        const response = await axiosClient.post('/api/register', {
           username: user.username,
           password: user.password,
           email: user.email
@@ -98,39 +99,59 @@ function Registration() {
 
   return (
     <div className="registrationForm">
-      <h2>Registration</h2>
-      <form onSubmit={handleSubmit}>
+      <h2 className="registrationtitle">Registration</h2>
+      <form onSubmit={handleSubmit} className="registrationform">
+        <TextField
+          label="Email:"
+          type="email"
+          name="email"
+          value={user.email}
+          onChange={handleChange}
+          errors={errors.email}
+        />
+        
+        <TextField
+          label="Username:"
+          type="text"
+          name="username"
+          value={user.username}
+          onChange={handleChange}
+          errors={errors.username}
+        />
+      
+        <TextField
+          label="Password:"
+          type="password"
+          name="password"
+          value={user.password}
+          onChange={handleChange}
+          errors={errors.password}
+        />
+
+        <TextField
+          label="Confirm Password:"
+          type="password"
+          name="confirmPassword"
+          value={user.confirmPassword}
+          onChange={handleChange}
+          errors={[errors.confirmPassword, errors.passwordMatch]}
+        />
+
         <div>
-          <label>Email:</label>
-          <input type="email" name="email" value={user.email} onChange={handleChange} />
-          {errors.email && <div className="error">{errors.email}</div>}
-        </div>
-        <div>
-          <label>Username:</label>
-          <input type="text" name="username" value={user.username} onChange={handleChange} />
-          {errors.username && <div className="error">{errors.username}</div>}
-        </div>
-        <div>
-          <label>Password:</label>
-          <input type="password" name="password" value={user.password} onChange={handleChange} />
-          {errors.password && <div className="error">{errors.password}</div>}
-        </div>
-        <div>
-          <label>Confirm Password:</label>
-          <input type="password" name="confirmPassword" value={user.confirmPassword} onChange={handleChange} />
-          {errors.confirmPassword && <div className="error">{errors.confirmPassword}</div>}
-          {errors.passwordMatch && <div className="error">{errors.passwordMatch}</div>}
-        </div>
-        <div>
-          <label>
-            <input type="checkbox" name="agreeToTerms" checked={user.agreeToTerms} onChange={handleChange} />
-            I agree to the Terms of Service
-          </label>
+          <div className='agreeBox'>
+            <input type="checkbox" name="agreeToTerms" id="agreeToTerms" checked={user.agreeToTerms} onChange={handleChange} />
+            <label className="formlabel" for="agreeToTerms">
+              I agree to the Terms of Service
+            </label>
+          </div>
           {errors.agreeToTerms && <div className="error">{errors.agreeToTerms}</div>}
         </div>
-        <button type="submit">Register</button>
+        <button className="registerbutton" type="submit">Register</button>
       </form>
 
+      <div className="divider"></div>
+      
+      <Link to="/dashboard" className="guestlink">Or continue as Guest</Link>
     </div>
   );
 }

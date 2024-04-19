@@ -1,0 +1,27 @@
+.chat-container {
+  display: flex;
+}
+
+.chat-content {
+  flex-grow: 1;
+}
+
+.chat-box {
+  background-color: white;
+  min-height: 24rem;
+  max-width: 24rem;
+  margin: auto;
+  text-align: left;
+  display: flex;
+  align-items: flex-end;
+}
+
+.chat-send {
+  display: flex;
+  max-width: 24rem;
+  margin: auto;
+}
+
+.chat-send > input {
+  flex-grow: 1;
+}
