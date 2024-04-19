@@ -74,38 +74,6 @@ function Registration() {
     return formIsValid;
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   if (validateForm()) {
-  //     try {
-  //       const response = await axiosClient.post('/api/register', {
-  //         username: user.username,
-  //         password: user.password,
-  //         email: user.email
-  //       })
-  //       .then(response => {
-  //         if (response.status === 200){
-  //           localStorage.setItem("user", JSON.stringify(response.data));
-  //           dispatch({type: 'LOGIN', payload: response.data})
-  //           navigate("/dashboard");        
-  //         }
-  //         else{
-  //           alert("Email is already in used");
-  //         }
-  //       })
-  //       .catch(error => {
-  //         console.error('Error:', error.message);
-  //       });
-  //     }
-  //     catch (error) {
-  //       console.error('Error:', error.message);
-  //     }
-  //   } 
-  //   else {
-  //     alert("Missing fields");
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
@@ -121,7 +89,7 @@ function Registration() {
           dispatch({ type: 'LOGIN', payload: response.data });
           navigate("/dashboard");
         } else {
-          alert("Email is already in use");
+          alert(response.message);
         }
       } catch (error) {
         console.error('Error:', error.message);
@@ -131,8 +99,6 @@ function Registration() {
     }
   };
   
-
-
 
 const handleGuestLogin = async () => {
     try {
