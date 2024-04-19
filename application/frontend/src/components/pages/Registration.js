@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {useAuthContext} from '../../hooks/useAuthContext'
 import axiosClient from '../../axiosClient';
 import { Link } from 'react-router-dom';
 import '../../css/Register.css';
@@ -17,6 +18,8 @@ function Registration() {
   });  
   
   const [errors, setErrors] = useState({});
+  //grab the dispatch function from userAUth
+  const {dispatch} = useAuthContext();
 
   // Handles changes in the form's fields, like checking the box or types in a field box
   const handleChange = (e) => {
@@ -71,6 +74,38 @@ function Registration() {
     return formIsValid;
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (validateForm()) {
+  //     try {
+  //       const response = await axiosClient.post('/api/register', {
+  //         username: user.username,
+  //         password: user.password,
+  //         email: user.email
+  //       })
+  //       .then(response => {
+  //         if (response.status === 200){
+  //           localStorage.setItem("user", JSON.stringify(response.data));
+  //           dispatch({type: 'LOGIN', payload: response.data})
+  //           navigate("/dashboard");        
+  //         }
+  //         else{
+  //           alert("Email is already in used");
+  //         }
+  //       })
+  //       .catch(error => {
+  //         console.error('Error:', error.message);
+  //       });
+  //     }
+  //     catch (error) {
+  //       console.error('Error:', error.message);
+  //     }
+  //   } 
+  //   else {
+  //     alert("Missing fields");
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
@@ -80,47 +115,44 @@ function Registration() {
           password: user.password,
           email: user.email
         });
-        
-        const res = await response.json();
-        
+        console.log(response.data);
         if (response.status === 200) {
-            const res = await response.json();
-            alert("User created!");
-            // Storing a JSON called user with properties token, username, email
-            localStorage.setItem("user", JSON.stringify(res));
-            navigate("/dashboard");
-          } 
-          else if (response.status === 409) {
-            alert("Email exists");
-          } 
-          else {
-            alert("An error occurred while registering");
-          }
-      }
-      catch (error) {
+          localStorage.setItem("user", JSON.stringify(response.data));
+          dispatch({ type: 'LOGIN', payload: response.data });
+          navigate("/dashboard");
+        } else {
+          alert("Email is already in use");
+        }
+      } catch (error) {
         console.error('Error:', error.message);
       }
     } else {
       alert("Missing fields");
     }
   };
+  
 
 
-  const handleGuestLogin = async () => {
+
+const handleGuestLogin = async () => {
     try {
-      const response = await axiosClient.post('/api/register/guest', {
+      axiosClient.post('/api/register/guest', {
         username: "Guest",
         password: "Guest"
+      })
+      .then(response => {
+        if (response.status === 200){
+          localStorage.setItem("user", JSON.stringify(response.data));
+          dispatch({type: 'LOGIN', payload: response.data})
+          navigate("/dashboard");        
+        }
+        else{
+          alert("An error occurred");
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error.message);
       });
-      const res = await response.json();
-      if (response.status === 200){
-        localStorage.setItem("user", JSON.stringify(res));
-        navigate("/dashboard");        
-      }
-      else{
-        alert("An error occured");
-      }
-      
     } 
     catch (error) {
       console.error('Error:', error.message);
