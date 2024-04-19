@@ -35,7 +35,7 @@ function App() {
           <Route path="/api/login" element={<Login />} />
           <Route path="/api/aboutus" element={<AboutUs />} />
           <Route path="/api/dashboard" element={<Dashboard />} />
-          <Route path="/chats" element={<Chats />}/>
+          <Route path="/api/chats" element={<Chats />}/>
         </Routes>
       </div>
     </Router>

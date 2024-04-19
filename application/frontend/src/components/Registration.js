@@ -79,7 +79,9 @@ function Registration() {
         });
         if (response.status === 200 ) {          
           alert("User created!");
-          navigate("/api/dashboard"); 
+          const json = response.json();
+          console.log("got passed the json line");
+          navigate("/dashboard"); 
         } 
         else{
           alert("Email is already in used");
