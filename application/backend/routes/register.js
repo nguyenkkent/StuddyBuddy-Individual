@@ -11,7 +11,6 @@ const createToken = (_id) => {
     return jwt.sign({_id}, process.env.SECRET, {expiresIn: '3d'});
 }
 
-//handles when a user registers for an account
 router.post('/', async (request, response)=>{
     try{
         const user = await Users.findOne({email: request.body.email});
@@ -28,12 +27,8 @@ router.post('/', async (request, response)=>{
                 tags: [],
                 history:[],
                 isVerified: false,
-                isGuess: false
+                isGuess: request.body.username==="Guest" ? true : false
                 }
-            //handles when user opt to continue as guess
-            if (newUser.username==="Guest"){
-                newUser.isGuess = true;
-            }
             const result = await Users.collection.insertOne(newUser);
             const username = newUser.username;
             const email = newUser.email;
