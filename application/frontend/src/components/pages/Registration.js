@@ -94,7 +94,7 @@ function Registration() {
             alert("Email exists");
           } 
           else {
-            alert("An error occurred while registering.");
+            alert("An error occurred while registering");
           }
       }
       catch (error) {
@@ -108,12 +108,21 @@ function Registration() {
 
   const handleGuestLogin = async () => {
     try {
-      const response = await axiosClient.post('/api/register', {
+      const response = await axiosClient.post('/api/register/guest', {
         username: "Guest",
         password: "Guest"
       });
+    //   const res = await response.json();
+    //   if (response.status === 200){
+    //     localStorage.setItem("user", JSON.stringify(res));
+    //     navigate("/dashboard");        
+    //   }
+    //   else{
+    //     alert("An error occured");
+    //   }
       
-    } catch (error) {
+    } 
+    catch (error) {
       console.error('Error:', error.message);
     }
   };
