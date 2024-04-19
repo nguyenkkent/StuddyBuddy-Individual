@@ -13,7 +13,6 @@ const createToken = (_id) => {
 
 router.post('/', async (request, response)=>{
     try{
-        console.log(request.body);
         const user = await Users.findOne({email: request.body.email});
         if (user){
             return response.status(409).json("Email is already in use");         
@@ -49,8 +48,6 @@ router.post('/', async (request, response)=>{
 
 router.post('/guest', async (request, response)=>{
     try{
-        console.log(request.body);
-            console.log("inside guest function");
             const newUser = {
                 username : request.body.username,
                 tags: [],
@@ -59,20 +56,17 @@ router.post('/guest', async (request, response)=>{
                 isGuess: true
                 }
             const result = await Users.collection.insertOne(newUser);
-            //const objectId = result.insertedId.toString();
-            //console.log(result.insertedId);  
-            
-            // if (newUser.isGuess){
-            //     const objectIdStr = objectId.toString();
-            //     const suffix = objectIdStr.splice(-6);
-            //     username += suffix;
-            // }
-            console.log(newUser);
+            //append the last 6 character of document's _id to guest username
+            const objectId = result.insertedId.toString();  
+            const suffix = objectId.slice(-6);
+            newUser.username += suffix;
+
+            //create variables for json return
             const username = newUser.username;
             const email = newUser.email;
             const token = createToken(result.insertedId);
 
-            console.log(`A document was inserted with the _id: ${result.insertedId}`);
+            console.log(`A guest was inserted with the _id: ${result.insertedId}`);
             return response.status(200).json({username, email, token});
         }
     catch(error){
