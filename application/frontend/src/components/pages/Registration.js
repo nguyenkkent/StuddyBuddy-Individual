@@ -112,14 +112,14 @@ function Registration() {
         username: "Guest",
         password: "Guest"
       });
-    //   const res = await response.json();
-    //   if (response.status === 200){
-    //     localStorage.setItem("user", JSON.stringify(res));
-    //     navigate("/dashboard");        
-    //   }
-    //   else{
-    //     alert("An error occured");
-    //   }
+      const res = await response.json();
+      if (response.status === 200){
+        localStorage.setItem("user", JSON.stringify(res));
+        navigate("/dashboard");        
+      }
+      else{
+        alert("An error occured");
+      }
       
     } 
     catch (error) {
