@@ -5,6 +5,7 @@ import "dotenv/config";
 import registerRouter from "./routes/register.js"
 import dashboardRouter from "./routes/dashboard.js";
 import loginRouter from "./routes/login.js";
+import friendsrouter from "./routes/friends.js"
 
 //middleware
 app.use(express.json());
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use('/api/register', registerRouter);
 app.use('/api/dashboard', dashboardRouter);
 app.use('/api/login', loginRouter);
+app.use('/api/my-friends', friendsrouter);
 
 //connect to mongoDB
 mongoose
