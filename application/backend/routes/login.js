@@ -18,8 +18,11 @@ router.post("", async (request, response) =>{
             //validate hashed password
             const match = await bcrypt.compare(request.body.password, user.password);
             if (match){
+                const username = user.username;
+                const email = user.email;
+                const objectId = user._id;
                 const token = createToken(user._id);
-                return response.status(200).json({token});
+                return response.status(200).json({username, email, objectId, token});
             }
         }
         //not exists or if password does not match
@@ -29,7 +32,6 @@ router.post("", async (request, response) =>{
         console.log("Error: ", error.message);
         response.status(500).send({message: error.message})        
     }
-    //check if email exists, if so check the hashed password
 
 })
 

@@ -83,7 +83,7 @@ function Registration() {
           password: user.password,
           email: user.email
         });
-        console.log(response.data);
+        //console.log(response.data);
         if (response.status === 200) {
           localStorage.setItem("user", JSON.stringify(response.data));
           dispatch({ type: 'LOGIN', payload: response.data });
