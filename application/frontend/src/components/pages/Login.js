@@ -27,7 +27,7 @@ function Login() {
         email: loginData.email,
         password: loginData.password
       });
-      console.log(`login message: ${response.message}`);
+      // console.log(`login message: ${response.message}`);
       if (response.status === 200) {
         navigate('/dashboard');
       }

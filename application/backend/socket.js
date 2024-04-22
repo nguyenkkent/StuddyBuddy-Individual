@@ -15,12 +15,12 @@ const server = createServer(app);
 const io = new Server(server, {
 	cors: {
 		origin: "\*",
-		methods: ["GET", "POST"],
+		methods: ["GET", "POST", "PUT", "DELETE"],
 	},
 });
 
 io.on('connection', (socket) => {
-    console.log(`User connected: ${socket.id}`);
+    // console.log(`User connected: ${socket.id}`);
 
     socket.on('disconnect', () => {
       console.log('user disconnected');

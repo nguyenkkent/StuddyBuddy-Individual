@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {useAuthContext} from '../../hooks/useAuthContext'
 import axiosClient from '../../axiosClient';
 import { Link } from 'react-router-dom';
 import '../../css/Register.css';
@@ -6,7 +8,8 @@ import TextField from '../common/TextField';
 
 
 function Registration() {
-  const [user, setUser] = useState({
+    const navigate = useNavigate();
+    const [user, setUser] = useState({
     email: '',
     username: '',
     password: '',
@@ -15,6 +18,8 @@ function Registration() {
   });  
   
   const [errors, setErrors] = useState({});
+  //grab the dispatch function from userAUth
+  const {dispatch} = useAuthContext();
 
   // Handles changes in the form's fields, like checking the box or types in a field box
   const handleChange = (e) => {
@@ -78,22 +83,48 @@ function Registration() {
           password: user.password,
           email: user.email
         });
-  
+        console.log(response.data);
         if (response.status === 200) {
-          
-          alert("User created!");
-        } 
-        else if (response.status === 409) {
-          alert("Email exists");
+          localStorage.setItem("user", JSON.stringify(response.data));
+          dispatch({ type: 'LOGIN', payload: response.data });
+          navigate("/dashboard");
+        } else {
+          alert(response.message);
         }
-      }
-      catch (error) {
+      } catch (error) {
         console.error('Error:', error.message);
       }
     } else {
       alert("Missing fields");
     }
   };
+  
+
+const handleGuestLogin = async () => {
+    try {
+      axiosClient.post('/api/register/guest', {
+        username: "Guest",
+        password: "Guest"
+      })
+      .then(response => {
+        if (response.status === 200){
+          localStorage.setItem("user", JSON.stringify(response.data));
+          dispatch({type: 'LOGIN', payload: response.data})
+          navigate("/dashboard");        
+        }
+        else{
+          alert("An error occurred");
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error.message);
+      });
+    } 
+    catch (error) {
+      console.error('Error:', error.message);
+    }
+  };
+
 
   return (
     <div className="registrationForm">
@@ -149,7 +180,8 @@ function Registration() {
 
       <div className="divider"></div>
       
-      <Link to="/dashboard" className="guestlink">Or continue as Guest</Link>
+      {/* <Link to="/dashboard" className="guestlink">Or continue as Guest</Link> */}
+      <button className="guestlink" onClick={handleGuestLogin}>Or continue as Guest</button>
     </div>
   );
 }

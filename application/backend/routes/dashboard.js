@@ -8,7 +8,7 @@ const router = express.Router();
 // app.use(express.json());
 router.get("/", async (request, response) =>{
     try{
-        const userData = await Users.collection.find({}).toArray();
+        const userData = await Users.collection.find(request.body.username).toArray();
         // const groupData = await Groups.collection.find({}).toArray();
         // const messageData = await Messages.collection.find({}).toArray();
         var jsonData = {};
