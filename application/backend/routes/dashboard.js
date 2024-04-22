@@ -2,7 +2,10 @@ import express from "express";
 import {Users} from "../models/userSchema.js";
 import {Groups} from "../models/groupSchema.js";
 import {Messages} from "../models/messageSchema.js";
+import requireAuth from "../middleware/requireAuth.js"
+
 const router = express.Router();
+router.use(requireAuth);
 
 // const app = express();
 // app.use(express.json());
