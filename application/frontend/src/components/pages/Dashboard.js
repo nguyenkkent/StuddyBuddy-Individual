@@ -16,6 +16,10 @@ function Dashboard() {
     setSearchTerm(event.target.value);
   };
   useEffect(() => {
+    if (!user){
+      console.log("User not loaded")
+      return;
+    }
     const fetchUsers = async () => {
       try {
         // FIXME: do not return sensitive information like email and password
