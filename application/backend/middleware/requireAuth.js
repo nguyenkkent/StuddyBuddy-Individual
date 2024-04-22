@@ -5,6 +5,7 @@ const requireAuth = (request, response, next) => {
 
     //get the authorization property from the request header
     const { authorization } = request.headers;
+    //alternatively can just check to see if jwt exists
     
     if (!authorization){
         return response.status(401).json({error: "Authorization token required"});

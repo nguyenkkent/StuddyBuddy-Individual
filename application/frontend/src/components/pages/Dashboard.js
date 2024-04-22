@@ -3,12 +3,14 @@ import "../../css/Dashboard.css";
 import axiosClient from "../../axiosClient";
 import { Link } from "react-router-dom";
 import Select from 'react-select'
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 function Dashboard() {
   const [searchTerm, setSearchTerm] = useState("");
   const [allUsers, setAllUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [tags, setTags] = useState([]);
+  const { user } = useAuthContext();
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
@@ -16,7 +18,13 @@ function Dashboard() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axiosClient.get("/api/dashboard"); // FIXME: do not return sensitive information like email and password
+        // FIXME: do not return sensitive information like email and password
+        const response = await axiosClient.get("/api/dashboard", {
+          //send authorization header for middleware to intercept
+          headers: {
+            'Authorization': `Bearer ${user.token}`
+          }
+        }); 
         setAllUsers(response.data.userData);
         setFilteredUsers(response.data.userData);
       } catch (error) {
