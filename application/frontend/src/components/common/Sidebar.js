@@ -1,15 +1,22 @@
 import React from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../../hooks/useAuthContext';
 import '../../css/Sidebar.css';
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { dispatch } = useAuthContext();
 
   const whitelistPages = ["/dashboard", "/chats", "/my-groups", "/my-friends", "/settings", "/profile"]
   const showSideBar = whitelistPages.includes(location.pathname);       
 
   function handleLogout() {
+    //delete json web token from browser storage
+    localStorage.removeItem("user");
+    //change dispatch function to logout state
+    dispatch({type: "LOGOUT"})
+
     navigate("/login");
   }
 
