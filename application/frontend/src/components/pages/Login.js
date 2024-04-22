@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {useAuthContext} from '../../hooks/useAuthContext'
 import axiosClient from '../../axiosClient';
 import '../../css/Login.css';
 
@@ -19,6 +20,9 @@ function Login() {
     });
   };
 
+  //grab the dispatch function from userAUth
+  const {dispatch} = useAuthContext();
+  
   // Can add validation here for backend, unless you have another way.
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -29,6 +33,8 @@ function Login() {
       });
       // console.log(`login message: ${response.message}`);
       if (response.status === 200) {
+        localStorage.setItem("user", JSON.stringify(response.data));
+        dispatch({ type: 'LOGIN', payload: response.data });
         navigate('/dashboard');
       }
       else {

@@ -16,7 +16,7 @@ router.post('/', async (request, response)=>{
         const user = await Users.findOne({email: request.body.email});
         if (user){
             // return response.status(409).json({ message: "Email is already in use" });  
-            return response.status(409).json("Email is already in use");    
+            return response.status(409).json({message:"Email is already in use"});    
         }
         else{
             const salt = await bcrypt.genSalt(10);
