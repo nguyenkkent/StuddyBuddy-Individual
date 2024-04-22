@@ -6,11 +6,11 @@ import Select from 'react-select'
 import { useAuthContext } from "../../hooks/useAuthContext";
 
 function Dashboard() {
+  const { user } = useAuthContext();
   const [searchTerm, setSearchTerm] = useState("");
   const [allUsers, setAllUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [tags, setTags] = useState([]);
-  const { user } = useAuthContext();
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
