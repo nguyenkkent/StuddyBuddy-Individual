@@ -16,6 +16,7 @@ function Dashboard() {
     setSearchTerm(event.target.value);
   };
   useEffect(() => {
+    //handles when user is not loaded property from the AuthContext
     if (!user){
       console.log("User not loaded")
       return;
