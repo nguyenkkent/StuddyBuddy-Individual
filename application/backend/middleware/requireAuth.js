@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import {Users} from "../models/userSchema.js";
 
-const requireAuth = (request, response, next) => {
+const requireAuth = async (request, response, next) => {
 
     //get the authorization property from the request header
     const { authorization } = request.headers;
@@ -12,13 +12,16 @@ const requireAuth = (request, response, next) => {
     }
     //split the authorization and grab the second portion after the space delimiter
     const token = authorization.split(" ")[1];
-
     try{
         //verify that the token on browser has not been tampered with
-        const {_id} = jwt.verify(token, process.env.SECRET);
-
+        // const {_id} = await jwt.verify(token, process.env.SECRET);
+        const user = await jwt.verify(token, process.env.SECRET);
+        if (!user) {
+            return response.status(404).json({ error: "User not found" });
+        }
         //add a user property to the request object to pass onto the route
-        request.user = Users.findOne({_id}).select("_id");
+        // request.user = Users.findOne({_id}).select("_id");
+        request.user = user; //set the user object to request.user
         next();
     }
     catch(error){
