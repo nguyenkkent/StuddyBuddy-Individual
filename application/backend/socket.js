@@ -2,7 +2,8 @@ import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import cors from "cors";
-// import {Messages} from "../models/messageSchema.js";
+import {Messages} from "../backend/models/messageSchema.js"
+
 
 //create an instance of the application object
 const app = express();
@@ -27,12 +28,18 @@ io.on('connection', (socket) => {
     });
     
     //getting data from the front end and sending it back
-    socket.on("sendMessage", data=>{
-        //send the message to all but the sender
-        console.log(data);
-        socket.broadcast.emit("receiveMessage", data);
-    })
+    socket.on("sendMessage", data => {
+      const { username, message } = data;
+      // Process message and username
+      const result = username.concat(": ", message)
+      console.log(result);
+      // Broadcast the message to other users
+    
+      socket.broadcast.emit("receiveMessage", { result });
   });
+  });
+
+
 
 
 export {app, io, server};
