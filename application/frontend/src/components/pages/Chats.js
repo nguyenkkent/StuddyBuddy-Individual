@@ -19,7 +19,6 @@ function Chats() {
       //of the new array
       setMessages(prevMessages => [...prevMessages, data.message]);
     });
-
     //Clean up event listener when component unmounts
     return () => {
       socket.off("receiveMessage");
@@ -45,10 +44,10 @@ function Chats() {
     <div className="chat-container">
       <div className="chat-content">
         <h1>Chatting with &lt;Placeholder&gt;</h1>
-        <div className="chat-box" style={{ display: "flex", flexDirection: "column-reverse" }}>
+        <div className="chat-box" style={{ display: "flex", flexDirection: "column" }}>
           {/* Display all received messages into each individual divs */}
           {messages.map((msg, index) => (
-           <div key={index}>{msg}</div>
+            <div key={index}>{msg}</div>
           ))}
         </div>
         <div className="chat-send">
