@@ -13,13 +13,14 @@ function Chats() {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    // Listen for incoming messages from the backend
+    //listen for incoming messages from the backend
     socket.on("receiveMessage", (data) => {
-      console.log(data);
+      //spreads the 'messages' array into a new array and appending 'data.message' to the end
+      //of the new array
       setMessages(prevMessages => [...prevMessages, data.message]);
     });
-    // console.log(messages);
-    // Clean up event listener when component unmounts
+
+    //Clean up event listener when component unmounts
     return () => {
       socket.off("receiveMessage");
     };
@@ -35,7 +36,7 @@ function Chats() {
     }
 
     const username = token.username;
-    // Emit the message to the backend
+    //emit the message to the backend
     socket.emit("sendMessage", { message, username });
     setMessage("");
   }
@@ -44,10 +45,10 @@ function Chats() {
     <div className="chat-container">
       <div className="chat-content">
         <h1>Chatting with &lt;Placeholder&gt;</h1>
-        <div className="chat-box">
-          {/* Display all received messages */}
+        <div className="chat-box" style={{ display: "flex", flexDirection: "column-reverse" }}>
+          {/* Display all received messages into each individual divs */}
           {messages.map((msg, index) => (
-            <div key={index}>{msg}</div>
+           <div key={index}>{msg}</div>
           ))}
         </div>
         <div className="chat-send">

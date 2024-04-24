@@ -24,7 +24,7 @@ io.on('connection', (socket) => {
     // console.log(`User connected: ${socket.id}`);
 
     socket.on('disconnect', () => {
-      console.log('user disconnected');
+      // console.log('user disconnected');
     });
     
     //getting data from the front end and sending it back
@@ -32,11 +32,8 @@ io.on('connection', (socket) => {
       const { username, message } = data;
       console.log(data);
       // Process message and username and concatenate them
-      // console.log(username);
-      // console.log(message);
-
       const result = username.concat(": ", message)
-      console.log({message : result});
+      // console.log({message : result});
 
       // Broadcast the message to other users
       io.emit("receiveMessage", {message : result} );
