@@ -3,8 +3,10 @@ import "../../css/Dashboard.css";
 import axiosClient from "../../axiosClient";
 import { Link } from "react-router-dom";
 import Select from 'react-select'
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 function Dashboard() {
+  const { user } = useAuthContext();
   const [searchTerm, setSearchTerm] = useState("");
   const [allUsers, setAllUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
@@ -14,9 +16,20 @@ function Dashboard() {
     setSearchTerm(event.target.value);
   };
   useEffect(() => {
+    //handles when user is not loaded property from the AuthContext
+    if (!user){
+      console.log("User not loaded")
+      return;
+    }
     const fetchUsers = async () => {
       try {
-        const response = await axiosClient.get("/api/dashboard"); // FIXME: do not return sensitive information like email and password
+        // FIXME: do not return sensitive information like email and password
+        const response = await axiosClient.get("/api/dashboard", {
+          //send authorization header for middleware to intercept
+          headers: {
+            'Authorization': `Bearer ${user.token}`
+          }
+        }); 
         setAllUsers(response.data.userData);
         setFilteredUsers(response.data.userData);
       } catch (error) {
