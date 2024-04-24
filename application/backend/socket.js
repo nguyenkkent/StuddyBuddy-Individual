@@ -39,7 +39,7 @@ io.on('connection', (socket) => {
       console.log({message : result});
 
       // Broadcast the message to other users
-      socket.emit("receiveMessage", {message : result} );
+      io.emit("receiveMessage", {message : result} );
   });
   });
 

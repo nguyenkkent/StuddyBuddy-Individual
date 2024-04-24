@@ -15,9 +15,10 @@ function Chats() {
   useEffect(() => {
     // Listen for incoming messages from the backend
     socket.on("receiveMessage", (data) => {
+      console.log(data);
       setMessages(prevMessages => [...prevMessages, data.message]);
     });
-
+    // console.log(messages);
     // Clean up event listener when component unmounts
     return () => {
       socket.off("receiveMessage");
