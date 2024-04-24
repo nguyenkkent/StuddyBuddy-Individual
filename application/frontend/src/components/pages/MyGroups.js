@@ -1,80 +1,46 @@
-import React, { useState, useEffect } from "react";
-import SideNavbar from '../common/Sidebar';
-import "../../css/Dashboard.css";
-import axiosClient from "../../axiosClient";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-function MyGroups() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [allUsers, setAllUsers] = useState([]);
-  const [filteredUsers, setFilteredUsers] = useState([]);
-  const [tags, setTags] = useState([]);
+const MyGroups = () => {
+  const [groups, setGroups] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const handleChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await axiosClient.get("/api/dashboard"); // FIXME: return sensitive information like email and password
-        setAllUsers(response.data.userData);
-        setFilteredUsers(response.data.userData);
-      } catch (error) {
-        console.error("Error fetching users:", error);
-        setAllUsers([]);
-        setFilteredUsers([]);
-      }
-    };
-    fetchUsers();
+    // REPLACE WITH THE ACTUAL API CALL - I don't want to put in something that isn't set up -yq
+    fetchGroups().then(fetchedGroups => {
+      setGroups(fetchedGroups);
+    });
   }, []);
 
-  useEffect(() => {
-    let filtered = allUsers && allUsers.filter(user =>
-      user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    if (tags.length) {
-      filtered = filtered.filter(user =>
-        user.tags.some(t => tags.includes(t))
-      );
-    }
-    setFilteredUsers(filtered);
-  }, [searchTerm, allUsers, tags]);
+  const handleSearch = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filteredGroups = groups.filter(group =>
+    group.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
-    <div className="dashboard-container">
-      <div className="dashboard-content">
-        <h1>Your Groups</h1>
-        <div className="dashboard-search">
-          <input
-            type="text"
-            className="dashboard-search-bar"
-            placeholder="Search Your Group Here"
-            value={searchTerm}
-            onChange={handleChange}
-          />
-          <svg fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="dashboard-search-button">
-            <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-          </svg>
-          <button><Link to="/add-friend">Create new group</Link></button>
-        </div>
-
-        <div className="user-results">
-          {filteredUsers && filteredUsers.map(user => (
-            <div key={user._id} className='user-entry'>
-              <div className="user-container">
-                <div>
-                  <div className='username'>{user.username}</div>
-                  <div>Tags: {user.tags.join(", ") || "N/A"}</div>
-                </div>
-                <Link to="/profile">Profile</Link>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+    <div>
+      <input type="text" value={searchQuery} onChange={handleSearch} placeholder="Search Your Group Here" />
+      <ul>
+        {filteredGroups.map(group => (
+          <li key={group._id}>{group.name} {/* If there are more details - add it here */}</li>
+        ))}
+      </ul>
+      <Link to="/create-group">Create New Group</Link>
     </div>
   );
-}
+};
+
+// THIS IS FOR TESTING PURPOSES - REMOVE WHEN ACTUAL BACKEND IS SET UP -yq (or I am dumb and didn't see it)
+// Fetch list of groups and populates the page
+const fetchGroups = async () => {
+    // Can put API call here
+    return [
+    // An example for testing
+    { _id: '1', name: 'Study Group Math' },
+  ];
+};
 
 export default MyGroups;
