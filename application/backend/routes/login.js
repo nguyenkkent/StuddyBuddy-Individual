@@ -12,7 +12,7 @@ const createToken = (_id) => {
 router.post("", async (request, response) =>{
     try{
         const user = await Users.findOne({email: request.body.email});
-        console.log("user: ", user);
+        //console.log("user: ", user);
         //if email exists in database
         if (user){
             //validate hashed password

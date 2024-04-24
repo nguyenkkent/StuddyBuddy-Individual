@@ -3,20 +3,32 @@ import SideNavbar from '../common/Sidebar';
 import "../../css/Dashboard.css";
 import axiosClient from "../../axiosClient";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 function MyFriends() {
   const [searchTerm, setSearchTerm] = useState("");
   const [allUsers, setAllUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [tags, setTags] = useState([]);
+  const { user } = useAuthContext();
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
   };
   useEffect(() => {
+    if (!user){
+      console.log("A user is not loaded");
+      return;
+    }
     const fetchUsers = async () => {
       try {
-        const response = await axiosClient.get("/api/dashboard"); // FIXME: return sensitive information like email and password
+        // FIXME: do not return sensitive information like email and password
+        const response = await axiosClient.get("/api/dashboard", {
+          headers: {
+            //send authorization header for middleware to intercept
+            'Authorization': `Bearer ${user.token}`
+          }        
+        }); 
         setAllUsers(response.data.userData);
         setFilteredUsers(response.data.userData);
       } catch (error) {

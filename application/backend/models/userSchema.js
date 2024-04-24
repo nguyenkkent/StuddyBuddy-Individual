@@ -15,7 +15,8 @@ const userSchema = new mongoose.Schema({
         // required: true,
     },
     tags: [String],
-    history: [String],  
+    history: [String],
+    friends: [String],  
     isVerified: {
         type: Boolean,
         require: true,

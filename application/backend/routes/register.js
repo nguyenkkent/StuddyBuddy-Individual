@@ -27,6 +27,7 @@ router.post('/', async (request, response)=>{
                 email: request.body.email,
                 tags: [],
                 history:[],
+                friends:[],
                 isVerified: false,
                 isGuess: request.body.username==="Guest",
                 }
@@ -58,9 +59,12 @@ router.post('/guest', async (request, response)=>{
                 }
             const result = await Users.collection.insertOne(newUser);
             //append the last 6 character of document's _id to guest username
-            const objectId = result.insertedId.toString();  
-            const suffix = objectId.slice(-6);
+            const objectId = result.insertedId;  
+            const suffix = objectId.toString().slice(-6);
             newUser.username += suffix;
+
+            // Update the user in the database with the new username
+            await Users.collection.updateOne({ _id: objectId }, { $set: { username: newUser.username } });
 
             //create variables for json return
             const username = newUser.username;
