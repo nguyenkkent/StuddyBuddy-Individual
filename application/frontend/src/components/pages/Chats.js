@@ -9,44 +9,45 @@ import jwt_decode from "jwt-decode";
 const socket = io(process.env.NODE_ENV == 'production' ? '/' : 'http://localhost:3001/'); // FIXME: edit paths as needed
 
 function Chats() {
-
-  // const [inputField, setInputField] = useState("");
   const [message, setMessage] = useState("");
-  const [messageReceived, setMessageReceived] = useState("");
-  const [username, setUsername] = useState(""); 
+  const [messages, setMessages] = useState([]);
 
-  //receiving the emit from the backend
   useEffect(() => {
+    // Listen for incoming messages from the backend
+    socket.on("receiveMessage", (data) => {
+      setMessages(prevMessages => [...prevMessages, data.message]);
+    });
+
+    // Clean up event listener when component unmounts
+    return () => {
+      socket.off("receiveMessage");
+    };
+  }, []);
+
+  //sending message to the backend
+  const sendMessage = () => {
     //grab token from browser
     const token = JSON.parse(localStorage.getItem("user"));
     if (!token) {
       console.log("No token found");
       return;
     }
-    setUsername(token.username);
 
-    socket.on("receiveMessage", (data) => {
-      setMessageReceived(data.message);
-    });
-  }, []);
-
-  //sending message to the backend
-  const sendMessage = () => {
-
-    //send the username of who sent message to backend
-    
+    const username = token.username;
+    // Emit the message to the backend
     socket.emit("sendMessage", { message, username });
     setMessage("");
   }
+
   return (
     <div className="chat-container">
       <div className="chat-content">
         <h1>Chatting with &lt;Placeholder&gt;</h1>
         <div className="chat-box">
-          <div>
-            <i>You epic chat starts here...</i>
-            {messageReceived}
-          </div>
+          {/* Display all received messages */}
+          {messages.map((msg, index) => (
+            <div key={index}>{msg}</div>
+          ))}
         </div>
         <div className="chat-send">
           <input placeholder='Message...' value={message} onChange={(event) => {
@@ -56,7 +57,6 @@ function Chats() {
         </div>
       </div>
     </div>
-
   );
 }
 

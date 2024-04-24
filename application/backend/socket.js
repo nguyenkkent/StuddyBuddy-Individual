@@ -30,16 +30,18 @@ io.on('connection', (socket) => {
     //getting data from the front end and sending it back
     socket.on("sendMessage", data => {
       const { username, message } = data;
-      // Process message and username
+      console.log(data);
+      // Process message and username and concatenate them
+      // console.log(username);
+      // console.log(message);
+
       const result = username.concat(": ", message)
-      console.log(result);
+      console.log({message : result});
+
       // Broadcast the message to other users
-    
-      socket.broadcast.emit("receiveMessage", { result });
+      socket.emit("receiveMessage", {message : result} );
   });
   });
-
-
 
 
 export {app, io, server};
