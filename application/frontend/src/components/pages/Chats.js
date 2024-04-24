@@ -3,8 +3,7 @@ import io from "socket.io-client";
 import { useEffect, useState } from 'react';
 import "../../css/Chats.css"
 import Sidebar from '../common/Sidebar';
-import axiosClient from '../../axiosClient';
-import jwt_decode from "jwt-decode";
+
 
 const socket = io(process.env.NODE_ENV == 'production' ? '/' : 'http://localhost:3001/'); // FIXME: edit paths as needed
 
