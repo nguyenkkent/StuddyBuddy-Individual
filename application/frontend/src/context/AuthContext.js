@@ -22,7 +22,7 @@ export const AuthContextProvider = ({children}) => {
     //check for the jwt from local storage
     useEffect(() => {
         //turn localStorage.getItem() json string into javascript object
-        const user = JSON.parse(localStorage.getItem("user"))
+        const user = JSON.parse(localStorage.getItem("user"));
         if (user){
             dispatch({type: "LOGIN", payload: user});
         }
