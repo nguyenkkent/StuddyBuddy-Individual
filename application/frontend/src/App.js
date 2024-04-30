@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Home from './components/pages/Home';
 import Navbar from './components/common/Navbar';
@@ -19,16 +19,13 @@ import Login from './components/pages/Login';
 import Dashboard from './components/pages/Dashboard';
 import MyFriends from "./components/pages/MyFriends";
 import MyGroups from "./components/pages/MyGroups";
+import CreateNewGroup from './components/pages/create-group';
 import Chats from "./components/pages/Chats";
 import Settings from "./components/pages/Settings";
 
 import Profile from './components/pages/Profile';
 
-import { useAuthContext } from './hooks/useAuthContext';
-
 function App() {
-  const { user } = useAuthContext();
-
   return (
     <Router>
       <div className="App">
@@ -48,15 +45,18 @@ function App() {
 
               <Route path="/aboutus" element={<AboutUs />} />
               <Route path="/register" element={<Registration />} />
+              <Route path="/login" element={<Login />} />
+
               {/* <Route path="/login" element={user? <Login /> : <Navigate to="/dashboard"/>} /> */}
               <Route path="/login" element={<Login />} />
               <Route path="/dashboard" element={user? <Dashboard /> : <Navigate to="/register"/>} />
               <Route path="/my-friends" element={user? <MyFriends /> : <Navigate to="/register"/>} />
               <Route path="/my-groups" element={user? <MyGroups /> : <Navigate to="/register"/>} />
+              <Route path="/create-group" element={<CreateNewGroup />} />
               <Route path="/chats" element={user? <Chats /> : <Navigate to="/register"/>} />
               <Route path="/settings" element={user? <Settings /> : <Navigate to="/register"/>} />
 
-              <Route path="/profile" element={user? <Profile /> : <Navigate to="/register"/>} />
+              <Route path="/profile" element={<Profile />} />
             </Routes>
           </div>
         </div>
