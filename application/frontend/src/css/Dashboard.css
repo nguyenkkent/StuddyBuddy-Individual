@@ -8,6 +8,7 @@
 .dashboard-search-bar {
   /* FIXME: override global input styling (input tags should not have a global style) */
   flex-grow: 1 !important; 
+  border-radius: 0px !important;
   border-top-left-radius: 16px !important;
   border-bottom-left-radius: 16px !important;
   padding: 10px !important;
