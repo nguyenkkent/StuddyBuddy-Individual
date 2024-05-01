@@ -8,8 +8,8 @@ function TextField(props) {
         </label>
       <input type={props.type} name={props.name} value={props.value} onChange={props.onChange}/>
       {props.errors && Array.isArray(props.errors) ? 
-        props.errors.map((error) => 
-          <div className="error">{error}</div>
+        props.errors.map((error, index) => 
+          <div className="error" key={index}>{error}</div>
         ) :
         <div className="error">{props.errors}</div>
       }
