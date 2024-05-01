@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "../../css/Dashboard.css";
 import axiosClient from "../../axiosClient";
-import { Link } from "react-router-dom";
 import Select from 'react-select'
 import { useAuthContext } from "../../hooks/useAuthContext";
+import UserCard from "../common/UserCard";
 
 function Dashboard() {
   const { user } = useAuthContext();
@@ -89,18 +89,12 @@ function Dashboard() {
             setTags(t.map(v => v.label));
           }}
           isMulti
-          />
+        />
         <div className="user-results">
           {filteredUsers && filteredUsers.map(user => (
-            <div key={user._id} className='user-entry'>
-              <div className="user-container">
-                <div>
-                  <div className='username'>{user.username}</div>
-                  <div>Tags: {user.tags.join(", ") || "N/A"}</div>
-                </div>
-                <Link to="/chats">Chat</Link>
-              </div>
-            </div>
+            <UserCard
+              user={user}
+            />
           ))}
         </div>
       </div>
