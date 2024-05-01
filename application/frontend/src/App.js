@@ -54,11 +54,11 @@ function App() {
               <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/register" />} />
               <Route path="/my-friends" element={user ? <MyFriends /> : <Navigate to="/register" />} />
               <Route path="/my-groups" element={user ? <MyGroups /> : <Navigate to="/register" />} />
-              <Route path="/create-group" element={<CreateNewGroup />} />
+              <Route path="/create-group" element={user ? <CreateNewGroup /> : <Navigate to="/register" />} />
               <Route path="/chats" element={user ? <Chats /> : <Navigate to="/register" />} />
               <Route path="/settings" element={user ? <Settings /> : <Navigate to="/register" />} />
 
-              <Route path="/profile" element={<Profile />} />
+              <Route path="/profile" element={user ? <Profile /> : <Navigate to="register"/>} />
             </Routes>
           </div>
         </div>
