@@ -48,7 +48,7 @@ function Dashboard() {
     );
     if (tags.length) {
       filtered = filtered.filter(user =>
-        user.tags.some(t => tags.includes(t))
+        tags.every(t => user.tags.includes(t))
       );
     }
     setFilteredUsers(filtered);
