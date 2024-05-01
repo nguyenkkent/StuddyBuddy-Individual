@@ -21,9 +21,11 @@ import Login from './components/pages/Login';
 import Dashboard from './components/pages/Dashboard';
 import MyFriends from "./components/pages/MyFriends";
 import MyGroups from "./components/pages/MyGroups";
-import CreateNewGroup from './components/pages/create-group';
 import Chats from "./components/pages/Chats";
 import Settings from "./components/pages/Settings";
+
+import CreateNewGroup from './components/pages/create-group';
+import FirstTime from './components/pages/FirstTime';
 
 import Profile from './components/pages/Profile';
 
@@ -51,14 +53,44 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/create-group" element={<CreateNewGroup />} />
 
-              {/* <Route path="/login" element={user? <Login /> : <Navigate to="/dashboard"/>} /> */}
-              <Route path="/login" element={<Login />} />
-              <Route path="/dashboard" element={user? <Dashboard /> : <Navigate to="/register"/>} />
-              <Route path="/my-friends" element={user? <MyFriends /> : <Navigate to="/register"/>} />
-              <Route path="/my-groups" element={user? <MyGroups /> : <Navigate to="/register"/>} />
-              <Route path="/chats" element={user? <Chats /> : <Navigate to="/register"/>} />
-              <Route path="/settings" element={user? <Settings /> : <Navigate to="/register"/>} />
-              <Route path="/profile" element={<Profile />} />
+              <Route path="/dashboard" element={
+                user ? (
+                  user?.isFirstTime ? <Navigate to="/first-time" /> : <Dashboard />
+                ) : <Navigate to="/register" />
+              } />
+              <Route path="/my-friends" element={
+                user ? (
+                  user?.isFirstTime ? <Navigate to="/first-time" /> : <MyFriends />
+                ) : <Navigate to="/register" />
+              } />
+              <Route path="/my-groups" element={
+                user ? (
+                  user?.isFirstTime ? <Navigate to="/first-time" /> : <MyGroups />
+                ) : <Navigate to="/register" />
+              } />
+              <Route path="/chats" element={
+                user ? (
+                  user?.isFirstTime ? <Navigate to="/first-time" /> : <Chats />
+                ) : <Navigate to="/register" />
+              } />
+              <Route path="/settings" element={
+                user ? (
+                  user?.isFirstTime ? <Navigate to="/first-time" /> : <Settings />
+                ) : <Navigate to="/register" />
+              } />
+
+              <Route path="/first-time" element={user?.isFirstTime ?? true ? <FirstTime /> : <Navigate to="/dashboard" />} />
+              <Route path="/create-group" element={
+                user ? (
+                  user?.isFirstTime ? <Navigate to="/first-time" /> : <CreateNewGroup />
+                ) : <Navigate to="/register" />
+              } />
+
+              <Route path="/profile" element={
+                user ? (
+                  user?.isFirstTime ? <Navigate to="/first-time" /> : <Profile />
+                ) : <Navigate to="register"/>
+              } />
             </Routes>
           </div>
         </div>

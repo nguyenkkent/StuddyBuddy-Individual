@@ -8,14 +8,14 @@ import TextField from '../common/TextField';
 
 
 function Registration() {
-    const navigate = useNavigate();
-    const [user, setUser] = useState({
+  const navigate = useNavigate();
+  const [user, setUser] = useState({
     email: '',
     username: '',
     password: '',
     confirmPassword: '',
     agreeToTerms: false,
-  });  
+  }); 
   
   const [errors, setErrors] = useState({});
   //grab the dispatch function from userAUth

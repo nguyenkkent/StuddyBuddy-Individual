@@ -79,6 +79,7 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   padding: 20px;
+  align-items: center;
 }
 
 .group-entry {
@@ -90,9 +91,9 @@
   gap: 5px;
   background-color: #bf9270;
   margin: 0 auto;
-  margin-top: 20px;
   text-align: left;
   width: 80%;
+  height: 80%;
 }
 
 .group-container {
