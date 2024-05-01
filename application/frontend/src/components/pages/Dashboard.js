@@ -42,13 +42,14 @@ function Dashboard() {
   }, []);
 
   useEffect(() => {
-    let filtered = allUsers && allUsers.filter(user =>
-      user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchTerm.toLowerCase())
+    let filtered = allUsers && allUsers.filter(u =>
+      user.objectId !== u._id &&
+      (u.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      u.email.toLowerCase().includes(searchTerm.toLowerCase()))
     );
     if (tags.length) {
-      filtered = filtered.filter(user =>
-        tags.every(t => user.tags.includes(t))
+      filtered = filtered.filter(u =>
+        tags.every(t => u.tags.includes(t))
       );
     }
     setFilteredUsers(filtered);
