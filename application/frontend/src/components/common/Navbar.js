@@ -1,18 +1,22 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import '../../css/Navbar.css';
+import { getMe } from '../../context/AuthContext';
 
 function Navbar() {
-    const location = useLocation();
-    const showProfilePages = ["/dashboard", "/chats", "/my-groups", "/my-friends", "/settings"];
-    const isLoginPage = location.pathname === "/login";
-    const isRegisterPage = location.pathname === "/register";
-    const isHomePage = location.pathname === "/";
-    const isAboutUsPage = location.pathname === "/aboutus";
+  const user = getMe();
+  const location = useLocation();
 
-    const showProfile = showProfilePages.includes(location.pathname);
-    const showLogin = isHomePage || isAboutUsPage || isRegisterPage;
-    const showRegister = isLoginPage;
+  const showProfilePages = ["/dashboard", "/chats", "/my-groups", "/my-friends", "/settings"];
+  const isLoginPage = location.pathname === "/login";
+  const isRegisterPage = location.pathname === "/register";
+  const isHomePage = location.pathname === "/";
+  const isAboutUsPage = location.pathname === "/aboutus";
+
+  const showProfile = showProfilePages.includes(location.pathname);
+  const showLogin = !user && (isHomePage || isAboutUsPage || isRegisterPage);
+  const showRegister =  !user && isLoginPage;
+  const showDashboard = user && (isHomePage || isAboutUsPage);
 
   return (
     <div className="navbar-wrapper">
@@ -30,6 +34,7 @@ function Navbar() {
         {showLogin && <Link to="/login">Login</Link>}
         {showRegister && <Link to="/register">Register</Link>}
         {showProfile && <Link to="/profile">Profile</Link>}
+        {showDashboard && <Link to="/dashboard">Dashboard</Link>}
       </div>
     </nav>
     </div>

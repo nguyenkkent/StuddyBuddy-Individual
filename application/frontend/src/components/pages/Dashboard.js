@@ -67,7 +67,7 @@ function Dashboard() {
   return (
     <div className="dashboard-container">
       <div className="dashboard-content">
-        <h1>Welcome back!</h1>
+        <h1>Welcome Back!</h1>
         <div className="dashboard-search">
           <input
             type="text"
