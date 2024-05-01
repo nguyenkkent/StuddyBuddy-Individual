@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Sidebar from "../common/Sidebar";
 import Select from 'react-select'
 import "../../css/Profile.css"
+import { getMe } from "../../context/AuthContext";
 
 function Profile() {
   const [tags, setTags] = useState([]);
@@ -16,17 +17,7 @@ function Profile() {
     { value: 'computer science', label: 'Computer Science' }
   ]
 
-  // FIXME: Create user.name field
-  // TODO: Get user.username
-  // TODO: Get user.email
-  // TODO: Get user.tags
-  // TODO: Get user.isVerified
-  const user = {
-    name: "Jane Doe",
-    username: "janedoe",
-    email: "janedoe@sfsu.edu",
-    isVerified: false
-  }
+  const user = getMe();
 
   return (
     <div className="profile-container">
@@ -35,9 +26,9 @@ function Profile() {
         <div className="profile-info">
           <div className="profile-detail">
             <div className="profile-detail-main">
-              <p>Name: {user.name}</p>
-              <p>Username: {user.username}</p>
-              <p>School Email: {user.email}</p>
+              <p>Name: {user.name || "???"}</p>
+              <p>Username: {user.username || "???"}</p>
+              <p>School Email: {user.email || "???"}</p>
             </div>
             <div className="profile-detail-verify">
               <p>Verified: {user.isVerified ? "YES" : "NO"}</p>
@@ -57,6 +48,9 @@ function Profile() {
             onChange={setTags}
             isMulti
           />
+        </div>
+        <div className="profile-save">
+          <button className="profile-save-button">Save</button>
         </div>
       </div>
     </div>
