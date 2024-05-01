@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 import Home from './components/pages/Home';
 import Navbar from './components/common/Navbar';
@@ -26,6 +26,7 @@ import Settings from "./components/pages/Settings";
 import Profile from './components/pages/Profile';
 
 function App() {
+    const [user] = useState(null);
   return (
     <Router>
       <div className="App">
@@ -46,16 +47,15 @@ function App() {
               <Route path="/aboutus" element={<AboutUs />} />
               <Route path="/register" element={<Registration />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/create-group" element={<CreateNewGroup />} />
 
               {/* <Route path="/login" element={user? <Login /> : <Navigate to="/dashboard"/>} /> */}
               <Route path="/login" element={<Login />} />
               <Route path="/dashboard" element={user? <Dashboard /> : <Navigate to="/register"/>} />
               <Route path="/my-friends" element={user? <MyFriends /> : <Navigate to="/register"/>} />
               <Route path="/my-groups" element={user? <MyGroups /> : <Navigate to="/register"/>} />
-              <Route path="/create-group" element={<CreateNewGroup />} />
               <Route path="/chats" element={user? <Chats /> : <Navigate to="/register"/>} />
               <Route path="/settings" element={user? <Settings /> : <Navigate to="/register"/>} />
-
               <Route path="/profile" element={<Profile />} />
             </Routes>
           </div>
