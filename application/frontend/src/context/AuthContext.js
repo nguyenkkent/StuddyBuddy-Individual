@@ -38,3 +38,7 @@ export const AuthContextProvider = ({children}) => {
         </AuthContext.Provider>
     )
 }
+
+export const getMe = () => {
+    return JSON.parse(localStorage.getItem("user"));
+}
