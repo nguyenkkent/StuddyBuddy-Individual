@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Sidebar from "../common/Sidebar";
 import Select from 'react-select'
 import "../../css/Profile.css"
-import { getMe } from "../../context/AuthContext";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 function Profile() {
   const [tags, setTags] = useState([]);
@@ -17,7 +17,7 @@ function Profile() {
     { value: 'computer science', label: 'Computer Science' }
   ]
 
-  const user = getMe();
+  const { user } = useAuthContext();
 
   return (
     <div className="profile-container">

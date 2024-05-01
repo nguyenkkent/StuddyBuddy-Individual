@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import '../../css/Navbar.css';
-import { getMe } from '../../context/AuthContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 function Navbar() {
-  const user = getMe();
+  const { user } = useAuthContext();
   const location = useLocation();
 
   const showProfilePages = ["/dashboard", "/chats", "/my-groups", "/my-friends", "/settings"];

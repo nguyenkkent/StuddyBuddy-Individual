@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import { getMe } from './context/AuthContext';
+import { useAuthContext } from './hooks/useAuthContext';
 import './App.css';
 
 import Home from './components/pages/Home';
@@ -28,7 +28,7 @@ import Settings from "./components/pages/Settings";
 import Profile from './components/pages/Profile';
 
 function App() {
-  const user = getMe()
+  const { user } = useAuthContext();
 
   return (
     <Router>

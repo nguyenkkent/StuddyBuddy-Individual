@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import SideNavbar from '../common/Sidebar';
 import "../../css/Dashboard.css";
 import axiosClient from "../../axiosClient";
 import { Link } from "react-router-dom";

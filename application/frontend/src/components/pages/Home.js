@@ -1,11 +1,11 @@
 import React from 'react';
 import "../../css/Home.css"
 import { Link } from 'react-router-dom';
-import { getMe } from '../../context/AuthContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 // Current is only a skeleton
 function Home() {
-  const user = getMe();
+  const { user } = useAuthContext();
 
   return (
     <div className="home-main-wrapper">
