@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { useAuthContext } from './hooks/useAuthContext';
+import React, { useState } from 'react';
 import './App.css';
 
 import Home from './components/pages/Home';
@@ -29,7 +30,6 @@ import Profile from './components/pages/Profile';
 
 function App() {
   const { user } = useAuthContext();
-
   return (
     <Router>
       <div className="App">
@@ -48,17 +48,18 @@ function App() {
               <Route path="/yuquan" element={<Yuquan />} />
 
               <Route path="/aboutus" element={<AboutUs />} />
-              <Route path="/register" element={user ? <Navigate to="/dashboard" /> : <Registration />} />
-              <Route path="/login" element={user ? <Navigate to="/dashboard" /> : <Login />} />
+              <Route path="/register" element={<Registration />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/create-group" element={<CreateNewGroup />} />
 
-              <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/register" />} />
-              <Route path="/my-friends" element={user ? <MyFriends /> : <Navigate to="/register" />} />
-              <Route path="/my-groups" element={user ? <MyGroups /> : <Navigate to="/register" />} />
-              <Route path="/create-group" element={user ? <CreateNewGroup /> : <Navigate to="/register" />} />
-              <Route path="/chats" element={user ? <Chats /> : <Navigate to="/register" />} />
-              <Route path="/settings" element={user ? <Settings /> : <Navigate to="/register" />} />
-
-              <Route path="/profile" element={user ? <Profile /> : <Navigate to="register"/>} />
+              {/* <Route path="/login" element={user? <Login /> : <Navigate to="/dashboard"/>} /> */}
+              <Route path="/login" element={<Login />} />
+              <Route path="/dashboard" element={user? <Dashboard /> : <Navigate to="/register"/>} />
+              <Route path="/my-friends" element={user? <MyFriends /> : <Navigate to="/register"/>} />
+              <Route path="/my-groups" element={user? <MyGroups /> : <Navigate to="/register"/>} />
+              <Route path="/chats" element={user? <Chats /> : <Navigate to="/register"/>} />
+              <Route path="/settings" element={user? <Settings /> : <Navigate to="/register"/>} />
+              <Route path="/profile" element={<Profile />} />
             </Routes>
           </div>
         </div>
