@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "../../css/Dashboard.css";
 import axiosClient from "../../axiosClient";
-import { Link } from "react-router-dom";
 import Select from 'react-select'
 import { useAuthContext } from "../../hooks/useAuthContext";
+import UserCard from "../common/UserCard";
 
 function Dashboard() {
   const { user } = useAuthContext();
@@ -42,13 +42,14 @@ function Dashboard() {
   }, []);
 
   useEffect(() => {
-    let filtered = allUsers && allUsers.filter(user =>
-      user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchTerm.toLowerCase())
+    let filtered = allUsers && allUsers.filter(u =>
+      user.objectId !== u._id &&
+      (u.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      u.email.toLowerCase().includes(searchTerm.toLowerCase()))
     );
     if (tags.length) {
-      filtered = filtered.filter(user =>
-        user.tags.some(t => tags.includes(t))
+      filtered = filtered.filter(u =>
+        tags.every(t => u.tags.includes(t))
       );
     }
     setFilteredUsers(filtered);
@@ -67,7 +68,7 @@ function Dashboard() {
   return (
     <div className="dashboard-container">
       <div className="dashboard-content">
-        <h1>Welcome back!</h1>
+        <h1>Welcome Back!</h1>
         <div className="dashboard-search">
           <input
             type="text"
@@ -88,18 +89,12 @@ function Dashboard() {
             setTags(t.map(v => v.label));
           }}
           isMulti
-          />
+        />
         <div className="user-results">
           {filteredUsers && filteredUsers.map(user => (
-            <div key={user._id} className='user-entry'>
-              <div className="user-container">
-                <div>
-                  <div className='username'>{user.username}</div>
-                  <div>Tags: {user.tags.join(", ") || "N/A"}</div>
-                </div>
-                <Link to="/chats">Chat</Link>
-              </div>
-            </div>
+            <UserCard
+              user={user}
+            />
           ))}
         </div>
       </div>

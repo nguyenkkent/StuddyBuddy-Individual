@@ -3,7 +3,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 70px);
 }
 
 .profile-content {
@@ -46,4 +45,31 @@
 .profile-tags-selector {
   flex-grow: 1;
   text-align: left;
+}
+
+.profile-save {
+  width: 80%;
+  margin: auto;
+  margin-top: 16px;
+  display: flex;
+  justify-content: start;
+}
+
+.profile-save-button {
+  color: black;
+  background: #edcdbb;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s, background-color 0.3s, transform 0.3s;
+  border-radius: 10px;
+  white-space: nowrap;
+  border: none
+}
+
+.profile-save-button:hover,
+.profile-save-button:focus {
+  background: #e3b7a0;
+  border-radius: 10px;
 }

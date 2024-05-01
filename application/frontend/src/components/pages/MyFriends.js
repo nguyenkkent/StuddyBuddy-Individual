@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import SideNavbar from '../common/Sidebar';
 import "../../css/Dashboard.css";
 import axiosClient from "../../axiosClient";
 import { Link } from "react-router-dom";
+import Select from 'react-select'
 import { useAuthContext } from "../../hooks/useAuthContext";
+import UserCard from "../common/UserCard";
 
 function MyFriends() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -53,15 +54,25 @@ function MyFriends() {
     setFilteredUsers(filtered);
   }, [searchTerm, allUsers, tags]);
 
+  // tag options
+  const options = [
+    { value: 'mathematics', label: 'Mathematics' },
+    { value: 'physics', label: 'Physics' },
+    { value: 'political science', label: 'Political Science' },
+    { value: 'english', label: 'English' },
+    { value: 'computer engineering', label: 'Computer Engineering' },
+    { value: 'computer science', label: 'Computer Science' }
+  ]
+
   return (
     <div className="dashboard-container">
       <div className="dashboard-content">
-        <h1>Your Friends</h1>
+        <h1>My Friends</h1>
         <div className="dashboard-search">
           <input
             type="text"
             className="dashboard-search-bar"
-            placeholder="Search Your Friend Here"
+            placeholder="Search My Friends Here"
             value={searchTerm}
             onChange={handleChange}
           />
@@ -70,18 +81,21 @@ function MyFriends() {
           </svg>
           <button><Link to="/add-friend">Add friend</Link></button>
         </div>
+        <Select
+          className="dashboard-filter"
+          placeholder="Filter Tags"
+          options={options}
+          onChange={(t) => {
+            setTags(t.map(v => v.label));
+          }}
+          isMulti
+        />
 
         <div className="user-results">
           {filteredUsers && filteredUsers.map(user => (
-            <div key={user._id} className='user-entry'>
-              <div className="user-container">
-                <div>
-                  <div className='username'>{user.username}</div>
-                  <div>Tags: {user.tags.join(", ") || "N/A"}</div>
-                </div>
-                <Link to="/profile">Profile</Link>
-              </div>
-            </div>
+            <UserCard
+              user={user}
+            />
           ))}
         </div>
       </div>

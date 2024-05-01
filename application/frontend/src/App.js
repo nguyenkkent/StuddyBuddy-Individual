@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { useAuthContext } from './hooks/useAuthContext';
+import React, { useState } from 'react';
 import './App.css';
+
 import Home from './components/pages/Home';
 import Navbar from './components/common/Navbar';
 import Sidebar from './components/common/Sidebar';
@@ -26,7 +29,7 @@ import Settings from "./components/pages/Settings";
 import Profile from './components/pages/Profile';
 
 function App() {
-    const [user] = useState(null);
+  const { user } = useAuthContext();
   return (
     <Router>
       <div className="App">
