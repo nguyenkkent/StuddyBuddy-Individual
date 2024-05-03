@@ -26,7 +26,7 @@ router.get("/", async (request, response) => {
 
         //set to json and return 
         const jsonData = { friendDataArray };
-        console.log(jsonData);
+        //console.log(jsonData);
         return response.status(200).json(jsonData);
 
     } catch (error) {

@@ -18,6 +18,7 @@ router.get("/", async (request, response) => {
             console.log("User is not a participant in any groups");
             return response.status(404).json({ error: "User is not a participant in any groups" });
         }
+        console.log(GroupsArray);
         return response.status(200).json(GroupsArray );
 
     }catch(error){

@@ -26,15 +26,22 @@ const MyGroups = () => {
     try{
     const fetchGroups = async () => {
       const response = await axiosClient.get("/api/my-groups", {
-        //send authorization header for middleware to intercept
-        'Authorization': `Bearer ${user.token}`
+        headers: {
+          //send authorization header for middleware to intercept
+          'Authorization': `Bearer ${user.token}`
+        } 
       })
     };
+  
+    fetchGroups()
+    /*
+    I commented the stuff below because im unsure what you guys wanna do here after the data comes
+    back from the backend -kent.
+    */
 
-    //change allGroups state
-    fetchGroups().then(fetchedGroups => {
-      setAllGroups(fetchedGroups);
-    });
+    // .then(fetchedGroups => {
+    //   setAllGroups(fetchedGroups);
+    // });
 
     } catch(error){
       console.error("Error fetching groups:", error);
