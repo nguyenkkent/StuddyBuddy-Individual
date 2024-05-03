@@ -11,17 +11,16 @@ router.get("/", async (request, response) => {
     try{
         //Grab the _id to identify the user's friend list
         //turn _id from string to mongoDB ObjectId class
-        //const userId = new ObjectId(request.user._id); 
+        const userId = new ObjectId(request.user._id); 
         console.log("User ID:", userId);    
-        const userId = request.user._id;
 
-        //Query MongoDB to find the user's document
-        const user = await Groups.collection.findOne({ _id: userId });
-        if (!user) {
-            console.log("User not found in the database.");
-            return response.status(404).json({ error: "User not found" });
+        //Query MongoDB to find the all message documents that user is a participant in
+        const Groups = await Groups.collection.find({ participantsId: userId }).toArray();
+        if (!Groups  || Groups .length === 0) {
+            console.log("User is not a participant in any groups");
+            return response.status(404).json({ error: "User is not a participant in any groups" });
         }
-        //assertion : user exists in the database
+        return response.status(200).json(Groups );
 
     }catch(error){
         console.log("Error:", error);
