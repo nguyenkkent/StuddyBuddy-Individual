@@ -11,8 +11,9 @@ router.get("/", async (request, response) => {
     try{
         //Grab the _id to identify the user's friend list
         //turn _id from string to mongoDB ObjectId class
-        const userId = new ObjectId(request.user._id); 
+        //const userId = new ObjectId(request.user._id); 
         console.log("User ID:", userId);    
+        const userId = request.user._id;
 
         //Query MongoDB to find the user's document
         const user = await Groups.collection.findOne({ _id: userId });
