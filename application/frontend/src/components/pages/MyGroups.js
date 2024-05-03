@@ -23,15 +23,23 @@ const MyGroups = () => {
       console.log("A user is not loaded");
       return;      
     }
+    try{
     const fetchGroups = async () => {
-      const response = await axiosClient.get
+      const response = await axiosClient.get("/api/my-groups", {
+        //send authorization header for middleware to intercept
+        'Authorization': `Bearer ${user.token}`
+      })
     };
-
 
     //change allGroups state
     fetchGroups().then(fetchedGroups => {
       setAllGroups(fetchedGroups);
     });
+
+    } catch(error){
+      console.error("Error fetching groups:", error);
+    }
+
   }, []);
 
 
