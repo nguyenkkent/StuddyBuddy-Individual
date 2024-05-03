@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import "../../css/Dashboard.css";
 import GroupCard from '../common/GroupCard';
+import { useAuthContext } from "../../hooks/useAuthContext";
+import axiosClient from '../../axiosClient';
 
 const MyGroups = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [allGroups, setAllGroups] = useState([]);
   const [filteredGroups, setFilteredGroups] = useState([]);
+  const { user } = useAuthContext();
 
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -14,8 +17,18 @@ const MyGroups = () => {
     setSearchTerm(event.target.value);
   };
 
+  //api call to grab all groups that user is a member of
   useEffect(() => {
-    // REPLACE WITH THE ACTUAL API CALL - I don't want to put in something that isn't set up -yq
+    if (!user){
+      console.log("A user is not loaded");
+      return;      
+    }
+    const fetchGroups = async () => {
+      const response = await axiosClient.get
+    };
+
+
+    //change allGroups state
     fetchGroups().then(fetchedGroups => {
       setAllGroups(fetchedGroups);
     });
