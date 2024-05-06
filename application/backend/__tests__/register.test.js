@@ -3,16 +3,23 @@ it("Testing to see if Jest works", () => {
   });
 
 
-import supertest from "supertest";
+// import supertest from "supertest";
+import request from "supertest";
 import {Users} from "../models/userSchema.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+
+
 
 
 //Create express app to use for testing
 import {app, server} from "../socket.js";
 
 
+test("should respond with a 200 status code", async () => {
+  const response = await request(app).post("/register");
+  expect(response.statusCode).toBe(200);
+})
 
 // app.use(express.json()); // Add JSON parsing middleware to the app
 // app.use('/register', registerRouter); // Mount your register router
