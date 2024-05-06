@@ -2,22 +2,18 @@ it("Testing to see if Jest works", () => {
     expect(1).toBe(1);
   });
 
-// import request from 'supertest'; 
-// import express from 'express';
-// import registerRouter from './register'; 
-// import {Users} from "../models/userSchema.js";
-// import bcrypt from 'bcrypt';
-// import jwt from 'jsonwebtoken';
 
-const request = require('supertest');
-const express = require('express');
-const registerRouter = require('../routes/register'); 
-const { Users } = require('../models/userSchema'); 
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+import supertest from "supertest";
+import {Users} from "../models/userSchema.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
-// Create a mock express app to use for testing
-// const app = express();
+
+//Create express app to use for testing
+import {app, server} from "../socket.js";
+
+
+
 // app.use(express.json()); // Add JSON parsing middleware to the app
 // app.use('/register', registerRouter); // Mount your register router
 
