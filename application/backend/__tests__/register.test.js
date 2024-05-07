@@ -1,49 +1,30 @@
-it("Testing to see if Jest works", () => {
-    expect(1).toBe(1);
-  });
+import { handleRegistration } from "../handlers/handleRegisterUser.js";
+import { Users } from "../models/userSchema.js";
 
 
-// import supertest from "supertest";
-import request from "supertest";
-import {Users} from "../models/userSchema.js";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+//think of this as request.body.email
+const mockRequest = {
+  body : {
+    email: "test@website.com",
+    password: "123",
+    username: "test",
+  }
+};
 
+//jest will mock the status and json function
+const mockResponse = {
+  status: jest.fn().mockReturnThis(),
+  json: jest.fn(),
+  send: jest.fn(),
+};
 
+jest.mock("../models/userSchema.js");
 
+describe("segistration page", () => {
+  it("should register a new user", async () => {
+    await handleRegistration(mockRequest, mockResponse);
+    expect(Users.findOne).toHaveBeenCalledWith({ email: "test@website.com" });
+  })
+});
 
-//Create express app to use for testing
-import {app, server} from "../socket.js";
-
-
-test("should respond with a 200 status code", async () => {
-  const response = await request(app).post("/register");
-  expect(response.statusCode).toBe(200);
-})
-
-// app.use(express.json()); // Add JSON parsing middleware to the app
-// app.use('/register', registerRouter); // Mount your register router
-
-
-// Mock the user model's findOne and collection methods
-// jest.mock('../models/userSchema', () => ({
-//     Users: {
-//       findOne: jest.fn(),
-//       collection: {
-//         insertOne: jest.fn(),
-//         updateOne: jest.fn()
-//       }
-//     }
-//   }));
-  
-//   // Mock bcrypt's genSalt and hash methods
-//   jest.mock('bcrypt', () => ({
-//     genSalt: jest.fn(),
-//     hash: jest.fn()
-//   }));
-  
-//   // Mock jwt's sign method
-//   jest.mock('jsonwebtoken', () => ({
-//     sign: jest.fn()
-//   }));
 
