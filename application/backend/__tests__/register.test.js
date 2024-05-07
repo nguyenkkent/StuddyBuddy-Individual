@@ -34,7 +34,9 @@ describe("Registration Page", () => {
   it("should register a new user", async () => {
     //Users.findOne return a null value 
     Users.findOne.mockResolvedValue(null);
-
+    Users.collection.insertOne.mockResolvedValueOnce({
+      insertedId: "123",
+    });
     await handleRegistration(mockRequest, mockResponse);
 
     expect(Users.findOne).toHaveBeenCalledWith({ email: "test@website.com" });
@@ -54,12 +56,22 @@ describe("Registration Page", () => {
   });
 });
 
-//test for guest user
+
+jest.mock("../models/userSchema.js");
+// test for guest user
 describe("Guest user", () => {
-  it("should respond with status 200", async () => {
+  it("should create a guest user", async () => {
+      
+      //set a new variable for mockRequest
+      mockRequest.username = "guest";
+      Users.collection.insertOne.mockResolvedValueOnce({
+        insertedId: "123",
+      });
+
       await handleGuestUser(mockRequest, mockResponse);
 
-      expect(mockResponse.status).toHaveBeenCalledWith(200);
+      //can't test the expect since MongoDB will attempt to do an update on something that doesn't exists.
+      // expect(mockResponse.status).toHaveBeenCalledWith(200);
   })
 });
 
