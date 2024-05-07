@@ -1,12 +1,11 @@
 import { Users } from "../models/userSchema.js";
-import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 const createToken = (_id) => {
     return jwt.sign({_id}, process.env.SECRET, {expiresIn: '3d'});
 }
 
-export async function handleGuessUser(request, response) {
+export async function handleGuestUser(request, response) {
     try{
         const newUser = {
             username : request.body.username,
