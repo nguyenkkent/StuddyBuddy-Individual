@@ -17,6 +17,7 @@ const mockResponse = {
   send: jest.fn(),
 };
 
+//for Users.mockResolvedValue() call
 jest.mock("../models/userSchema.js");
 
 // describe("segistration page", () => {
@@ -35,6 +36,7 @@ describe("Registration Page", () => {
 
     expect(Users.findOne).toHaveBeenCalledWith({ email: "test@website.com" });
     expect(mockResponse.status).not.toHaveBeenCalledWith(409);
+    //there is an insertId error here since we're not actually putting anything into MongoDB
   });
 
   it("should respond with 409 if the email already exists", async () => {
