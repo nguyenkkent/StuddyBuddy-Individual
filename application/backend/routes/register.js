@@ -6,8 +6,8 @@ import { handleGuessUser } from "../handlers/handleGuessUser.js";
 
 const router = express.Router();
 
-// router.post('/', handleRegistration);
+router.post('/', handleRegistration);
 
-// router.post('/guest', handleGuessUser)
+router.post('/guest', handleGuessUser)
 
 export default router;
