@@ -1,7 +1,6 @@
 import { handleRegistration } from "../handlers/handleRegisterUser.js";
 import { Users } from "../models/userSchema.js";
 
-
 //think of this as request.body.email
 const mockRequest = {
   body : {
@@ -20,11 +19,33 @@ const mockResponse = {
 
 jest.mock("../models/userSchema.js");
 
-describe("segistration page", () => {
-  it("should register a new user", async () => {
-    await handleRegistration(mockRequest, mockResponse);
-    expect(Users.findOne).toHaveBeenCalledWith({ email: "test@website.com" });
-  })
-});
+// describe("segistration page", () => {
+//   it("should register a new user", async () => {
+//     await handleRegistration(mockRequest, mockResponse);
+//     expect(Users.findOne).toHaveBeenCalledWith({ email: "test@website.com" });
+//   })
+// });
 
+describe("Registration Page", () => {
+  it("should register a new user", async () => {
+    //Users.findOne return a null value 
+    Users.findOne.mockResolvedValue(null);
+
+    await handleRegistration(mockRequest, mockResponse);
+
+    expect(Users.findOne).toHaveBeenCalledWith({ email: "test@website.com" });
+    expect(mockResponse.status).not.toHaveBeenCalledWith(409);
+  });
+
+  it("should respond with 409 if the email already exists", async () => {
+    //Users.findOne return a user
+    Users.findOne.mockResolvedValue({});
+
+    await handleRegistration(mockRequest, mockResponse);
+
+    expect(Users.findOne).toHaveBeenCalledWith({ email: "test@website.com" });
+    expect(mockResponse.status).toHaveBeenCalledWith(409);
+    expect(mockResponse.json).toHaveBeenCalledWith({ message: "Email is already in use" });
+  });
+});
 
