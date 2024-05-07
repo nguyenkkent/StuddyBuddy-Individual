@@ -1,4 +1,5 @@
 import { handleRegistration } from "../handlers/handleRegisterUser.js";
+import { handleGuestUser } from "../handlers/handleGuessUser.js";
 import { Users } from "../models/userSchema.js";
 
 //think of this as request.body.email
@@ -27,6 +28,8 @@ jest.mock("../models/userSchema.js");
 //   })
 // });
 
+
+//test for register feature
 describe("Registration Page", () => {
   it("should register a new user", async () => {
     //Users.findOne return a null value 
@@ -49,5 +52,14 @@ describe("Registration Page", () => {
     expect(mockResponse.status).toHaveBeenCalledWith(409);
     expect(mockResponse.json).toHaveBeenCalledWith({ message: "Email is already in use" });
   });
+});
+
+//test for guest user
+describe("Guest user", () => {
+  it("should respond with status 200", async () => {
+      await handleGuestUser(mockRequest, mockResponse);
+
+      expect(mockResponse.status).toHaveBeenCalledWith(200);
+  })
 });
 
