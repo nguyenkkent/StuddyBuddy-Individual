@@ -48,7 +48,7 @@
 .navbar-component > a:hover,
 .navbar-component > a:focus {
   background: #e3b7a0;
-  transform: scale(0.90);
+  transform: scale(1.10);
   border-radius: 10px;
 }
 

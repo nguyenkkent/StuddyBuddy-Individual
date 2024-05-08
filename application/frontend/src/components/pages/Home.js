@@ -12,7 +12,6 @@ function Home() {
       <div className="home-main">
         <div className="home-content">
           <h1>Welcome to Our Website</h1>
-          <p>This is a platform where you can connect with your friends, share updates, and much more. Get started now!</p>
           <h2>Connect with friends and the knowledge around you.</h2>
           <div className="home-start">
             {user ?
