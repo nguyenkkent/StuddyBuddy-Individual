@@ -57,20 +57,21 @@
 
 .profile-save-button {
   color: black;
-  background: #edcdbb;
+  background-image: url("../../public/cloud.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
   text-align: center;
-  padding: 14px 16px;
+  padding: 24px 32px;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 24px;
   transition: color 0.3s, background-color 0.3s, transform 0.3s;
-  border-radius: 10px;
   white-space: nowrap;
-  border: none
+  cursor: pointer;
+  user-select: none;
 }
 
 .profile-save-button:hover,
 .profile-save-button:focus {
-  background: #e3b7a0;
   transform: scale(1.10);
-  border-radius: 10px;
 }

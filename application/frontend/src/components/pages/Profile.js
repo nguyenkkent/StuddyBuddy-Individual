@@ -50,7 +50,7 @@ function Profile() {
           />
         </div>
         <div className="profile-save">
-          <button className="profile-save-button">Save</button>
+          <a className="profile-save-button">Save</a>
         </div>
       </div>
     </div>
