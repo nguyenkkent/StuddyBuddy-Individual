@@ -17,7 +17,7 @@ export const authReducer = (state, action ) => {
 
 export const AuthContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(authReducer, {
-        user : null
+        user : JSON.parse(localStorage.getItem("user"))
     })
     //check for the jwt from local storage
     useEffect(() => {
@@ -30,6 +30,7 @@ export const AuthContextProvider = ({children}) => {
 
     //debugger to see everytime the state changes
     console.log("AuthContext state: ", state);
+    
     //the authContext wraps the children argument and returns the provider component
     return (
         //dynamic spread operator on state
