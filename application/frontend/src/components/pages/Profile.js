@@ -28,7 +28,7 @@ function Profile() {
             <div className="profile-detail-main">
               <p>Name: {user.name || "???"}</p>
               <p>Username: {user.username || "???"}</p>
-              <p>School Email: {user.email || "???"}</p>
+              <p>Email: {user.email || "???"}</p>
             </div>
             <div className="profile-detail-verify">
               <p>Verified: {user.isVerified ? "YES" : "NO"}</p>
