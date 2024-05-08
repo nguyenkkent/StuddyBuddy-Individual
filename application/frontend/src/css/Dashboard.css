@@ -99,6 +99,8 @@
   padding: 10px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 5px;
   background-color: #c8e6f3;
   margin: 0 auto;
@@ -126,7 +128,8 @@
 }
 
 .group-button-wrapper {
-  margin: 14px 24px;
+  display: flex;
+  justify-content: center;
 }
 
 .dashboard-container {
@@ -201,5 +204,6 @@
 .add-create-button:hover,
 .add-create-button:focus {
   background: #99becf;
+  transform: scale(1.10);
   border-radius: 10px;
 }
