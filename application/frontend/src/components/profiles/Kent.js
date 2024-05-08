@@ -1,5 +1,5 @@
 import React from 'react';
-import AboutMe from '../common/AboutMe';
+import AboutMe from '../pages/AboutMe';
 
 function Kent() {
   return (
