@@ -44,8 +44,10 @@ function Dashboard() {
   useEffect(() => {
     let filtered = allUsers && allUsers.filter(u =>
       user.objectId !== u._id &&
-      (u.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      u.email.toLowerCase().includes(searchTerm.toLowerCase()))
+      u.username.toLowerCase().includes(searchTerm.toLowerCase())
+      // user.objectId !== u._id &&
+      // (u.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      // u.email.toLowerCase().includes(searchTerm.toLowerCase()))
     );
     if (tags.length) {
       filtered = filtered.filter(u =>
