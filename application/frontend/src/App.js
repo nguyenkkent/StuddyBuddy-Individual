@@ -6,6 +6,7 @@ import './App.css';
 import Home from './components/pages/Home';
 import Navbar from './components/common/Navbar';
 import Sidebar from './components/common/Sidebar';
+import PleaseLogin from './components/common/PleaseLogin';
 
 import Ashley from './components/profiles/Ashley';
 import Brenden from './components/profiles/Brenden';
@@ -62,40 +63,40 @@ function App() {
               <Route path="/dashboard" element={
                 user ? (
                   user?.isFirstTime ? <Navigate to="/first-time" /> : <Dashboard />
-                ) : <Navigate to="/login" />
+                ) : <PleaseLogin />
               } />
               <Route path="/my-friends" element={
                 user ? (
                   user?.isFirstTime ? <Navigate to="/first-time" /> : <MyFriends />
-                ) : <Navigate to="/login" />
+                ) : <PleaseLogin />
               } />
               <Route path="/my-groups" element={
                 user ? (
                   user?.isFirstTime ? <Navigate to="/first-time" /> : <MyGroups />
-                ) : <Navigate to="/login" />
+                ) : <PleaseLogin />
               } />
               <Route path="/chats" element={
                 user ? (
                   user?.isFirstTime ? <Navigate to="/first-time" /> : <Chats />
-                ) : <Navigate to="/login" />
+                ) : <PleaseLogin />
               } />
               <Route path="/settings" element={
                 user ? (
                   user?.isFirstTime ? <Navigate to="/first-time" /> : <Settings />
-                ) : <Navigate to="/login" />
+                ) : <PleaseLogin />
               } />
 
               <Route path="/first-time" element={user?.isFirstTime ?? true ? <FirstTime /> : <Navigate to="/dashboard" />} />
               <Route path="/create-group" element={
                 user ? (
                   user?.isFirstTime ? <Navigate to="/first-time" /> : <CreateNewGroup />
-                ) : <Navigate to="/login" />
+                ) : <PleaseLogin />
               } />
 
               <Route path="/profile" element={
                 user ? (
                   user?.isFirstTime ? <Navigate to="/first-time" /> : <Profile />
-                ) : <Navigate to="login" />
+                ) : <PleaseLogin />
               } />
             </Routes>
           </div>
