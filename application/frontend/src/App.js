@@ -62,40 +62,40 @@ function App() {
               <Route path="/dashboard" element={
                 user ? (
                   user?.isFirstTime ? <Navigate to="/first-time" /> : <Dashboard />
-                ) : <Navigate to="/register" />
+                ) : <Navigate to="/login" />
               } />
               <Route path="/my-friends" element={
                 user ? (
                   user?.isFirstTime ? <Navigate to="/first-time" /> : <MyFriends />
-                ) : <Navigate to="/register" />
+                ) : <Navigate to="/login" />
               } />
               <Route path="/my-groups" element={
                 user ? (
                   user?.isFirstTime ? <Navigate to="/first-time" /> : <MyGroups />
-                ) : <Navigate to="/register" />
+                ) : <Navigate to="/login" />
               } />
               <Route path="/chats" element={
                 user ? (
                   user?.isFirstTime ? <Navigate to="/first-time" /> : <Chats />
-                ) : <Navigate to="/register" />
+                ) : <Navigate to="/login" />
               } />
               <Route path="/settings" element={
                 user ? (
                   user?.isFirstTime ? <Navigate to="/first-time" /> : <Settings />
-                ) : <Navigate to="/register" />
+                ) : <Navigate to="/login" />
               } />
 
               <Route path="/first-time" element={user?.isFirstTime ?? true ? <FirstTime /> : <Navigate to="/dashboard" />} />
               <Route path="/create-group" element={
                 user ? (
                   user?.isFirstTime ? <Navigate to="/first-time" /> : <CreateNewGroup />
-                ) : <Navigate to="/register" />
+                ) : <Navigate to="/login" />
               } />
 
               <Route path="/profile" element={
                 user ? (
                   user?.isFirstTime ? <Navigate to="/first-time" /> : <Profile />
-                ) : <Navigate to="register" />
+                ) : <Navigate to="login" />
               } />
             </Routes>
           </div>
