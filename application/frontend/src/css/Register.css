@@ -38,6 +38,9 @@
   display: block;
   margin-bottom: 5px;
   color: #666;
+  font-weight: bold;
+  font-size: 20px;
+  color: black;
 }
 
 input[type="email"],
