@@ -26,8 +26,9 @@ import Chats from "./components/pages/Chats";
 import Settings from "./components/pages/Settings";
 
 import FirstTime from './components/pages/FirstTime';
-import Profile from './components/pages/Profile';
+import AddFriend from './components/pages/AddFriend';
 import CreateNewGroup from './components/pages/CreateNewGroup';
+import Profile from './components/pages/Profile';
 
 function App() {
   const { user } = useAuthContext();
@@ -87,6 +88,11 @@ function App() {
               } />
 
               <Route path="/first-time" element={user?.isFirstTime ?? true ? <FirstTime /> : <Navigate to="/dashboard" />} />
+              <Route path="/add-friend" element={
+                user ? (
+                  user?.isFirstTime ? <Navigate to="/first-time" /> : <AddFriend />
+                ) : <PleaseLogin />
+              } />
               <Route path="/create-group" element={
                 user ? (
                   user?.isFirstTime ? <Navigate to="/first-time" /> : <CreateNewGroup />
