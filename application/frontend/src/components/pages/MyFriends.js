@@ -10,7 +10,6 @@ function MyFriends() {
   const [searchTerm, setSearchTerm] = useState("");
   const [allUsers, setAllUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
-  const [tags, setTags] = useState([]);
   const { user } = useAuthContext();
 
   const handleChange = (event) => {
@@ -46,13 +45,8 @@ function MyFriends() {
       user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
       user.email.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    if (tags.length) {
-      filtered = filtered.filter(user =>
-        user.tags.some(t => tags.includes(t))
-      );
-    }
     setFilteredUsers(filtered);
-  }, [searchTerm, allUsers, tags]);
+  }, [searchTerm, allUsers]);
 
   // tag options
   const options = [
@@ -81,15 +75,6 @@ function MyFriends() {
           </svg>
           <Link className="add-create-button" to="/add-friend">Add Friend</Link>
         </div>
-        <Select
-          className="dashboard-filter"
-          placeholder="Filter Tags"
-          options={options}
-          onChange={(t) => {
-            setTags(t.map(v => v.label));
-          }}
-          isMulti
-        />
 
         <div className="user-results">
           {filteredUsers && filteredUsers.map(user => (

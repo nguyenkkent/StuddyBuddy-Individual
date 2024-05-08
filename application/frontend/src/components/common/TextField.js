@@ -6,7 +6,7 @@ function TextField(props) {
       <label className="formlabel">
         {props.label}
         </label>
-      <input type={props.type} name={props.name} value={props.value} onChange={props.onChange}/>
+      <input type={props.type} name={props.name} value={props.value} onChange={props.onChange} required={props.required}/>
       {props.errors && Array.isArray(props.errors) ? 
         props.errors.map((error, index) => 
           <div className="error" key={index}>{error}</div>

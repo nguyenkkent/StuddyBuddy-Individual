@@ -3,26 +3,27 @@
     left: 0;
     height: calc(100vh - 92px);
     width: 150px;
-    background-color: #333;
+    background-color: #dbf7ff;
     display: flex;
     flex-direction: column;
     z-index: 500;
+    border-right-style: solid;
   }
 
 .sidebar a {
   padding: 10px 15px;
-  color: goldenrod;
+  color: black;
   text-decoration: none;
   display: block;
   transition: background-color 0.3s;
 }
 
 .sidebar a:hover {
-  background-color: #444;
+  background-color: #99becf;
 }
 
 .sidebar a.active {
-  background-color: #666;
+  background-color: #8ed8fb;
 }
 
 .sidebar .logout-divider {
@@ -34,7 +35,7 @@
 .sidebar button {
   background: none;
   border: none;
-  color: gold;
+  color: black;
   padding: 10px 15px;
   text-align: center;
   width: 100%;
@@ -43,7 +44,7 @@
 }
 
 .sidebar button:hover {
-  background-color: rgb(158, 62, 62);
+  background-color: #99becf;
 }
 
 .sidebar a:first-child, .sidebar button:first-child {

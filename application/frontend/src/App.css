@@ -29,13 +29,14 @@
 }
 
 body {
-  background: #ffeddb;
+  background-image: url("../public/home-background.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
 }
 
 .App-main-wrapper {
+  backdrop-filter: blur(10px);
   display: flex;
 }
 

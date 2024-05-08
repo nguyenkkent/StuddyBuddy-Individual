@@ -1,17 +1,16 @@
-.first-time-container {
-  width: 100%;
-  height: 100%;
+.first-time-content {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  height: 100%;
+}
+
+.first-time-container {
+  margin: auto;
 }
 
 .first-time-field-wrapper {
   padding: 50px;
-  margin: 0 10px;
-  max-width: 24rem;
-  width: 100%;
+  margin: 10px;
+  max-width: 600px;
   background-color: white;
   border-radius: 16px;
   border-width: 2px;

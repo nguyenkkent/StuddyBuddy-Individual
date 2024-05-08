@@ -4,20 +4,25 @@ html {
   margin: 0;
 }
 
-.settings-container {
+.settings-content {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 20px;
+  height: 100%;
+}
+
+.settings-container {
+  width: 100%;
+  max-width: 640px;
+  margin: auto;
 }
 
 .settings-form {
-  width: 100%;
   max-width: 600px;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 50px;
+  margin: 10px;
+  border-radius: 16px;
+  border-width: 2px;
+  border-color: black;
+  border-style: solid;
   background-color: #fff;
 }
 

@@ -83,45 +83,47 @@ function FirstTime() {
   ]
 
   return (
-    <div className="first-time-container">
-      <h1>We just need a bit more information</h1>
-      <div className="first-time-field-wrapper">
-        <form onSubmit={handleSubmit} className="first-time-field">
-          <TextField
-            label="First Name:"
-            type="text"
-            name="firstname"
-            value={user.firstname}
-            onChange={handleChange}
-            errors={errors.firstname}
-          />
-          <TextField
-            label="Last Name:"
-            type="text"
-            name="lastname"
-            value={user.lastname}
-            onChange={handleChange}
-            errors={errors.lastname}
-          />
-          <div>
-            <p className="first-time-tags-label">Tags:</p>
-            <Select
-              className="first-time-tags"
-              placeholder=""
-              options={options}
-              onChange={(t) => {
-                setUser({
-                  ...user,
-                  tags: t.map(v => v.label)
-                });
-              }}
-              isMulti
+    <div className="first-time-content">
+      <div className="first-time-container">
+        <h1>We just need a bit more information</h1>
+        <div className="first-time-field-wrapper">
+          <form onSubmit={handleSubmit} className="first-time-field">
+            <TextField
+              label="First Name:"
+              type="text"
+              name="firstname"
+              value={user.firstname}
+              onChange={handleChange}
+              errors={errors.firstname}
             />
-          </div>
-          <div className="first-time-update-wrapper">
-            <button className="first-time-update" type="submit">Submit</button>
-          </div>
-        </form>
+            <TextField
+              label="Last Name:"
+              type="text"
+              name="lastname"
+              value={user.lastname}
+              onChange={handleChange}
+              errors={errors.lastname}
+            />
+            <div>
+              <p className="first-time-tags-label">Tags:</p>
+              <Select
+                className="first-time-tags"
+                placeholder=""
+                options={options}
+                onChange={(t) => {
+                  setUser({
+                    ...user,
+                    tags: t.map(v => v.label)
+                  });
+                }}
+                isMulti
+              />
+            </div>
+            <div className="first-time-update-wrapper">
+              <button className="first-time-update" type="submit">Submit</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

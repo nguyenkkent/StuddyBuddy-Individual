@@ -127,61 +127,60 @@ const handleGuestLogin = async () => {
 
 
   return (
-    <div className="registrationForm">
-      <h2 className="registrationtitle">Registration</h2>
-      <form onSubmit={handleSubmit} className="registrationform">
-        <TextField
-          label="Email:"
-          type="email"
-          name="email"
-          value={user.email}
-          onChange={handleChange}
-          errors={errors.email}
-        />
+    <div className="registrationContent">
+      <div className="registrationForm">
+        <h2 className="registrationtitle">Registration</h2>
+        <form onSubmit={handleSubmit} className="registrationform">
+          <TextField
+            label="Email:"
+            type="email"
+            name="email"
+            value={user.email}
+            onChange={handleChange}
+            errors={errors.email}
+          />
+          
+          <TextField
+            label="Username:"
+            type="text"
+            name="username"
+            value={user.username}
+            onChange={handleChange}
+            errors={errors.username}
+          />
         
-        <TextField
-          label="Username:"
-          type="text"
-          name="username"
-          value={user.username}
-          onChange={handleChange}
-          errors={errors.username}
-        />
-      
-        <TextField
-          label="Password:"
-          type="password"
-          name="password"
-          value={user.password}
-          onChange={handleChange}
-          errors={errors.password}
-        />
+          <TextField
+            label="Password:"
+            type="password"
+            name="password"
+            value={user.password}
+            onChange={handleChange}
+            errors={errors.password}
+          />
 
-        <TextField
-          label="Confirm Password:"
-          type="password"
-          name="confirmPassword"
-          value={user.confirmPassword}
-          onChange={handleChange}
-          errors={[errors.confirmPassword, errors.passwordMatch]}
-        />
+          <TextField
+            label="Confirm Password:"
+            type="password"
+            name="confirmPassword"
+            value={user.confirmPassword}
+            onChange={handleChange}
+            errors={[errors.confirmPassword, errors.passwordMatch]}
+          />
 
-        <div>
-          <div className='agreeBox'>
-            <input type="checkbox" name="agreeToTerms" id="agreeToTerms" checked={user.agreeToTerms} onChange={handleChange} />
-            <label className="formlabel" for="agreeToTerms">
-              I agree to the Terms of Service
-            </label>
+          <div>
+            <div className='agreeBox'>
+              <input type="checkbox" name="agreeToTerms" id="agreeToTerms" checked={user.agreeToTerms} onChange={handleChange} />
+              <label className="formlabel" for="agreeToTerms">
+                I agree to the Terms of Service
+              </label>
+            </div>
+            {errors.agreeToTerms && <div className="error">{errors.agreeToTerms}</div>}
           </div>
-          {errors.agreeToTerms && <div className="error">{errors.agreeToTerms}</div>}
-        </div>
-        <button className="registerbutton" type="submit">Register</button>
-      </form>
-
-      <div className="divider"></div>
-      
-      {/* <Link to="/dashboard" className="guestlink">Or continue as Guest</Link> */}
-      <button className="guestlink" onClick={handleGuestLogin}>Or continue as Guest</button>
+          <button className="registerbutton" type="submit">Register</button>
+          <div className="divider"></div>
+          <button className="guestlink" onClick={handleGuestLogin}>Or continue as Guest</button>
+        </form>
+      </div>
     </div>
   );
 }

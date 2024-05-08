@@ -1,28 +1,30 @@
-.registrationForm {
+.registrationContent {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 20px;
+  height: 100%;
+}
+
+.registrationForm {
+  width: 100%;
+  max-width: 640px;
+  margin: auto;
 }
 
 .registrationtitle {
   font-size: 4rem;
   color: black;
-  margin-bottom: 0px;
-  margin-top: 130px;
+  margin: 0px;
 }
 
 .registrationform {
-  width: 100%;
   max-width: 600px;
-  margin-top: 60px;
-  margin-bottom: 50px;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  padding: 50px;
+  margin: 10px;
   background: #ffffff;
-  border-radius: 5px;
+  border-radius: 16px;
+  border-width: 2px;
+  border-color: black;
+  border-style: solid;
 }
 
 .registrationform > * + * {
@@ -78,8 +80,8 @@ input[type="password"] {
 .divider {
   height: 1px;
   background-color: black;
-  width: 30%;
-  margin-top: 0px;
+  width: 100%;
+  margin: 24px 0px;
 }
 
 .agreeBox {
@@ -93,7 +95,7 @@ input[type="password"] {
   text-decoration: none;
   padding: 10px;
   font-size: 1rem;
-  margin-top: 10px;
+  margin-top: 0px;
   font-weight: bold;
 }
 
