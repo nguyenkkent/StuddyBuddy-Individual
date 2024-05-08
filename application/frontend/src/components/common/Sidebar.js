@@ -8,7 +8,7 @@ const Sidebar = () => {
   const location = useLocation();
   const { dispatch } = useAuthContext();
 
-  const whitelistPages = ["/dashboard", "/chats", "/my-groups", "/my-friends", "/settings", "/profile"]
+  const whitelistPages = ["/dashboard", "/chats", "/my-groups", "/my-friends", "/settings", "/profile", "/add-friend", "/create-group"]
   const showSideBar = whitelistPages.includes(location.pathname);       
 
   function handleLogout() {
@@ -24,8 +24,8 @@ const Sidebar = () => {
     <>
       {showSideBar && <div className="sidebar">
         <NavLink activeclassname="active" to="/dashboard">Dashboard</NavLink>
-        <NavLink activeclassname="active" to="/my-friends">My Friends</NavLink>
-        <NavLink activeclassname="active" to="/my-groups">My Groups</NavLink>
+        <NavLink activeclassname="active" className={location.pathname === "/add-friend" && "active"} to="/my-friends">My Friends</NavLink>
+        <NavLink activeclassname="active" className={location.pathname === "/create-group" && "active"} to="/my-groups">My Groups</NavLink>
         <NavLink activeclassname="active" to="/chats">Chats</NavLink>
         <NavLink activeclassname="active" to="/settings">Settings</NavLink>
         <div className="logout-divider"></div>
