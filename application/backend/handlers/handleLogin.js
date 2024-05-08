@@ -19,7 +19,8 @@ export async function handleLogin(request, response) {
                 const email = user.email;
                 const objectId = user._id;
                 const token = createToken(user._id);
-                return response.status(200).json({username, email, objectId, token});
+                return response.status(200).json({username, email, objectId, token})
+                .send({message:"Valid credentials"});
             }
         }
         //not exists or if password does not match
