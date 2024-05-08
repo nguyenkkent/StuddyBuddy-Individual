@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import "../../css/Dashboard.css";
 import GroupCard from '../common/GroupCard';
+import { useAuthContext } from "../../hooks/useAuthContext";
+import axiosClient from '../../axiosClient';
 
 const MyGroups = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [allGroups, setAllGroups] = useState([]);
   const [filteredGroups, setFilteredGroups] = useState([]);
+  const { user } = useAuthContext();
 
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -14,11 +17,36 @@ const MyGroups = () => {
     setSearchTerm(event.target.value);
   };
 
+  //api call to grab all groups that user is a member of
   useEffect(() => {
-    // REPLACE WITH THE ACTUAL API CALL - I don't want to put in something that isn't set up -yq
-    fetchGroups().then(fetchedGroups => {
-      setAllGroups(fetchedGroups);
-    });
+    if (!user){
+      console.log("A user is not loaded");
+      return;      
+    }
+    try{
+    const fetchGroups = async () => {
+      const response = await axiosClient.get("/api/my-groups", {
+        headers: {
+          //send authorization header for middleware to intercept
+          'Authorization': `Bearer ${user.token}`
+        } 
+      })
+    };
+  
+    fetchGroups()
+    /*
+    I commented the stuff below because im unsure what you guys wanna do here after the data comes
+    back from the backend -kent.
+    */
+
+    // .then(fetchedGroups => {
+    //   setAllGroups(fetchedGroups);
+    // });
+
+    } catch(error){
+      console.error("Error fetching groups:", error);
+    }
+
   }, []);
 
 
