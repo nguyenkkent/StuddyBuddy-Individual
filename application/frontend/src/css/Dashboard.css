@@ -37,6 +37,14 @@
   text-align: left;
 }
 
+.dashboard-filter > div {
+  border-color: black
+}
+
+.dashboard-filter > div:hover {
+  border-color: black
+}
+
 .user-results {
   display: flex;
   flex-direction: column;
@@ -51,7 +59,7 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
-  background-color: #bf9270;
+  background-color: #c8e6f3;
   margin: 0 auto;
   margin-top: 20px;
   text-align: left;
@@ -61,6 +69,7 @@
 .user-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .username {
@@ -75,10 +84,13 @@
 }
 
 .group-results {
-  width: calc(100% - 40px);
+  width: calc(80% + 20px);
+  margin: 0 auto;
+  margin-top: 32px;
+  gap: 64px;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  padding: 20px;
+  align-items: center;
 }
 
 .group-entry {
@@ -87,12 +99,14 @@
   padding: 10px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 5px;
-  background-color: #bf9270;
+  background-color: #c8e6f3;
   margin: 0 auto;
-  margin-top: 20px;
   text-align: left;
-  width: 80%;
+  width: 100%;
+  height: 100%;
 }
 
 .group-container {
@@ -114,7 +128,8 @@
 }
 
 .group-button-wrapper {
-  margin: 14px 24px;
+  display: flex;
+  justify-content: center;
 }
 
 .dashboard-container {
@@ -131,9 +146,11 @@
 /* FIXME: create single file for button class */
 .user-entry a {
   color: black;
-  background: #edcdbb;
+  background: #8ed8fb;
+  border-width: 1px;
+  border-style: solid;
   text-align: center;
-  padding: 14px 24px;
+  padding: 12px 24px;
   text-decoration: none;
   font-size: 20px;
   transition: color 0.3s, background-color 0.3s, transform 0.3s;
@@ -143,14 +160,16 @@
 
 .user-entry a:hover,
 .user-entry a:focus {
-  background: #e3b7a0;
-  transform: scale(0.90);
+  background: #99becf;
+  transform: scale(1.10);
   border-radius: 10px;
 }
 
 .group-entry a {
   color: black;
-  background: #edcdbb;
+  background: #8ed8fb;
+  border-width: 1px;
+  border-style: solid;
   text-align: center;
   padding: 14px 24px;
   text-decoration: none;
@@ -162,7 +181,29 @@
 
 .group-entry a:hover,
 .group-entry a:focus {
-  background: #e3b7a0;
-  transform: scale(0.90);
+  background: #99becf;
+  transform: scale(1.10);
+  border-radius: 10px;
+}
+
+.add-create-button {
+  color: black;
+  background: #8ed8fb;
+  border-width: 1px;
+  border-style: solid;
+  text-align: center;
+  margin-left: 8px;
+  padding: 10px 16px;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s, background-color 0.3s, transform 0.3s;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.add-create-button:hover,
+.add-create-button:focus {
+  background: #99becf;
+  transform: scale(1.10);
   border-radius: 10px;
 }

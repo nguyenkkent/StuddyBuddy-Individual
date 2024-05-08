@@ -29,13 +29,14 @@
 }
 
 body {
-  background: #ffeddb;
+  background-image: url("../public/home-background.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
 }
 
 .App-main-wrapper {
+  backdrop-filter: blur(10px);
   display: flex;
 }
 
@@ -43,4 +44,10 @@ body {
   overflow-y: auto;
   height: calc(100vh - 92px);
   flex-grow: 1;
+}
+
+@media screen and (max-width: 510px) {
+  .App-main {
+    height: calc(100vh - 140px);
+  }
 }

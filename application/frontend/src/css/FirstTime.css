@@ -1,0 +1,59 @@
+.first-time-content {
+  display: flex;
+  height: 100%;
+}
+
+.first-time-container {
+  margin: auto;
+}
+
+.first-time-field-wrapper {
+  padding: 50px;
+  margin: 10px;
+  max-width: 600px;
+  background-color: white;
+  border-radius: 16px;
+  border-width: 2px;
+  border-color: black;
+  border-style: solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.first-time-field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.first-time-field > * + * {
+  margin-top: 30px;
+}
+
+.first-time-tags-label {
+  color: #666;
+  margin: 0px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 20px;
+  color: black;
+}
+
+.first-time-tags {
+  width: calc(80% + 20px);
+  margin: auto;
+  text-align: left;
+}
+
+.first-time-update {
+  width: calc(80% + 20px);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 20px;
+}

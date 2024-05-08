@@ -26,12 +26,12 @@ function Profile() {
         <div className="profile-info">
           <div className="profile-detail">
             <div className="profile-detail-main">
-              <p>Name: {user.name || "???"}</p>
-              <p>Username: {user.username || "???"}</p>
-              <p>School Email: {user.email || "???"}</p>
+              <p>Name: {user?.name || "???"}</p>
+              <p>Username: {user?.username || "???"}</p>
+              <p>Email: {user?.email || "???"}</p>
             </div>
             <div className="profile-detail-verify">
-              <p>Verified: {user.isVerified ? "YES" : "NO"}</p>
+              <p>Verified: {user?.isVerified ? "YES" : "NO"}</p>
             </div>
           </div>
           <svg fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="profile-img">
@@ -50,7 +50,7 @@ function Profile() {
           />
         </div>
         <div className="profile-save">
-          <button className="profile-save-button">Save</button>
+          <a className="profile-save-button">Save</a>
         </div>
       </div>
     </div>

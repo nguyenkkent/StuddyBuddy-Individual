@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {useAuthContext} from '../../hooks/useAuthContext'
+import { useAuthContext } from '../../hooks/useAuthContext'
 import axiosClient from '../../axiosClient';
 import '../../css/Login.css';
+import TextField from '../common/TextField';
 
 
 function Login() {
@@ -21,8 +22,8 @@ function Login() {
   };
 
   //grab the dispatch function from userAUth
-  const {dispatch} = useAuthContext();
-  
+  const { dispatch } = useAuthContext();
+
   // Can add validation here for backend, unless you have another way.
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -35,7 +36,9 @@ function Login() {
       if (response.status === 200) {
         localStorage.setItem("user", JSON.stringify(response.data));
         dispatch({ type: 'LOGIN', payload: response.data });
-        navigate('/dashboard');
+        const redirectTo = sessionStorage.getItem("redirectTo");
+        sessionStorage.removeItem("redirectTo");
+        navigate(redirectTo ?? "/dashboard", { replace: true });
       }
       else {
         alert(response.message);
@@ -47,18 +50,30 @@ function Login() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className='loginform'>
-      <h2 className="logintitle">Login</h2>
-      <div>
-        <label className="formgroup">Email:</label>
-        <input className="forminput" type="email" name="email" value={loginData.email} onChange={handleInputChange} required />
+    <div className="loginContent">
+      <div className="loginForm">
+        <h2 className="logintitle">Login</h2>
+        <form onSubmit={handleSubmit} className='loginform'>
+          <TextField
+            label="Email:"
+            type="email"
+            name="email"
+            value={loginData.email}
+            onChange={handleInputChange}
+            required
+          />
+          <TextField
+            label="Password:"
+            type="password"
+            name="password"
+            value={loginData.password}
+            onChange={handleInputChange}
+            required
+          />
+          <button className="loginsubmit" type="submit">Login</button>
+        </form>
       </div>
-      <div>
-        <label className="formgroup">Password:</label>
-        <input className="forminput" type="password" name="password" value={loginData.password} onChange={handleInputChange} required />
-      </div>
-      <button className="loginsubmit" type="submit">Login</button>
-    </form>
+    </div>
   );
 }
 
