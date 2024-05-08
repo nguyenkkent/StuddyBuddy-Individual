@@ -37,7 +37,7 @@ function Login() {
         dispatch({ type: 'LOGIN', payload: response.data });
         const redirectTo = sessionStorage.getItem("redirectTo");
         sessionStorage.removeItem("redirectTo");
-        navigate(redirectTo ?? "/dashboard");
+        navigate(redirectTo ?? "/dashboard", { replace: true });
       }
       else {
         alert(response.message);
