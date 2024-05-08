@@ -35,7 +35,9 @@ function Login() {
       if (response.status === 200) {
         localStorage.setItem("user", JSON.stringify(response.data));
         dispatch({ type: 'LOGIN', payload: response.data });
-        navigate('/dashboard');
+        const redirectTo = sessionStorage.getItem("redirectTo");
+        sessionStorage.removeItem("redirectTo");
+        navigate(redirectTo ?? "/dashboard");
       }
       else {
         alert(response.message);
