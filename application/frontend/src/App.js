@@ -24,10 +24,9 @@ import MyGroups from "./components/pages/MyGroups";
 import Chats from "./components/pages/Chats";
 import Settings from "./components/pages/Settings";
 
-import CreateNewGroup from './components/pages/create-group';
 import FirstTime from './components/pages/FirstTime';
-
 import Profile from './components/pages/Profile';
+import CreateNewGroup from './components/pages/CreateNewGroup';
 
 function App() {
   const { user } = useAuthContext();
@@ -49,9 +48,16 @@ function App() {
               <Route path="/yuquan" element={<Yuquan />} />
 
               <Route path="/aboutus" element={<AboutUs />} />
-              <Route path="/register" element={<Registration />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/create-group" element={<CreateNewGroup />} />
+              <Route path="/register" element={
+                user ? (
+                  user?.isFirstTime ? <Navigate to="/first-time" /> : <Navigate to="/dashboard" />
+                ) : <Registration />
+              } />
+              <Route path="/login" element={
+                user ? (
+                  user?.isFirstTime ? <Navigate to="/first-time" /> : <Navigate to="/dashboard" />
+                ) : <Login />
+              } />
 
               <Route path="/dashboard" element={
                 user ? (
@@ -89,7 +95,7 @@ function App() {
               <Route path="/profile" element={
                 user ? (
                   user?.isFirstTime ? <Navigate to="/first-time" /> : <Profile />
-                ) : <Navigate to="register"/>
+                ) : <Navigate to="register" />
               } />
             </Routes>
           </div>
