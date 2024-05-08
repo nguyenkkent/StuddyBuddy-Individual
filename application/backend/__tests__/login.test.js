@@ -11,8 +11,8 @@ const mockRequest = {
 
 const mockResponse = {
   status: jest.fn().mockReturnThis(),
-  json: jest.fn().mockReturnThis(),
-  send: jest.fn().mockReturnThis(),
+  json: jest.fn(),
+  send: jest.fn(),
 };
 
 jest.mock("../models/userSchema.js");
@@ -22,12 +22,21 @@ describe("handleLogin function", () => {
   it("should try to search database if email exists", async () => {
     await handleLogin(mockRequest, mockResponse);
 
-    // const salt = await bcrypt.genSalt(10);
-    // const hashedPassword = await bcrypt.hash(mockRequest.body.password, salt); 
 
-    // expect(Users.findOne).toHaveBeenCalledWith({ email: "bcrypt@gmail.com", password: hashedPassword });
+    
+    await handleLogin(mockRequest, mockResponse);
+
     expect(Users.findOne).toHaveBeenCalledWith({ email: "bcrypt@gmail.com" });
-
-
   });
+
+  it("should return 401 if user does not exists", async () => {
+    //mock db query
+    Users.findOne.mockResolvedValue(null);
+
+    await handleLogin(mockRequest, mockResponse);
+    
+    expect(mockResponse.status).toHaveBeenCalledWith(401);
+    expect(mockResponse.json).toHaveBeenCalledWith({ message:"Invalid credentials"  });
+  });
+
 });
