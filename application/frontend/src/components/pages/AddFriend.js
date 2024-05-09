@@ -83,10 +83,9 @@ const AddFriend = () => {
         </div>
         <div className="user-results">
           {filteredUsers && filteredUsers.map(user => (
-            // TODO: Change 'Chat' -> 'Add' or 'Profile'
             <UserCard
               user={user}
-              profile
+              friend
             />
           ))}
         </div>

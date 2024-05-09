@@ -78,7 +78,25 @@ function Profile() {
           />
         </div>
         <div className="profile-save">
-          <a className="profile-save-button">Save</a>
+          {
+            data?.email && (user === data ?
+            <div
+              className="profile-save-button"
+              onClick={() => {
+                alert("WIP");
+              }}
+            >
+              Save
+            </div> :
+            <div
+              className="profile-add-button"
+              onClick={() => {
+                alert("WIP");
+              }}
+            >
+              Add Friend
+            </div>)
+          }
         </div>
       </div>
     </div>
