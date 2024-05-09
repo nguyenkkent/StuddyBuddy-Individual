@@ -7,7 +7,7 @@ export async function handleSearchForUsers(request, response){
         //Query MongoDB to find the user's document
         // const potentialFriends = await Users.find({ email: searchTerm });
         const potentialFriends = await Users.find(
-            { email: { $regex: new RegExp(searchTerm, 'i') } },
+            { _id: searchTerm },
             { username: 1, email: 1, _id: 0 } // Projection to include only username and email fields
         );
         

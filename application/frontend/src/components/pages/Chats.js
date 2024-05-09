@@ -6,7 +6,7 @@ import Sidebar from '../common/Sidebar';
 import Webcam from "react-webcam"; 
 
 
-const socket = io(process.env.NODE_ENV == 'production' ? '/' : 'http://localhost:3001/'); // FIXME: edit paths as needed
+const socket = io(process.env.NODE_ENV == 'production' ? '/' : 'http://localhost:3001/');
 
 function Chats() {
   const webcamRef = useRef(null);

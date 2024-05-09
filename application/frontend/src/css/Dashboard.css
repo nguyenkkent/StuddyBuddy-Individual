@@ -76,6 +76,7 @@
   font-size: 24px;
   font-weight: bold;
   color: #333333;
+  cursor: pointer;
 }
 
 .email {
@@ -144,7 +145,8 @@
 }
 
 /* FIXME: create single file for button class */
-.user-entry a {
+.user-entry a,
+.user-entry button {
   color: black;
   background: #8ed8fb;
   border-width: 1px;
@@ -159,7 +161,9 @@
 }
 
 .user-entry a:hover,
-.user-entry a:focus {
+.user-entry a:focus,
+.user-entry button:hover,
+.user-entry button:focus {
   background: #99becf;
   transform: scale(1.10);
   border-radius: 10px;
