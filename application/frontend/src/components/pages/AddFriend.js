@@ -44,14 +44,14 @@ const AddFriend = () => {
 
   useEffect(() => {
     let filtered = allUsers && allUsers.filter(u =>
-      user.objectId !== u._id &&
+      user.objectId !== u._id && u.email &&
       u.username.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    if (tags.length) {
-      filtered = filtered.filter(u =>
-        tags.every(t => u.tags.includes(t))
-      );
-    }
+    // if (tags.length) {
+    //   filtered = filtered.filter(u =>
+    //     tags.every(t => u.tags.includes(t))
+    //   );
+    // }
     setFilteredUsers(filtered);
   }, [searchTerm, allUsers, tags]);
 
