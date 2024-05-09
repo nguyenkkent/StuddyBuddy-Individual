@@ -13,6 +13,7 @@ const CreateNewGroup = () => {
 
     const handleSearchFriends = (searchTerm) => {
         // REPLACE WITH THE ACTUAL API CALL - I don't want to put in something that isn't set up -yq
+        // Should return the friendlist that match the search term
     };
 
     const handleSelectFriend = (friendId) => {
