@@ -12,8 +12,8 @@ const AddFriend = () => {
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [tags, setTags] = useState([]);
 
-  const handleChange = (event) => {
-    setSearchTerm(event.target.value);
+  const handleChange = async (event) => {
+    setSearchTerm(event.target.value);    
   };
   useEffect(() => {
     //handles when user is not loaded property from the AuthContext
@@ -27,11 +27,12 @@ const AddFriend = () => {
         const response = await axiosClient.get("/api/dashboard", {
           //send authorization header for middleware to intercept
           headers: {
-            'Authorization': `Bearer ${user.token}`
+            'Authorization': `Bearer ${user.token}`,
+            'searchTerm': searchTerm
           }
         }); 
         setAllUsers(response.data.userData);
-        setFilteredUsers(response.data.userData);
+        setFilteredUsers(response.data.userData); 
       } catch (error) {
         console.error("Error fetching users:", error);
         setAllUsers([]);
@@ -39,18 +40,18 @@ const AddFriend = () => {
       }
     };
     fetchUsers();
-  }, []);
+  }, searchTerm);
 
   useEffect(() => {
     let filtered = allUsers && allUsers.filter(u =>
-      user.objectId !== u._id &&
+      user.objectId !== u._id && u.email &&
       u.username.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    if (tags.length) {
-      filtered = filtered.filter(u =>
-        tags.every(t => u.tags.includes(t))
-      );
-    }
+    // if (tags.length) {
+    //   filtered = filtered.filter(u =>
+    //     tags.every(t => u.tags.includes(t))
+    //   );
+    // }
     setFilteredUsers(filtered);
   }, [searchTerm, allUsers, tags]);
 
@@ -82,9 +83,9 @@ const AddFriend = () => {
         </div>
         <div className="user-results">
           {filteredUsers && filteredUsers.map(user => (
-            // TODO: Change 'Chat' -> 'Add' or 'Profile'
             <UserCard
               user={user}
+              friend
             />
           ))}
         </div>
