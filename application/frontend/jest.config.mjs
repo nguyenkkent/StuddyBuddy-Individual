@@ -1,10 +1,24 @@
-// Using ES6 export in .mjs file
-export default {
-    testEnvironment: 'jsdom',
+const config = {
+    clearMocks: true,
+    coverageProvider: "v8",
+    moduleFileExtensions: [
+        "js",
+        "jsx",
+        "mjs",
+        "cjs",
+        "json",
+        "node"
+    ],
     transform: {
-      "^.+\\.(js|jsx|ts|tsx)$": "babel-jest",
+        "\\.[jt]sx?$": "babel-jest",
     },
+    transformIgnorePatterns: [
+        "/node_modules/(?!axios).+\\.js$"
+    ],
     moduleNameMapper: {
-      '\\.(css|scss|less)$': 'identity-obj-proxy',
-    }
+        "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+    },
+    testEnvironment: 'jsdom'
 };
+
+export default config;
