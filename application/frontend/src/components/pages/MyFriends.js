@@ -29,8 +29,8 @@ function MyFriends() {
             'Authorization': `Bearer ${user.token}`
           }        
         }); 
-        setAllUsers(response.data.userData);
-        setFilteredUsers(response.data.userData);
+        setAllUsers(response.data.friendDataArray);
+        setFilteredUsers(response.data.friendDataArray);
       } catch (error) {
         console.error("Error fetching users:", error);
         setAllUsers([]);
@@ -42,8 +42,7 @@ function MyFriends() {
 
   useEffect(() => {
     let filtered = allUsers && allUsers.filter(user =>
-      user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchTerm.toLowerCase())
+      user.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredUsers(filtered);
   }, [searchTerm, allUsers]);

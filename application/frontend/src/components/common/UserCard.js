@@ -5,7 +5,7 @@ function UserCard(props) {
   const navigate = useNavigate();
 
   return (
-    <div key={props.user._id} className='user-entry'>
+    <div key={props.user._id || props.user} className='user-entry'>
       <div className="user-container">
         <div>
           <div
@@ -14,9 +14,12 @@ function UserCard(props) {
               navigate(`/profile/${props.user._id}`);
             }}
           >
-            {props.user.username}
+            {props.user.username || props.user}
           </div>
-          <div>Tags: {props.user.tags.join(", ") || "N/A"}</div>
+          {
+            props.user.tags &&
+            <div>Tags: {props.user.tags.join(", ") || "N/A"}</div>
+          }
         </div>
         {
           props.friend ?
