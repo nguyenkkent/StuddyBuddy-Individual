@@ -9,7 +9,11 @@ function UserCard(props) {
           <div className='username'>{props.user.username}</div>
           <div>Tags: {props.user.tags.join(", ") || "N/A"}</div>
         </div>
-        <Link to="/chats">Chat</Link>
+        {
+          props.profile ?
+          <Link to={`/profile/${props.user._id}`}>Profile</Link> :
+          <Link to="/chats">Chat</Link>
+        }
       </div>
     </div>
   );

@@ -86,6 +86,7 @@ const AddFriend = () => {
             // TODO: Change 'Chat' -> 'Add' or 'Profile'
             <UserCard
               user={user}
+              profile
             />
           ))}
         </div>
