@@ -21,10 +21,7 @@ describe("handleLogin function", () => {
 
   it("should try to search database if email exists", async () => {
     await handleLogin(mockRequest, mockResponse);
-
-
-    
-    await handleLogin(mockRequest, mockResponse);
+    // await handleLogin(mockRequest, mockResponse);
 
     expect(Users.findOne).toHaveBeenCalledWith({ email: "bcrypt@gmail.com" });
   });
