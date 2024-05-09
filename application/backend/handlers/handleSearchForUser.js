@@ -5,7 +5,12 @@ export async function handleSearchForUsers(request, response){
         const searchTerm = request.headers.searchterm; // Corrected header name
 
         //Query MongoDB to find the user's document
-        const potentialFriends = await Users.find({ email: searchTerm });
+        // const potentialFriends = await Users.find({ email: searchTerm });
+        const potentialFriends = await Users.find(
+            { email: { $regex: new RegExp(searchTerm, 'i') } },
+            { username: 1, email: 1, _id: 0 } // Projection to include only username and email fields
+        );
+        
         if (!potentialFriends) {
             console.log("No documents found with email");
             return response.status(404).json({ error: "UNo documents found with email" });
