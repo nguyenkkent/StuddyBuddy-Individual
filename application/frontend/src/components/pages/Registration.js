@@ -132,6 +132,7 @@ const handleGuestLogin = async () => {
         <h2 className="registrationtitle">Registration</h2>
         <form onSubmit={handleSubmit} className="registrationform">
           <TextField
+            id="email"
             label="Email:"
             type="email"
             name="email"
@@ -141,6 +142,7 @@ const handleGuestLogin = async () => {
           />
           
           <TextField
+            id="username"
             label="Username:"
             type="text"
             name="username"
@@ -150,6 +152,7 @@ const handleGuestLogin = async () => {
           />
         
           <TextField
+            id="password"
             label="Password:"
             type="password"
             name="password"
@@ -159,6 +162,7 @@ const handleGuestLogin = async () => {
           />
 
           <TextField
+            id="confirmPassword"
             label="Confirm Password:"
             type="password"
             name="confirmPassword"
@@ -170,7 +174,7 @@ const handleGuestLogin = async () => {
           <div>
             <div className='agreeBox'>
               <input type="checkbox" name="agreeToTerms" id="agreeToTerms" checked={user.agreeToTerms} onChange={handleChange} />
-              <label className="formlabel" for="agreeToTerms">
+              <label className="formlabel" htmlFor="agreeToTerms">
                 I agree to the Terms of Service
               </label>
             </div>

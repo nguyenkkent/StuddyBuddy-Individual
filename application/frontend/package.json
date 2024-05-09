@@ -1,6 +1,7 @@
 {
   "name": "sb",
   "version": "0.1.0",
+  "type": "commonjs",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -22,7 +23,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -42,5 +43,23 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.5",
+    "@babel/eslint-parser": "^7.24.5",
+    "@babel/preset-env": "^7.24.5",
+    "@babel/preset-react": "^7.24.1",
+    "babel-jest": "^29.7.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.1",
+    "globals": "^15.1.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.5.1",
+    "jest-extended": "^4.0.2"
+  },
+  "description": "In the terminal:\\\r `cd application\\frontend`\\\r `npm install` to make a node_modules folder (only needed to do this once, pulling from the repo won't discard it and pushing it won't push the folder through b/c of .gitignore)\\\r `npm start`",
+  "main": "babel.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
