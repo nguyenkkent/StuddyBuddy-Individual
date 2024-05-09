@@ -13,7 +13,7 @@ export async function handleSearchForUsers(request, response){
         
         if (!potentialFriends) {
             console.log("No documents found with email");
-            return response.status(404).json({ error: "UNo documents found with email" });
+            return response.status(404).json({ error: "No documents found with email" });
         }
 
         return response.status(200).json({ potentialFriends });
