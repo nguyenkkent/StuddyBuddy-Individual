@@ -104,6 +104,11 @@ function App() {
                   user?.isFirstTime ? <Navigate to="/first-time" /> : <Profile />
                 ) : <PleaseLogin />
               } />
+              <Route path="/profile/:id" element={
+                user ? (
+                  user?.isFirstTime ? <Navigate to="/first-time" /> : <Profile />
+                ) : <PleaseLogin />
+              } />
             </Routes>
           </div>
         </div>

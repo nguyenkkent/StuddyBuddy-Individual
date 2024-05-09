@@ -75,3 +75,24 @@
 .profile-save-button:focus {
   transform: scale(1.10);
 }
+
+.profile-add-button {
+  color: black;
+  background-image: url("../../public/cloud.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-align: center;
+  padding: 26px 20px;
+  text-decoration: none;
+  font-size: 24px;
+  transition: color 0.3s, background-color 0.3s, transform 0.3s;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+}
+
+.profile-add-button:hover,
+.profile-add-button:focus {
+  transform: scale(1.10);
+}
