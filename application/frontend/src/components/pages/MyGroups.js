@@ -30,7 +30,8 @@ const MyGroups = () => {
           //send authorization header for middleware to intercept
           'Authorization': `Bearer ${user.token}`
         } 
-      })
+      });
+      return response.data;
     };
   
     fetchGroups()
@@ -39,9 +40,10 @@ const MyGroups = () => {
     back from the backend -kent.
     */
 
-    // .then(fetchedGroups => {
-    //   setAllGroups(fetchedGroups);
-    // });
+    .then(fetchedGroups => {
+      console.log(fetchedGroups);
+      setAllGroups(fetchedGroups);
+    });
 
     } catch(error){
       console.error("Error fetching groups:", error);
