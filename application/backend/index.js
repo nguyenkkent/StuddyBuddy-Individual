@@ -7,6 +7,7 @@ import dashboardRouter from "./routes/dashboard.js";
 import loginRouter from "./routes/login.js";
 import friendsRouter from "./routes/friends.js"
 import groupsRouter from "./routes/groups.js"
+import addFriendRouter from "./routes/addFriend.js"
 
 //middleware
 app.use(express.json());
@@ -17,6 +18,8 @@ app.use('/api/dashboard', dashboardRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/my-friends', friendsRouter);
 app.use('/api/my-groups', groupsRouter)
+app.use('/api/add-friend', addFriendRouter);
+
 
 
 //connect to mongoDB
