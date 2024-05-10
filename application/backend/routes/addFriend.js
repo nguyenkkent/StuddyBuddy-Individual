@@ -6,7 +6,6 @@ const router = express.Router();
 router.use(requireAuth);
 
 router.get("/", handleSearchForUsers);
-router.post("/", );
 
 export default router;
 

@@ -9,7 +9,7 @@ const Sidebar = () => {
   const { dispatch } = useAuthContext();
 
   const whitelistPages = ["/dashboard", "/chats", "/my-groups", "/my-friends", "/settings", "/profile", "/add-friend", "/create-group"]
-  const showSideBar = whitelistPages.includes(location.pathname);       
+  const showSideBar = whitelistPages.includes(location.pathname.split("/", 2).join("/"));
 
   function handleLogout() {
     //delete json web token from browser storage

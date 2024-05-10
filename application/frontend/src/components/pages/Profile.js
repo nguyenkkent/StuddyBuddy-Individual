@@ -1,11 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../common/Sidebar";
 import Select from 'react-select'
 import "../../css/Profile.css"
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { useParams } from "react-router-dom";
+import axiosClient from "../../axiosClient";
 
 function Profile() {
+  const params = useParams();
+
+  const { user } = useAuthContext()
+
   const [tags, setTags] = useState([]);
+  const [data, setData] = useState(params.id ? null : user);
+
+  useEffect(() => {
+    if (data){
+      return;
+    }
+    const fetchUser = async () => {
+      try {
+        // FIXME: do not return sensitive information like email and password
+        const response = await axiosClient.get("/api/add-friend", {
+          //send authorization header for middleware to intercept
+          headers: {
+            'Authorization': `Bearer ${user.token}`,
+            'searchTerm': params.id
+          }
+        });
+        setData(response.data.potentialFriends[0]); 
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }
+    };
+    fetchUser();
+  });
 
   // tag options
   const options = [
@@ -17,7 +46,6 @@ function Profile() {
     { value: 'computer science', label: 'Computer Science' }
   ]
 
-  const { user } = useAuthContext();
 
   return (
     <div className="profile-container">
@@ -26,12 +54,12 @@ function Profile() {
         <div className="profile-info">
           <div className="profile-detail">
             <div className="profile-detail-main">
-              <p>Name: {user?.name || "???"}</p>
-              <p>Username: {user?.username || "???"}</p>
-              <p>Email: {user?.email || "???"}</p>
+              <p>Name: {data === null ? "Loading..." : (data?.name || "???")}</p>
+              <p>Username: {data === null ? "Loading..." : (data?.username || "???")}</p>
+              <p>Email: {data === null ? "Loading..." : (data?.email || "???")}</p>
             </div>
             <div className="profile-detail-verify">
-              <p>Verified: {user?.isVerified ? "YES" : "NO"}</p>
+              <p>Verified: {data === null ? "Loading..." : (data?.isVerified ? "YES" : "NO")}</p>
             </div>
           </div>
           <svg fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="profile-img">
@@ -50,7 +78,25 @@ function Profile() {
           />
         </div>
         <div className="profile-save">
-          <a className="profile-save-button">Save</a>
+          {
+            data?.email && (user === data ?
+            <div
+              className="profile-save-button"
+              onClick={() => {
+                alert("WIP");
+              }}
+            >
+              Save
+            </div> :
+            <div
+              className="profile-add-button"
+              onClick={() => {
+                alert("WIP");
+              }}
+            >
+              Add Friend
+            </div>)
+          }
         </div>
       </div>
     </div>
