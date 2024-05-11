@@ -20,7 +20,7 @@ app.use('/api/login', loginRouter);
 app.use('/api/my-friends', friendsRouter);
 app.use('/api/my-groups', groupsRouter);
 app.use('/api/add-friend', addFriendRouter);
-app.use('api/addGroup', addGroup);
+app.use('/api/add-group', addGroup);
 
 
 
