@@ -95,6 +95,7 @@ function Chats() {
 //query db for chat amongst user and recipient
 const handleMessageClick = (msg) => {
   // console.log(msg);
+  setRecipient(msg.participants[0]===user.username? msg.participants[1] : msg.participants[0])
 }
 
 
@@ -128,7 +129,7 @@ const handleMessageClick = (msg) => {
     
     <div className="chat-container"> {/* Chat container */}
       <div className="chat-content">
-        <h1>Chatting with &lt;Placeholder&gt;</h1>
+        <h1>Chatting with &lt;{recipient}&gt;</h1>
         <div className="chat-box" style={{ display: "flex", flexDirection: "column" }}>
           {/* Display all received messages into each individual divs */}
           {/* {messages.map((msg, index) => (
