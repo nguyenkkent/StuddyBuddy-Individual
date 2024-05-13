@@ -10,18 +10,21 @@ function UserCard(props) {
   const handleChatClick = async () => {
 
     //grab the message recipient's email
-    const messageRecipientEmail = props.user.email;
+    const recipientEmail = props.user.email;
     // console.log(currentUserEmail);
     // console.log(messageRecipientEmail);
 
     //send info for both parties to back
-    const response =  await axiosClient.post("/api/chats/start-chat", {
-      //send authorization header for middleware to intercept
+
+    //Provide configuration object directly, including headers
+    const response = await axiosClient.post("api/chats/start-chat", {
+      
       headers: {
-        'Authorization': `Bearer ${user.token}`, 
-        'recipient': messageRecipientEmail
+        'Authorization': `Bearer ${user.token}`,
+        'recipient': recipientEmail
       }
     }); 
+      
   }
 
 

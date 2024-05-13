@@ -1,6 +1,7 @@
 import { Messages } from "../../models/messageSchema.js";
 
-export async function handleStartChats(response, request){
-    console.log(request.headers.sender);
-    console.log(request.headers.recipient);
+export async function handleStartChats(request, response){
+    console.log("handleStartChats was called");
+    console.log(request.headers);
+    return response.status(200).json({ message: "Route ok" });
 }
