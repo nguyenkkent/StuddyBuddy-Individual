@@ -21,24 +21,32 @@ const io = new Server(server, {
 });
 
 io.on('connection', (socket) => {
-    // console.log(`User connected: ${socket.id}`);
-  
-    socket.on('disconnect', () => {
-      // console.log('user disconnected');
-    });
-    
-    //getting data from the front end and sending it back
-    socket.on("sendMessage", data => {
-      const { username, message } = data;
-      console.log(data);
-      // Process message and username and concatenate them
-      const result = username.concat(": ", message)
-      // console.log({message : result});
 
-      // Broadcast the message to other users
-      io.emit("receiveMessage", {message : result} );
+  // console.log(`User connected: ${socket.id}`);
+
+  socket.on('disconnect', () => {
+    // console.log('user disconnected');
   });
+
+  socket.on('joinRoom', ({ roomId }) => {
+  // Join the Socket.IO room with the specified roomId
+  console.log("roomId: " + roomId);
+  socket.join(roomId);
   });
+
+  //getting data from the front end and sending it back
+  socket.on("sendMessage", data => {
+    const { username, message } = data;
+    //console.log(data);
+    // Process message and username and concatenate them
+    const result = username.concat(": ", message)
+    // console.log({message : result});
+
+    // Broadcast the message to other users
+    io.emit("receiveMessage", {message : result} );
+  });
+
+});
 
 
 export {app, io, server};
