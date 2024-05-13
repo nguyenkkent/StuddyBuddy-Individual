@@ -4,28 +4,50 @@ import { useEffect, useState, useRef } from 'react';
 import "../../css/Chats.css"
 import Sidebar from '../common/Sidebar';
 import Webcam from "react-webcam"; 
-
+import { useAuthContext } from '../../hooks/useAuthContext';
+import axiosClient from '../../axiosClient';
 
 const socket = io(process.env.NODE_ENV == 'production' ? '/' : 'http://localhost:3001/');
 
 function Chats() {
+  const { user } = useAuthContext();
   const webcamRef = useRef(null);
   const [webcamEnabled, setWebcamEnabled] = useState(false); 
 
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  const [recipient, setRecipient] = useState("");
+
+  if(!user){
+    console.log("User not loaded")
+    return;
+  }
 
   //handles receiving messages from backend
   useEffect(() => {
-    //listen for incoming messages from the backend
-    socket.on("receiveMessage", (data) => {
-      //spreads the 'messages' array into a new array and appending 'data.message' to the end
-      //of the new array
-      setMessages(prevMessages => [...prevMessages, data.message]);
+    socket.on("receiveMessageDB", async (data) => {
+      try {
+        const token = JSON.parse(localStorage.getItem("user"));
+        if (!token) {
+          console.log("No token found");
+          return;
+        }
+        //query database whenever to check for new activities
+        const response = await axiosClient.get("/api/chats/get-all-messages", {
+          //send authorization header for middleware to intercept
+          headers: {
+            'Authorization': `Bearer ${user.token}`
+          }
+        }); 
+        //render the Messages documents as clickables
+
+
+      } catch (error) {
+        console.error("Error fetching messages:", error);
+      }
     });
-    //Clean up event listener when component unmounts
     return () => {
-      socket.off("receiveMessage");
+      socket.off("receiveMessageDB");
     };
   }, []);
 
@@ -38,12 +60,21 @@ function Chats() {
       return;
     }
 
+
     const username = token.username;
     const email = token.email;
     //emit the message to the backend
-    socket.emit("sendMessage", { message, username, email });
+    socket.emit("sendMessageDB", { message, username, email });
     setMessage("");
   }
+
+
+
+
+
+
+
+
 
   //toggle for webcam
   const toggleWebcam = () => {

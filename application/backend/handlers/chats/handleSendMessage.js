@@ -20,7 +20,7 @@ export async function handleSendMessage(request, response){
             participantsId: { $all: [userId, recipientDocument._id] }
         });
 
-        console.log(messageDocument);
+        //console.log(messageDocument);
         // Update document
         if (messageDocument) {
             const updatedMessage = `${currentUserDocument.username}: ${request.body.message}`;
