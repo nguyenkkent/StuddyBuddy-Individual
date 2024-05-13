@@ -18,13 +18,37 @@ function Chats() {
   const [messages, setMessages] = useState([]);
   const [recipient, setRecipient] = useState("");
 
-  if(!user){
-    console.log("User not loaded")
-    return;
-  }
+  //get all messages when component loads
+  useEffect(() => {
+    const fetchMessages = async () => {
+      try {
+        if (!user) {
+          console.log("User not loaded");
+          return;
+        }
+
+        //get all Messages document where current user is a participant
+        const response = await axiosClient.get("/api/chats/get-all-messages", {
+          // Send authorization header for middleware to intercept
+          headers: {
+            'Authorization': `Bearer ${user.token}`
+          }
+        }); 
+        setMessages(response.data.messages);
+
+      } catch (error) {
+        console.error("Error fetching messages:", error);
+      }
+    };
+    fetchMessages();
+  }, []); 
 
   //handles receiving messages from backend
   useEffect(() => {
+    if(!user){
+    console.log("User not loaded")
+    return;
+  }
     socket.on("receiveMessageDB", async (data) => {
       try {
         const token = JSON.parse(localStorage.getItem("user"));
@@ -39,8 +63,9 @@ function Chats() {
             'Authorization': `Bearer ${user.token}`
           }
         }); 
+        console.log("response: ", response);
         //render the Messages documents as clickables
-
+        setMessages(response.data.messages);
 
       } catch (error) {
         console.error("Error fetching messages:", error);
@@ -70,10 +95,9 @@ function Chats() {
 
 
 
-
-
-
-
+const handleMessageClick = (msg) => {
+  console.log(msg);
+}
 
 
   //toggle for webcam
@@ -96,14 +120,21 @@ function Chats() {
       )} 
     </div>
 
+    <div>
+      {/* Render clickable buttons for each Messages document */}
+      {messages.map((msg) => (
+      <button key={msg._id} onClick={() => handleMessageClick(msg)}> {msg.contents[0]}
+      </button>))}
+    </div>
+    
     <div className="chat-container"> {/* Chat container */}
       <div className="chat-content">
         <h1>Chatting with &lt;Placeholder&gt;</h1>
         <div className="chat-box" style={{ display: "flex", flexDirection: "column" }}>
           {/* Display all received messages into each individual divs */}
-          {messages.map((msg, index) => (
+          {/* {messages.map((msg, index) => (
             <div key={index}>{msg}</div>
-          ))}
+          ))} */}
         </div>
         <div className="chat-send">
           <input 

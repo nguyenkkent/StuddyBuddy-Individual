@@ -1,7 +1,7 @@
 import { Users } from "../../models/userSchema.js";
 import { Messages } from "../../models/messageSchema.js";
 import { ObjectId } from "mongodb";
-
+import { io } from "../../socket.js";
 export async function handleSendMessage(request, response){
     try{
         console.log("handleSendMessage was called");
@@ -26,6 +26,8 @@ export async function handleSendMessage(request, response){
             const updatedMessage = `${currentUserDocument.username}: ${request.body.message}`;
             messageDocument.contents.push(updatedMessage);
             await messageDocument.save();
+
+            io.emit("receiveMessageDB", {text: updatedMessage});
             return response.status(200).send({ message: "Message sent successfully" });
         } 
         else {
