@@ -14,24 +14,28 @@ export async function handleStartChats(request, response){
         //find the recipient
         const recipientEmail = request.body.recipient;
         const recipientDocument = await Users.collection.findOne({email: recipientEmail});
-        
-        const newMessage = new Messages({
+
+        //check if both parties have a previous message document
+        const existingMessage = await Messages.findOne({
+            participantsId: {
+                $all: [userId, recipientDocument._id]
+            }
+        });
+
+        if (existingMessage) {
+            return response.status(409).json({ message: "Chat between both user already exists" }); 
+        }
+        else{
+            const newMessage = new Messages({
             participantsId : [userId, recipientDocument._id],
             participants : [currentUserDocument.username, recipientDocument.username],
             isGroupMEssage: false
         })
-        //console.log(newMessage);
-        await newMessage.save();
+            //console.log(newMessage);
+            await newMessage.save();
+            return response.status(200).json({ message: "Chat started successfully" });
+        }
 
-        // // Emit an event to the frontend with the room details
-        // console.log("newMessage._id: "+newMessage._id);
-        // console.log("participiants: " + userId +" " + recipientDocument._id);
-        // io.emit("roomCreated", 
-        // {   roomId: newMessage._id, 
-        //     participants: [userId, recipientDocument._id] 
-        // });
-
-        return response.status(200).json({ message: "Chat started successfully" });
     }catch(error){
         console.log("Error:", error);
         return response.status(500).send({ message: error.message });
