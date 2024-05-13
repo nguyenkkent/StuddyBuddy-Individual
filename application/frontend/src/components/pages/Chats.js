@@ -84,8 +84,6 @@ function Chats() {
       console.log("No token found");
       return;
     }
-
-
     const username = token.username;
     const email = token.email;
     //emit the message to the backend
@@ -94,9 +92,9 @@ function Chats() {
   }
 
 
-
+//query db for chat amongst user and recipient
 const handleMessageClick = (msg) => {
-  console.log(msg);
+  // console.log(msg);
 }
 
 
@@ -123,7 +121,8 @@ const handleMessageClick = (msg) => {
     <div>
       {/* Render clickable buttons for each Messages document */}
       {messages.map((msg) => (
-      <button key={msg._id} onClick={() => handleMessageClick(msg)}> {msg.contents[0]}
+      // <button key={msg._id} onClick={() => handleMessageClick(msg)}> {msg.contents[0]}
+      <button key={msg._id} onClick={() => handleMessageClick(msg)}> {msg.participants[0]===user.username? msg.participants[1] : msg.participants[0]}
       </button>))}
     </div>
     
