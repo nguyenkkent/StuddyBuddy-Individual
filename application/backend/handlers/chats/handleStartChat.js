@@ -22,14 +22,14 @@ export async function handleStartChats(request, response){
         })
         //console.log(newMessage);
         await newMessage.save();
-        
-        // Emit an event to the frontend with the room details
-        console.log("newMessage._id: "+newMessage._id);
-        console.log("participiants: " + userId +" " + recipientDocument._id);
-        io.emit("roomCreated", 
-        {   roomId: newMessage._id, 
-            participants: [userId, recipientDocument._id] 
-        });
+
+        // // Emit an event to the frontend with the room details
+        // console.log("newMessage._id: "+newMessage._id);
+        // console.log("participiants: " + userId +" " + recipientDocument._id);
+        // io.emit("roomCreated", 
+        // {   roomId: newMessage._id, 
+        //     participants: [userId, recipientDocument._id] 
+        // });
 
         return response.status(200).json({ message: "Chat started successfully" });
     }catch(error){
