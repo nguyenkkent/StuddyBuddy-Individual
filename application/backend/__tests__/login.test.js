@@ -1,5 +1,5 @@
 import { Users } from "../models/userSchema.js";
-import { handleLogin } from "../handlers/handleLogin.js";
+import { handleLogin } from "../handlers/login/handleLogin.js";
 import bcrypt from "bcrypt";
 
 const mockRequest = {

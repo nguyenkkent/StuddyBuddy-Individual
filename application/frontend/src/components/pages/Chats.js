@@ -38,8 +38,9 @@ function Chats() {
     }
 
     const username = token.username;
+    const email = token.email;
     //emit the message to the backend
-    socket.emit("sendMessage", { message, username });
+    socket.emit("sendMessage", { message, username, email });
     setMessage("");
   }
 

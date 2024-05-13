@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
-import { Groups } from "../models/groupSchema.js";
-import { Users } from "../models/userSchema.js";
+import { Groups } from "../../models/groupSchema.js";
+import { Users } from "../../models/userSchema.js";
 
 export async function handleAddGroup(request, response){
     try {

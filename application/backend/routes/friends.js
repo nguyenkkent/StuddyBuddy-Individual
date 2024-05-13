@@ -1,6 +1,6 @@
 import express from "express";
 import requireAuth from "../middleware/requireAuth.js"
-import { handleDisplayAllFriends } from "../handlers/handleDisplayAllFriends.js";
+import { handleDisplayAllFriends } from "../handlers/friends/handleDisplayAllFriends.js";
 
 
 const router = express.Router();

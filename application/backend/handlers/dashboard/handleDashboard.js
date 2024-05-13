@@ -1,4 +1,4 @@
-import { Users } from "../models/userSchema.js";
+import { Users } from "../../models/userSchema.js";
 
 export async function handleDashboard(request, response) {
     try{

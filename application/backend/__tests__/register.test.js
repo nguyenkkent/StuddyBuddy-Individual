@@ -1,5 +1,5 @@
-import { handleRegistration } from "../handlers/handleRegisterUser.js";
-import { handleGuestUser } from "../handlers/handleGuessUser.js";
+import { handleRegistration } from "../handlers/register/handleRegisterUser.js";
+import { handleGuestUser } from "../handlers/register/handleGuessUser.js";
 import { Users } from "../models/userSchema.js";
 
 //think of this as request.body.email

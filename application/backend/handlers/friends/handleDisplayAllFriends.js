@@ -1,4 +1,4 @@
-import {Users} from "../models/userSchema.js";
+import {Users} from "../../models/userSchema.js";
 import {ObjectId} from "mongodb";
 
 export async function handleDisplayAllFriends(request, response){
