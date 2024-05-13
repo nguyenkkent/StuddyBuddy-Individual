@@ -24,6 +24,7 @@ import MyFriends from "./components/pages/MyFriends";
 import MyGroups from "./components/pages/MyGroups";
 import Chats from "./components/pages/Chats";
 import Settings from "./components/pages/Settings";
+import GroupChat from './components/pages/GroupChat';
 
 import FirstTime from './components/pages/FirstTime';
 import AddFriend from './components/pages/AddFriend';
@@ -81,6 +82,11 @@ function App() {
                   user?.isFirstTime ? <Navigate to="/first-time" /> : <Chats />
                 ) : <PleaseLogin />
               } />
+              <Route path="/groupchat" element={
+                user ? (
+                  user?.isFirstTime ? <Navigate to="/first-time" /> : <GroupChat />
+                ) : <PleaseLogin />
+              } />              
               <Route path="/settings" element={
                 user ? (
                   user?.isFirstTime ? <Navigate to="/first-time" /> : <Settings />
