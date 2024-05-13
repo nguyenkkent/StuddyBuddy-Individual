@@ -73,7 +73,7 @@ function Chats() {
       }
     });
     return () => {
-      socket.off("receiveMessageDB");
+      // socket.off("receiveMessageDB");
     };
   }, []);
 
