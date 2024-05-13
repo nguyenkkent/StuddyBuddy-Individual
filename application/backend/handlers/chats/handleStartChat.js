@@ -8,10 +8,19 @@ export async function handleStartChats(request, response){
 
         //find the current user
         const userId = new ObjectId(request.user._id); 
-        const currentUser = await Users.findById(userId);
+        const currentUserDocument = await Users.findById(userId);
 
         //find the recipient
-        const recipient = request.body.recipient;
+        const recipientEmail = request.body.recipient;
+        const recipientDocument = await Users.collection.findOne({email: recipientEmail});
+        
+        const newMessage = new Messages({
+            participantsId : [userId, recipientDocument._id],
+            participants : [currentUserDocument.username, recipientDocument.username],
+            isGroupMEssage: false
+        })
+        //console.log(newMessage);
+        await newMessage.save();
 
 
         return response.status(200).json({ message: "Route ok" });
