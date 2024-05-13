@@ -16,15 +16,15 @@ export async function handleAddMemberToGroup(request, response){
         }
 
         //locate the group document in database that the current user is also in
-        //const groupName = request.headers.groupname;
-        const groupName = request.body.groupname;
+        const groupName = request.headers.groupname;
+        //const groupName = request.body.groupname;
         const group = await Groups.findOne({
             name: groupName,
             // Check if membersId array contains the current user's userId
             membersId: userId 
         });
-        // const newMemberEmail = request.headers.email;
-        const newMemberEmail = request.body.email;
+        const newMemberEmail = request.headers.email;
+        //const newMemberEmail = request.body.email;
         //find new member's document in database
         const newMember = await Users.findOne({email: newMemberEmail});
 

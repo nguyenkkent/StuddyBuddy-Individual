@@ -2,8 +2,8 @@ import { Users } from "../../models/userSchema.js";
 
 export async function handleSearchForUsers(request, response){
     try{
-       // const searchTerm = request.headers.searchterm;
-       searchTerm = request.body.researchterm;
+       const searchTerm = request.headers.searchterm;
+       //const searchTerm = request.body.researchterm;
 
         //Query MongoDB to find the user's document
         // const potentialFriends = await Users.find({ email: searchTerm });
