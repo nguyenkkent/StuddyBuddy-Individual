@@ -8,7 +8,9 @@ import loginRouter from "./routes/login.js";
 import friendsRouter from "./routes/friends.js";
 import groupsRouter from "./routes/groups.js";
 import addFriendRouter from "./routes/addFriend.js";
-import addGroup from "./routes/addGroup.js";
+import addGroupRouter from "./routes/addGroup.js";
+import chatsRouter from "./routes/chats.js";
+
 
 //middleware
 app.use(express.json());
@@ -20,7 +22,8 @@ app.use('/api/login', loginRouter);
 app.use('/api/my-friends', friendsRouter);
 app.use('/api/my-groups', groupsRouter);
 app.use('/api/add-friend', addFriendRouter);
-app.use('/api/add-group', addGroup);
+app.use('/api/add-group', addGroupRouter);
+app.use('/api/chats', chatsRouter)
 
 
 
