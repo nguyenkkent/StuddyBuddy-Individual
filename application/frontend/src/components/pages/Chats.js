@@ -15,8 +15,9 @@ function Chats() {
   const [webcamEnabled, setWebcamEnabled] = useState(false); 
 
   const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState([]);
+  const [messageDocuments, setMessageDocuments] = useState([]);
   const [recipient, setRecipient] = useState("");
+  const [messageContents, setMessageContents] = useState([]);
 
   //get all messages when component loads
   useEffect(() => {
@@ -34,7 +35,7 @@ function Chats() {
             'Authorization': `Bearer ${user.token}`
           }
         }); 
-        setMessages(response.data.messages);
+        setMessageDocuments(response.data.messages);
 
       } catch (error) {
         console.error("Error fetching messages:", error);
@@ -65,7 +66,7 @@ function Chats() {
         }); 
         console.log("response: ", response);
         //render the Messages documents as clickables
-        setMessages(response.data.messages);
+        setMessageDocuments(response.data.messages);
 
       } catch (error) {
         console.error("Error fetching messages:", error);
@@ -96,6 +97,7 @@ function Chats() {
 const handleMessageClick = (msg) => {
   // console.log(msg);
   setRecipient(msg.participants[0]===user.username? msg.participants[1] : msg.participants[0])
+  setMessageContents(msg.contents);
 }
 
 
@@ -121,7 +123,7 @@ const handleMessageClick = (msg) => {
 
     <div>
       {/* Render clickable buttons for each Messages document */}
-      {messages.map((msg) => (
+      {messageDocuments.map((msg) => (
       // <button key={msg._id} onClick={() => handleMessageClick(msg)}> {msg.contents[0]}
       <button key={msg._id} onClick={() => handleMessageClick(msg)}> {msg.participants[0]===user.username? msg.participants[1] : msg.participants[0]}
       </button>))}
@@ -132,9 +134,9 @@ const handleMessageClick = (msg) => {
         <h1>Chatting with &lt;{recipient}&gt;</h1>
         <div className="chat-box" style={{ display: "flex", flexDirection: "column" }}>
           {/* Display all received messages into each individual divs */}
-          {/* {messages.map((msg, index) => (
+          {messageContents.map((msg, index) => (
             <div key={index}>{msg}</div>
-          ))} */}
+          ))}
         </div>
         <div className="chat-send">
           <input 
