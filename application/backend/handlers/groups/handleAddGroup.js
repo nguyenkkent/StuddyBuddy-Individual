@@ -15,8 +15,8 @@ export async function handleAddGroup(request, response){
         }
 
         //grab the group name from headers
-        const newGroupName = request.headers.groupname;
-
+        // const newGroupName = request.headers.groupname;
+        const newGroupName = request.body.groupname;
         //create the new group document
         const newGroup = {
             name: newGroupName,

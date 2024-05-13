@@ -15,15 +15,13 @@ function UserCard(props) {
     // console.log(messageRecipientEmail);
 
     //send info for both parties to back
-
-    //Provide configuration object directly, including headers
-    const response = await axiosClient.post("api/chats/start-chat", {
-      
+    const response = await axiosClient.post("/api/chats/start-chat/", {
+      recipient: recipientEmail
+    }, {
       headers: {
-        'Authorization': `Bearer ${user.token}`,
-        'recipient': recipientEmail
+        'Authorization': `Bearer ${user.token}`
       }
-    }); 
+    });
       
   }
 
