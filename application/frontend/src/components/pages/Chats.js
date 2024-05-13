@@ -15,23 +15,6 @@ function Chats() {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
 
-  const [roomId, setRoomId] = useState(null);
-
-  useEffect(() => {
-    // Listen for the event emitted by the backend when a room is created
-    socket.on("roomCreated", (data) => {
-        setRoomId(data.roomId);
-        console.log("roomId: " + roomId);
-        // Join the Socket.IO room with the roomId
-        socket.emit("joinRoom", { roomId: data.roomId });
-    });
-    
-    return () => {
-        socket.off("roomCreated");
-    };
-}, []);
-
-
   //handles receiving messages from backend
   useEffect(() => {
     //listen for incoming messages from the backend
