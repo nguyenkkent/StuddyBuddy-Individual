@@ -3,7 +3,7 @@ import { ObjectId } from "mongodb";
 
 export async function handleGetAllMessages(request, response){
     try{
-        console.log("handleGetAllMessages was called  ", Date.now());
+        console.log("handleGetAllMessages was called @ ", Date.now());
 
         //find the current user
         const userId = new ObjectId(request.user._id);
