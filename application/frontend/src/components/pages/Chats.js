@@ -14,11 +14,11 @@ function Chats() {
   const webcamRef = useRef(null);
   const [webcamEnabled, setWebcamEnabled] = useState(false); 
 
-  const [message, setMessage] = useState("");
-  const [messageDocuments, setMessageDocuments] = useState([]);
-  const [recipient, setRecipient] = useState("");
-  const [recipientId, setRecipientId] = useState("");
-  const [messageContents, setMessageContents] = useState([]);
+  const [message, setMessage] = useState(""); //tracks the message we're emitting out
+  const [messageDocuments, setMessageDocuments] = useState([]); //tracks all active chats open with current user
+  const [recipient, setRecipient] = useState(""); //tracks name of who we're talking to
+  const [recipientId, setRecipientId] = useState(""); //tracks the mongoDB ObjectId of who we're talking to
+  const [messageContents, setMessageContents] = useState([]); //tracks the chat contents between two people
 
   //get all messages when component loads
   useEffect(() => {
@@ -92,7 +92,7 @@ function Chats() {
   }
 
 
-//toggle between chats with other users
+//toggle between chats with other users and keeps track who the message's receipient is
 const handleMessageDocumentClick = (msg) => {
   //set the name of the person the current user is talking to
   setRecipient(msg.participants[0]===user.username? msg.participants[1] : msg.participants[0])
@@ -102,7 +102,7 @@ const handleMessageDocumentClick = (msg) => {
 
   //set the recipient's ObjectId
   setRecipientId(msg.participantsId[0]===user.objectId ? msg.participantsId[1] : msg.participantsId[0])
-  console.log(recipientId);
+  //console.log(recipientId);
 }
 
 
@@ -127,7 +127,7 @@ const handleMessageDocumentClick = (msg) => {
     </div>
 
     <div>
-      {/* Render clickable buttons for each Messages document */}
+      {/*render clickable buttons for each Messages document */}
       {messageDocuments.map((msg) => (
       // <button key={msg._id} onClick={() => handleMessageClick(msg)}> {msg.contents[0]}
       <button key={msg._id} onClick={() => handleMessageDocumentClick(msg)}> {msg.participants[0]===user.username? msg.participants[1] : msg.participants[0]}
@@ -138,7 +138,7 @@ const handleMessageDocumentClick = (msg) => {
       <div className="chat-content">
         <h1>Chatting with &lt;{recipient}&gt;</h1>
         <div className="chat-box" style={{ display: "flex", flexDirection: "column" }}>
-          {/* Display all received messages into each individual divs */}
+          {/*display all received messages into each individual divs */}
           {messageContents.map((msg, index) => (
             <div key={index}>{msg}</div>
           ))}
