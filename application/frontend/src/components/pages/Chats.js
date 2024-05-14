@@ -84,10 +84,17 @@ function Chats() {
       console.log("No token found");
       return;
     }
+
+    /*
+    1. who is sending the message - email + username
+    2. who is receiving the message - recipientId
+    3. the message itself - message
+    */
+   
     const username = token.username;
     const email = token.email;
     //emit the message to the backend
-    socket.emit("sendMessageDB", { message, username, email });
+    socket.emit("sendMessageDB", { message, username, email, recipientId });
     setMessage("");
   }
 
@@ -101,7 +108,7 @@ const handleMessageDocumentClick = (msg) => {
   setMessageContents(msg.contents);
 
   //set the recipient's ObjectId
-  setRecipientId(msg.participantsId[0]===user.objectId ? msg.participantsId[1] : msg.participantsId[0])
+  setRecipientId(msg.participantsId[0]===user.objectId? msg.participantsId[1] : msg.participantsId[0])
   //console.log(recipientId);
 }
 

@@ -2,7 +2,9 @@ import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import cors from "cors";
-import {Messages} from "../backend/models/messageSchema.js"
+import { Messages } from "../backend/models/messageSchema.js"
+import { Users } from "./models/userSchema.js";
+import { ObjectId } from "mongodb";
 
 
 //create an instance of the application object
@@ -28,22 +30,54 @@ io.on('connection', (socket) => {
     // console.log('user disconnected');
   });
 
-  socket.on('joinRoom', ({ roomId }) => {
-  // Join the Socket.IO room with the specified roomId
-  console.log("roomId: " + roomId);
-  socket.join(roomId);
-  });
-
-  //getting data from the front end and sending it back
+  //handles public groupchat
   socket.on("sendMessage", data => {
     const { username, message } = data;
-    //console.log(data);
     // Process message and username and concatenate them
     const result = username.concat(": ", message)
-    // console.log({message : result});
 
     // Broadcast the message to other users
     io.emit("receiveMessage", {message : result} );
+  });
+
+
+  //handles chats between two registered users
+  socket.on("sendMessageDB", async (data) => {
+    const {message, username, email, recipientId} = data;
+    //console.log(data);
+    try{
+
+      //locate current user
+      const currentUserDocument = await Users.findOne({email : email});
+      //console.log(currentUserDocument);
+      const userId = currentUserDocument._id
+
+
+      const existingMessage = await Messages.findOne({
+        participantsId: {
+          $all: [userId, recipientId]
+        }
+      });
+  
+      if (existingMessage) {
+        //update the contents of the existing Message document
+        existingMessage.contents.push(`${username}: ${message}`);
+        await existingMessage.save();
+      } 
+      else {
+        const newMessage = new Messages({
+          participantsId: [userId, recipientId],
+          participants: [username, recipientId],
+          contents: [`${username}: ${message}`],
+          isGroupMessage: false
+        });
+        await newMessage.save();
+      }
+
+      io.emit("receiveMessageDB", { message });
+    }catch(error){
+      console.error("Error: ", error);
+    }
   });
 
 });
