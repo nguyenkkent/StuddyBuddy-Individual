@@ -17,6 +17,7 @@ function Chats() {
   const [message, setMessage] = useState("");
   const [messageDocuments, setMessageDocuments] = useState([]);
   const [recipient, setRecipient] = useState("");
+  const [recipientId, setRecipientId] = useState("");
   const [messageContents, setMessageContents] = useState([]);
 
   //get all messages when component loads
@@ -35,6 +36,7 @@ function Chats() {
             'Authorization': `Bearer ${user.token}`
           }
         }); 
+        //render the Messages documents as clickables
         setMessageDocuments(response.data.messages);
 
       } catch (error) {
@@ -44,7 +46,7 @@ function Chats() {
     fetchMessages();
   }, []); 
 
-  //handles receiving messages from backend
+  //handles receiving messages from socket.io server
   useEffect(() => {
     if(!user){
     console.log("User not loaded")
@@ -59,13 +61,10 @@ function Chats() {
         }
         //query database whenever to check for new activities
         const response = await axiosClient.get("/api/chats/get-all-messages", {
-          //send authorization header for middleware to intercept
           headers: {
             'Authorization': `Bearer ${user.token}`
           }
         }); 
-        console.log("response: ", response);
-        //render the Messages documents as clickables
         setMessageDocuments(response.data.messages);
 
       } catch (error) {
@@ -93,11 +92,17 @@ function Chats() {
   }
 
 
-//query db for chat amongst user and recipient
-const handleMessageClick = (msg) => {
-  // console.log(msg);
+//toggle between chats with other users
+const handleMessageDocumentClick = (msg) => {
+  //set the name of the person the current user is talking to
   setRecipient(msg.participants[0]===user.username? msg.participants[1] : msg.participants[0])
+
+  //load the contents of conversation between current user and recipient
   setMessageContents(msg.contents);
+
+  //set the recipient's ObjectId
+  setRecipientId(msg.participantsId[0]===user.objectId ? msg.participantsId[1] : msg.participantsId[0])
+  console.log(recipientId);
 }
 
 
@@ -125,7 +130,7 @@ const handleMessageClick = (msg) => {
       {/* Render clickable buttons for each Messages document */}
       {messageDocuments.map((msg) => (
       // <button key={msg._id} onClick={() => handleMessageClick(msg)}> {msg.contents[0]}
-      <button key={msg._id} onClick={() => handleMessageClick(msg)}> {msg.participants[0]===user.username? msg.participants[1] : msg.participants[0]}
+      <button key={msg._id} onClick={() => handleMessageDocumentClick(msg)}> {msg.participants[0]===user.username? msg.participants[1] : msg.participants[0]}
       </button>))}
     </div>
     
