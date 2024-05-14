@@ -59,7 +59,8 @@ io.on('connection', (socket) => {
         }
       });
   
-      io.emit("receiveMessageDB", { message: `${username}: ${message}` });
+      io.emit("receiveMessageDB", { message: `${username}: ${message}`, recipientId : recipientId });
+
       if (existingMessage) {
         //update the contents of the existing Message document
         existingMessage.contents.push(`${username}: ${message}`);

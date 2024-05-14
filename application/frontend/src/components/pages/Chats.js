@@ -45,6 +45,7 @@ function Chats() {
       }
     };
     fetchMessages();
+    console.log(messageDocuments);
   }, []); 
 
 
@@ -54,7 +55,10 @@ function Chats() {
     socket.on("receiveMessageDB", (data) => {
       //spreads the 'messages' array into a new array and appending 'data.message' to the end
       //of the new array
-      setMessageContents(prevMessages => [...prevMessages, data.message]);
+      console.log(data);
+      if (data.recipientId == recipientId){
+        setMessageContents(prevMessages => [...prevMessages, data.message]);
+      }
     });
     return () => {
       socket.off("receiveMessageDB");
@@ -85,11 +89,13 @@ function Chats() {
     //iterate through messageDocuments and look for recipient's name in each of message's participants
     setMessageDocuments(prevDocuments => {
       return prevDocuments.map(doc => {
+        //console.log("Current recipient: ", recipient);
         if (doc.participants.includes(recipient)) {
           return {
             ...doc,
             contents: [...doc.contents, `${username}: ${message}`]
           };
+          
         }
         return doc;
       });
