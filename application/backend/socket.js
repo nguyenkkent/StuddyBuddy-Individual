@@ -59,6 +59,7 @@ io.on('connection', (socket) => {
         }
       });
   
+      io.emit("receiveMessageDB", { message: `${username}: ${message}` });
       if (existingMessage) {
         //update the contents of the existing Message document
         existingMessage.contents.push(`${username}: ${message}`);
@@ -74,7 +75,7 @@ io.on('connection', (socket) => {
         await newMessage.save();
       }
 
-      io.emit("receiveMessageDB", { message });
+      
     }catch(error){
       console.error("Error: ", error);
     }

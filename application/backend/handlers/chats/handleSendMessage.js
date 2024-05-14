@@ -4,7 +4,7 @@ import { ObjectId } from "mongodb";
 import { io } from "../../socket.js";
 export async function handleSendMessage(request, response){
     try{
-        console.log("handleSendMessage was called");
+        console.log("handleSendMessage was called @ ", Date.now());
 
         //find the current user
         const userId = new ObjectId(request.user._id); 

@@ -20,6 +20,7 @@ function Chats() {
   const [recipientId, setRecipientId] = useState(""); //tracks the mongoDB ObjectId of who we're talking to
   const [messageContents, setMessageContents] = useState([]); //tracks the chat contents between two people
 
+  const [receieveMessageDb, setReceieveMessageDb] = useState("");
   //get all messages when component loads
   useEffect(() => {
     const fetchMessages = async () => {
@@ -46,35 +47,20 @@ function Chats() {
     fetchMessages();
   }, []); 
 
-  //handles receiving messages from socket.io server
-  useEffect(() => {
-    if(!user){
-    console.log("User not loaded")
-    return;
-  }
-    socket.on("receiveMessageDB", async (data) => {
-      try {
-        const token = JSON.parse(localStorage.getItem("user"));
-        if (!token) {
-          console.log("No token found");
-          return;
-        }
-        //query database whenever to check for new activities
-        const response = await axiosClient.get("/api/chats/get-all-messages", {
-          headers: {
-            'Authorization': `Bearer ${user.token}`
-          }
-        }); 
-        setMessageDocuments(response.data.messages);
 
-      } catch (error) {
-        console.error("Error fetching messages:", error);
-      }
+
+  useEffect(() => {
+    //listen for incoming messages from the backend
+    socket.on("receiveMessageDB", (data) => {
+      //spreads the 'messages' array into a new array and appending 'data.message' to the end
+      //of the new array
+      setMessageContents(prevMessages => [...prevMessages, data.message]);
     });
     return () => {
-      // socket.off("receiveMessageDB");
+      socket.off("receiveMessageDB");
     };
   }, []);
+
 
   //sending message to the backend
   const sendMessage = () => {
@@ -85,16 +71,30 @@ function Chats() {
       return;
     }
 
-    /*
-    1. who is sending the message - email + username
-    2. who is receiving the message - recipientId
-    3. the message itself - message
-    */
-   
     const username = token.username;
     const email = token.email;
     //emit the message to the backend
     socket.emit("sendMessageDB", { message, username, email, recipientId });
+
+    /*
+    need to add the conversation to the current content since the db won't load again unless
+    page is refresh. So if the user tabs over to someone else's chat tab. The current Message document
+    will not have the most recent things the current user has sent. 
+    */    
+
+    //iterate through messageDocuments and look for recipient's name in each of message's participants
+    setMessageDocuments(prevDocuments => {
+      return prevDocuments.map(doc => {
+        if (doc.participants.includes(recipient)) {
+          return {
+            ...doc,
+            contents: [...doc.contents, `${username}: ${message}`]
+          };
+        }
+        return doc;
+      });
+    });
+
     setMessage("");
   }
 
