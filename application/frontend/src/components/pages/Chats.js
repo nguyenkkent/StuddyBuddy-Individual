@@ -32,7 +32,7 @@ function Chats() {
 
         //get all Messages document where current user is a participant
         const response = await axiosClient.get("/api/chats/get-all-messages", {
-          // Send authorization header for middleware to intercept
+          //send authorization header for middleware to intercept
           headers: {
             'Authorization': `Bearer ${user.token}`
           }
@@ -48,7 +48,7 @@ function Chats() {
   }, []); 
 
 
-
+  //handles when a message is coming back full circle from backend and display it to the appropriate tab
   useEffect(() => {
     //listen for incoming messages from the backend
     socket.on("receiveMessageDB", (data) => {
