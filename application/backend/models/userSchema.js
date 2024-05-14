@@ -1,4 +1,6 @@
+import { ObjectId } from "mongodb";
 import mongoose from "mongoose";
+
 const Schema = mongoose.Schema;
 
 const userSchema = new mongoose.Schema({
@@ -16,7 +18,8 @@ const userSchema = new mongoose.Schema({
     },
     tags: [String],
     history: [String],
-    friends: [String],  
+    friends: [String],
+    friendsIds:[ObjectId],  
     isVerified: {
         type: Boolean,
         require: true,
