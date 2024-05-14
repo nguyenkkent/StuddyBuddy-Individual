@@ -1,4 +1,4 @@
-import { handleDashboard } from "../handlers/handleDashboard.js";
+import { handleDashboard } from "../handlers/dashboard/handleDashboard.js";
 import { Users } from "../models/userSchema.js";
 
 const mockRequest = {

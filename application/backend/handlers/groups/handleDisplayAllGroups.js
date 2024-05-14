@@ -1,4 +1,4 @@
-import { Groups } from "../models/groupSchema.js";
+import { Groups } from "../../models/groupSchema.js";
 
 import {ObjectId} from "mongodb";
 export async function handleDisplayAllGroups(request, response){

@@ -27,6 +27,7 @@ const Sidebar = () => {
         <NavLink activeclassname="active" className={location.pathname === "/add-friend" && "active"} to="/my-friends">My Friends</NavLink>
         <NavLink activeclassname="active" className={location.pathname === "/create-group" && "active"} to="/my-groups">My Groups</NavLink>
         <NavLink activeclassname="active" to="/chats">Chats</NavLink>
+        <NavLink activeclassname="active" to="/groupchat">Groupchat</NavLink>
         <NavLink activeclassname="active" to="/settings">Settings</NavLink>
         <div className="logout-divider"></div>
         <button onClick={handleLogout}>Logout</button>

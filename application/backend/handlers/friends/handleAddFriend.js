@@ -1,4 +1,4 @@
-import { Users } from "../models/userSchema.js";
+import { Users } from "../../models/userSchema.js";
 import {ObjectId} from "mongodb";
 
 export async function handleAddFriend(request, response){
@@ -19,10 +19,9 @@ export async function handleAddFriend(request, response){
         }
         
         //identify the friend to add
-        const addFriendEmail = request.headers.addfriendemail;
+        // const addFriendEmail = request.headers.addfriendemail;
+        const addFriendEmail = request.body.addfriendemail;
         //weird note here, the headers cant do camelcase
-        // console.log(request.headers);
-        // console.log(addFriendEmail);
         const futureFriend = await Users.collection.findOne({ email : addFriendEmail });
 
         if (!addFriendEmail) {

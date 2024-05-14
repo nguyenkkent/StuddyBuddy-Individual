@@ -1,12 +1,12 @@
 import { ObjectId } from "mongodb";
-import { Groups } from "../models/groupSchema.js";
-import { Users } from "../models/userSchema.js";
+import { Groups } from "../../models/groupSchema.js";
+import { Users } from "../../models/userSchema.js";
 
 
 export async function handleAddMemberToGroup(request, response){
     try{
 
-        console.log(request.headers);
+        //console.log(request.headers);
         //search for current user document to get the username
         const userId = new ObjectId(request.user._id); 
         const user = await Users.findById(userId);
@@ -17,12 +17,14 @@ export async function handleAddMemberToGroup(request, response){
 
         //locate the group document in database that the current user is also in
         const groupName = request.headers.groupname;
+        //const groupName = request.body.groupname;
         const group = await Groups.findOne({
             name: groupName,
             // Check if membersId array contains the current user's userId
             membersId: userId 
         });
         const newMemberEmail = request.headers.email;
+        //const newMemberEmail = request.body.email;
         //find new member's document in database
         const newMember = await Users.findOne({email: newMemberEmail});
 

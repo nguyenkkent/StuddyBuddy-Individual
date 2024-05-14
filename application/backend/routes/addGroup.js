@@ -1,7 +1,7 @@
 import express from "express";
 import requireAuth from "../middleware/requireAuth.js"
-import { handleAddGroup } from "../handlers/handleAddGroup.js";
-import { handleAddMemberToGroup } from "../handlers/handleAddMemberToGroup.js";
+import { handleAddGroup } from "../handlers/groups/handleAddGroup.js";
+import { handleAddMemberToGroup } from "../handlers/groups/handleAddMemberToGroup.js";
 const router = express.Router();
 router.use(requireAuth);
 

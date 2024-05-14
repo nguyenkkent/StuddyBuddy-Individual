@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
-import { Groups } from "../models/groupSchema.js";
-import { Users } from "../models/userSchema.js";
+import { Groups } from "../../models/groupSchema.js";
+import { Users } from "../../models/userSchema.js";
 
 export async function handleAddGroup(request, response){
     try {
@@ -16,7 +16,7 @@ export async function handleAddGroup(request, response){
 
         //grab the group name from headers
         const newGroupName = request.headers.groupname;
-
+        //const newGroupName = request.body.groupname;
         //create the new group document
         const newGroup = {
             name: newGroupName,

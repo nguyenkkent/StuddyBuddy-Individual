@@ -1,5 +1,5 @@
 import express from "express";
-import { handleLogin } from "../handlers/handleLogin.js";
+import { handleLogin } from "../handlers/login/handleLogin.js";
 
 const router = express.Router();
 
