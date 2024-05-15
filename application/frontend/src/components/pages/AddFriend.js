@@ -40,7 +40,7 @@ const AddFriend = () => {
       }
     };
     fetchUsers();
-  }, searchTerm);
+  }, []);
 
   useEffect(() => {
     let filtered = allUsers && allUsers.filter(u =>
