@@ -11,6 +11,7 @@ function MyFriends() {
   const [allUsers, setAllUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const { user } = useAuthContext();
+  const [tags, setTags] = useState([]);
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
@@ -30,8 +31,11 @@ function MyFriends() {
           }        
         }); 
         console.log(response);
-        setAllUsers(response.data.friendDataArray);
-        setFilteredUsers(response.data.friendDataArray);
+        const usernames = response.data.friends.map(friend => friend.username);
+        // setAllUsers(response.data.friendDataArray);
+        // setFilteredUsers(response.data.friendDataArray);
+        setAllUsers(response.data.friends);
+        setFilteredUsers(response.data.friends);
       } catch (error) {
         console.error("Error fetching users:", error);
         setAllUsers([]);
@@ -40,13 +44,39 @@ function MyFriends() {
     };
     fetchUsers();
   }, []);
-  
+
+  // useEffect(() => {
+  //   let filtered = allUsers && allUsers.filter(user =>
+  //     user.toLowerCase().includes(searchTerm.toLowerCase())
+  //   );
+  //   setFilteredUsers(filtered);
+  // }, [searchTerm, allUsers]);
+
+  // // tag options
+  // const options = [
+  //   { value: 'mathematics', label: 'Mathematics' },
+  //   { value: 'physics', label: 'Physics' },
+  //   { value: 'political science', label: 'Political Science' },
+  //   { value: 'english', label: 'English' },
+  //   { value: 'computer engineering', label: 'Computer Engineering' },
+  //   { value: 'computer science', label: 'Computer Science' }
+  // ]
+
   useEffect(() => {
-    let filtered = allUsers && allUsers.filter(user =>
-      user.toLowerCase().includes(searchTerm.toLowerCase())
+    let filtered = allUsers && allUsers.filter(u =>
+      user.objectId !== u._id &&
+      u.username.toLowerCase().includes(searchTerm.toLowerCase())
+      // user.objectId !== u._id &&
+      // (u.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      // u.email.toLowerCase().includes(searchTerm.toLowerCase()))
     );
+    if (tags.length) {
+      filtered = filtered.filter(u =>
+        tags.every(t => u.tags.includes(t))
+      );
+    }
     setFilteredUsers(filtered);
-  }, [searchTerm, allUsers]);
+  }, [searchTerm, allUsers, tags]);
 
   // tag options
   const options = [
