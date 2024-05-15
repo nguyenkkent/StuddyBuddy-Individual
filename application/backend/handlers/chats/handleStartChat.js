@@ -5,7 +5,7 @@ import { io } from "../../socket.js";
 
 export async function handleStartChats(request, response){
     try{
-        console.log("handleStartChats was called");
+        console.log("handleStartChats was called @ ", Date.now());
 
         //find the current user
         const userId = new ObjectId(request.user._id); 

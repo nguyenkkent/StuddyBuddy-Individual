@@ -13,7 +13,8 @@ const CreateNewGroup = () => {
     const handleGroupNameChange = async (event) => {
         setGroupName(event.target.value);
     };
-    
+
+    //returns a list of friends that matches searchTerm
     const handleSearchFriends = async (searchTerm) => {
         try{
           const response = await axiosClient.get("/api/my-groups/search-friend-list", 
@@ -25,6 +26,7 @@ const CreateNewGroup = () => {
                 'Authorization': `Bearer ${user.token}`
               }      
             });
+            console.log(response);
         }catch(error){
           console.log("handleSearchFriends error: ", error);
         }
@@ -41,13 +43,25 @@ const CreateNewGroup = () => {
         return newSelectedFriends;
         });
     };
-
-    const handleCreateGroup = () => {
+    //need to also send all the usernames that will be in the group to back as well.
+    //the membersId will be how to locate the individual User documents.
+    //I made a blank "members" array for now as a placeholder(no need to add the current user's Id) -Kent
+    const handleCreateGroup = async () => {
         const group = {
         name: groupName,
-        members: Array.from(selectedFriends),
+        membersId: Array.from(selectedFriends),
+        members: []
         };
-        // REPLACE WITH THE ACTUAL API CALL - I don't want to put in something that isn't set up -yq
+        const response = axiosClient.post("/api/add-group/",
+          {
+            group
+          },
+          {
+            headers: {
+              'Authorization': `Bearer ${user.token}`
+            }    
+          }
+        );
         console.log('Creating group with:', group);
         // Not sure if you want the form to reset or redirect the user
     };
