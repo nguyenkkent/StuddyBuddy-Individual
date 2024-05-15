@@ -31,11 +31,11 @@ function MyFriends() {
           }        
         }); 
         console.log(response);
-        const usernames = response.data.friends.map(friend => friend.username);
-        // setAllUsers(response.data.friendDataArray);
-        // setFilteredUsers(response.data.friendDataArray);
-        setAllUsers(response.data.friends);
-        setFilteredUsers(response.data.friends);
+        // const usernames = response.data.friends.map(friend => friend.username);
+        setAllUsers(response.data.friendDataArray);
+        setFilteredUsers(response.data.friendDataArray);
+        // setAllUsers(response.data.friends);
+        // setFilteredUsers(response.data.friends);
       } catch (error) {
         console.error("Error fetching users:", error);
         setAllUsers([]);
@@ -64,8 +64,7 @@ function MyFriends() {
 
   useEffect(() => {
     let filtered = allUsers && allUsers.filter(u =>
-      user.objectId !== u._id &&
-      u.username.toLowerCase().includes(searchTerm.toLowerCase())
+      u.toLowerCase().includes(searchTerm.toLowerCase())
       // user.objectId !== u._id &&
       // (u.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
       // u.email.toLowerCase().includes(searchTerm.toLowerCase()))
