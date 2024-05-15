@@ -14,7 +14,7 @@ function UserCard(props) {
   const handleChatClick = async () => {
     console.log(props);
     //grab the message recipient's email
-    const recipientEmail = props.user.email;
+    const recipientEmail = props.user.email; // FIXME: null -> friend list returns a list of strings | user is the username (a string)
 
     try {
       //send info for both parties to backend
