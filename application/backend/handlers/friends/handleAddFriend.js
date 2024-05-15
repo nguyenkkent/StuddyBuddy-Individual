@@ -30,9 +30,11 @@ export async function handleAddFriend(request, response){
         }        
         
         //add that friend
-        currentUser.friends.push(futureFriend.username);
-        currentUser.friendsIds.push(futureFriend._id);
-        await currentUser.save();
+        if (!currentUser.friends.includes(futureFriend.username)) {
+            currentUser.friends.push(futureFriend.username);
+            currentUser.friendsIds.push(futureFriend._id);
+            await currentUser.save();
+        }
 
         return response.status(200).json({ message: "Friend added successfully" }); 
 
