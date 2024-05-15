@@ -73,7 +73,7 @@ const AddFriend = () => {
           <input
             type="text"
             className="dashboard-search-bar"
-            placeholder="Search Friend by username"
+            placeholder="Search For New Friends by username"
             value={searchTerm}
             onChange={handleChange}
           />

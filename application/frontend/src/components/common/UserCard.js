@@ -51,7 +51,9 @@ function UserCard(props) {
       handleSendMessage();
     }
   }
-
+  const handleAddFriendClick = async () => {
+    console.log(props);
+  }
   return (
     <div key={props.user._id || props.user} className='user-entry'>
       <div className="user-container">
@@ -71,13 +73,7 @@ function UserCard(props) {
         </div>
         {
           props.friend ?
-          <button
-            onClick={() => {
-              alert("WIP");
-            }}
-          >
-            Add Friend
-          </button> :
+          <button onClick={handleAddFriendClick}>Add Friend</button> :
           <div>
             {
               // Show the "Chat" button if the input box is not visible
