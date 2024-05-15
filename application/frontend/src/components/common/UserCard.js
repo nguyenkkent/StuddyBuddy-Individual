@@ -86,9 +86,10 @@ function UserCard(props) {
                 props.membersId.splice(props.membersId.indexOf(props.user._id || props.user), 1);
                 props.members.splice(props.members.indexOf(props.user.username || props.user), 1);
                 props.setMembersId([...props.membersId]);
+                props.setMembers(props.members);
               } else {
                 props.setMembersId([...props.membersId, (props.user._id || props.user)]);
-                props.setMembers([...props.membersId, (props.user.username || props.user)]);
+                props.setMembers([...props.members, (props.user.username || props.user)]);
               }
             }}
           />

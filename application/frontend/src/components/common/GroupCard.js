@@ -8,7 +8,7 @@ function GroupCard(props) {
         <div className='group-name'>{props.group.name}</div>
         <div className='group-participants'>{props.group.members.join(", ") || "N/A"}</div>
         <div className="group-button-wrapper">
-          <Link to="/chats">Chat</Link>
+          <Link to="/groupchat">Chat</Link>
         </div>
       </div>
     </div>

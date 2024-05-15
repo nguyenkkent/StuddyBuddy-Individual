@@ -15,6 +15,7 @@ const CreateNewGroup = () => {
   const [allUsers, setAllUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [tags, setTags] = useState([]);
+  const [groupName, setGroupName] = useState("");
   const [membersId, setMembersId] = useState([]);
   const [members, setMembers] = useState([])
 
@@ -23,8 +24,14 @@ const CreateNewGroup = () => {
   };
 
   const handleCreation = async () => {
+    if (!groupName) {
+      alert("Please choose a group name.");
+      return;
+    }
+
     try {
       const response = await axiosClient.post("/api/add-group", {
+        "groupname": groupName,
         "membersId": membersId,
         "members": members
       }, {
@@ -81,7 +88,13 @@ const CreateNewGroup = () => {
         <h1>Create Group</h1>
         <div className="group-name">
           <p>Group Name:</p>
-          <input type="text" />
+          <input
+            type="text"
+            value={groupName}
+            onChange={(event) => {
+              setGroupName(event.target.value);
+            }}
+          />
         </div>
         <div className="dashboard-search">
           <input
