@@ -8,7 +8,7 @@ const Sidebar = () => {
   const location = useLocation();
   const { dispatch } = useAuthContext();
 
-  const whitelistPages = ["/dashboard", "/chats", "/my-groups", "/my-friends", "/settings", "/profile", "/add-friend", "/create-group"]
+  const whitelistPages = ["/dashboard", "/my-friends", "/my-groups", "/chats", "/groupchat", "/settings", "/profile", "/add-friend", "/create-group"]
   const showSideBar = whitelistPages.includes(location.pathname.split("/", 2).join("/"));
 
   function handleLogout() {
