@@ -7,16 +7,37 @@ import { useState } from "react"; // Import useState hook
 function UserCard(props) {
   const navigate = useNavigate();
   const { user } = useAuthContext();
-  const [showInputBox, setShowInputBox] = useState(false); 
-  const [message, setMessage] = useState(""); 
-
+  const [showInputBox, setShowInputBox] = useState(false);
+  const [message, setMessage] = useState("");
 
   //handles starting the empty chat document
   const handleChatClick = async () => {
     console.log(props);
+    console.log(props);
     //grab the message recipient's email
-    const recipientEmail = props.user.email;
+    const recipientEmail = props.user.email; // FIXME: null -> friend list returns a list of strings | user is the username (a string)
 
+    try {
+      //send info for both parties to backend
+      const response = await axiosClient.post("/api/chats/start-chat/", {
+        recipient: recipientEmail
+      }, {
+        headers: {
+          'Authorization': `Bearer ${user.token}`,
+        }
+      });
+      navigate("/chats");
+    } catch (error) {
+      console.log('Error initiating chat:', error.response ? error.response.data : error.message);
+      if (error.response && error.response.status === 409) {
+        alert("Chat with this user already exists.");
+        navigate("/chats");
+      } 
+      else {
+        alert("An error occurred while starting the chat.");
+      }
+    }
+  };
     try {
       //send info for both parties to backend
       const response = await axiosClient.post("/api/chats/start-chat/", {
@@ -54,12 +75,15 @@ function UserCard(props) {
     //send user to /chats
     navigate('/chats');
   };
+  };
 
   const handleKeyDown = (event) => {
     //if the "Enter" key is pressed (key code 13)
     if (event.keyCode === 13) {
       handleSendMessage();
     }
+  };
+
   };
 
   const handleAddFriendClick = async () => {
@@ -77,7 +101,23 @@ function UserCard(props) {
 
   return (
     <div key={props.user._id || props.user} className='user-entry'>
-      <div className="user-container">
+      <div className={`user-container ${props.group && "group-picker"}`}>
+        {props.group &&
+          <div
+            className={`group-selector ${(props.membersId.includes(props.user._id) || props.membersId.includes(props.user)) && "group-selected"}`}
+            onClick={() => {
+              if (props.membersId.includes(props.user._id) || props.membersId.includes(props.user)) {
+                props.membersId.splice(props.membersId.indexOf(props.user._id || props.user), 1);
+                props.members.splice(props.members.indexOf(props.user.username || props.user), 1);
+                props.setMembersId([...props.membersId]);
+                props.setMembers(props.members);
+              } else {
+                props.setMembersId([...props.membersId, (props.user._id || props.user)]);
+                props.setMembers([...props.members, (props.user.username || props.user)]);
+              }
+            }}
+          />
+        }
         <div>
           <div
             className='username'

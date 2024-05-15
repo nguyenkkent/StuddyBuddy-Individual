@@ -26,10 +26,10 @@ export async function handleAddGroup(request, response){
         console.log(request.body.group);
         //retrieve variables from request body parser and create new group document
         const newGroup = {
-            name: request.body.group.groupName,
+            name: request.body.groupName,
             //create new mongoDB ObjectId out of the Id strings
-            membersId: [userId, ...request.body.group.membersId.map(id => new ObjectId(id))],
-            members: [user.username, ...request.body.group.members],
+            membersId: [userId, ...request.body.membersId.map(id => new ObjectId(id))],
+            members: [user.username, ...request.body.members],
         };
         const result = await Groups.collection.insertOne(newGroup);
 

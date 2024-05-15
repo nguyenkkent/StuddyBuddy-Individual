@@ -150,8 +150,9 @@ const handleMessageDocumentClick = (msg) => {
     
     <div className="chat-container"> {/* Chat container */}
       <div className="chat-content">
-        <h1>Chatting with &lt;{recipient}&gt;</h1>
-        <div className="chat-box" style={{ display: "flex", flexDirection: "column" }}>
+        <h1>Chatting with &lt;Placeholder&gt;</h1>
+        {/* TODO: Chat scrolling */}
+        <div className="chat-box">
           {/*display all received messages into each individual divs */}
           {messageContents.map((msg, index) => (
             <div key={index}>{msg}</div>

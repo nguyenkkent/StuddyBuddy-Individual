@@ -1,88 +1,128 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import "../../css/Dashboard.css";
 import axiosClient from "../../axiosClient";
-import { useAuthContext } from '../../hooks/useAuthContext';
+import Select from 'react-select'
+import { useAuthContext } from "../../hooks/useAuthContext";
+import UserCard from "../common/UserCard";
+import Overlay from "../common/Overlay";
+import { useNavigate } from "react-router-dom";
 
 const CreateNewGroup = () => {
-    const { user } = useAuthContext(); 
-    const [groupName, setGroupName] = useState('');
-    const [friends, setFriends] = useState([]); // Change this to the actual list of friends
-    const [selectedFriends, setSelectedFriends] = useState(new Set());
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const handleGroupNameChange = async (event) => {
-        setGroupName(event.target.value);
-    };
+  const { user } = useAuthContext();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [allUsers, setAllUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [tags, setTags] = useState([]);
+  const [groupName, setGroupName] = useState("");
+  const [membersId, setMembersId] = useState([]);
+  const [members, setMembers] = useState([])
 
-    //returns a list of friends that matches searchTerm
-    const handleSearchFriends = async (searchTerm) => {
-        try{
-          const response = await axiosClient.get("/api/my-groups/search-friend-list", 
-            {
-              searchTerm
-            },
-            {
-              headers: {
-                'Authorization': `Bearer ${user.token}`
-              }      
-            });
-            console.log(response);
-        }catch(error){
-          console.log("handleSearchFriends error: ", error);
+  const handleChange = async (event) => {
+    setSearchTerm(event.target.value);    
+  };
+
+  const handleCreation = async () => {
+    if (!groupName) {
+      alert("Please choose a group name.");
+      return;
+    }
+
+    try {
+      const response = await axiosClient.post("/api/add-group", {
+        "groupname": groupName,
+        "membersId": membersId,
+        "members": members
+      }, {
+        headers: {
+          "Authorization": `Bearer ${user.token}`,
         }
-    };
+      });
 
-    const handleSelectFriend = (friendId) => {
-        setSelectedFriends(prevSelectedFriends => {
-        const newSelectedFriends = new Set(prevSelectedFriends);
-        if (newSelectedFriends.has(friendId)) {
-        newSelectedFriends.delete(friendId);
-        } else {
-            newSelectedFriends.add(friendId);
-        }
-        return newSelectedFriends;
-        });
-    };
-    //need to also send all the usernames that will be in the group to back as well.
-    //the membersId will be how to locate the individual User documents.
-    //I made a blank "members" array for now as a placeholder(no need to add the current user's Id) -Kent
-    const handleCreateGroup = async () => {
-      const group = {
-      groupName: groupName,
-      membersId: Array.from(selectedFriends),
-      members: []
-      };
-      console.log(group);
-      const response = await axiosClient.post("/api/my-groups/add-group/",
-        {
-          group
-        },
-        {
+      console.log(response.data);
+      navigate("/my-groups");
+    } catch (error) {
+      console.error("Error creating group: ", error);
+    }
+  }
+
+  useEffect(() => {
+    //handles when user is not loaded property from the AuthContext
+    if (!user){
+      console.log("User not loaded")
+      return;
+    }
+    const fetchUsers = async () => {
+      try {
+        const response = await axiosClient.get("/api/dashboard", {
+          //send authorization header for middleware to intercept
           headers: {
-            'Authorization': `Bearer ${user.token}`
-          }    
-        }
-      );
-      console.log('Creating group with:', group);
-      navigate("/my-groups/");
+            'Authorization': `Bearer ${user.token}`,
+            'searchTerm': searchTerm
+          }
+        });
+        setAllUsers(response.data.userData);
+        setFilteredUsers(response.data.userData); 
+      } catch (error) {
+        console.error("Error fetching users:", error);
+        setAllUsers([]);
+        setFilteredUsers([]);
+      }
     };
+    fetchUsers();
+  }, []);
+
+  useEffect(() => {
+    let filtered = allUsers && allUsers.filter(u =>
+      user.objectId !== u._id && u.email &&
+      u.username.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredUsers(filtered);
+  }, [searchTerm, allUsers, tags]);
 
   return (
-    <div>
-      <input type="text" value={groupName} onChange={handleGroupNameChange} placeholder="Group Name" />
-      {friends.map(friend => (
-        <div
-          key={friend._id}
-          className={`friend-item ${selectedFriends.has(friend._id) ? 'selected' : ''}`}
-          onClick={() => handleSelectFriend(friend._id)}
-        >
-          {friend.name} {/* Some cool styles can be added here */}
+    <div className="dashboard-container">
+      <Overlay handler={handleCreation} />
+      <div className="dashboard-content">
+        <h1>Create Group</h1>
+        <div className="group-name">
+          <p>Group Name:</p>
+          <input
+            type="text"
+            value={groupName}
+            onChange={(event) => {
+              setGroupName(event.target.value);
+            }}
+          />
         </div>
-      ))}
-      <button onClick={handleCreateGroup}>Add</button>
-      <button onClick={() => navigate(-1)}>Go Back</button>
+        <div className="dashboard-search">
+          <input
+            type="text"
+            className="dashboard-search-bar"
+            placeholder="Search Friend by username"
+            value={searchTerm}
+            onChange={handleChange}
+          />
+          <svg fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="dashboard-search-button">
+            <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+          </svg>
+        </div>
+        <div className="user-results">
+          {filteredUsers && filteredUsers.map(user => (
+            <UserCard
+              user={user}
+              members={members}
+              setMembers={setMembers}
+              membersId={membersId}
+              setMembersId={setMembersId}
+              group
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
-};
+}
 
 export default CreateNewGroup;

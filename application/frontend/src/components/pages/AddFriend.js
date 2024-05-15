@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
-import "../../css/Dashboard.css";
+import React, { useEffect, useState } from "react";
 import axiosClient from "../../axiosClient";
-import Select from 'react-select'
+import "../../css/Dashboard.css";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import Overlay from "../common/Overlay";
 import UserCard from "../common/UserCard";
 
 const AddFriend = () => {
   const { user } = useAuthContext();
   const [searchTerm, setSearchTerm] = useState("");
   const [allUsers, setAllUsers] = useState([]);
+  const [friends, setFriends] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [tags, setTags] = useState([]);
 
@@ -23,6 +24,14 @@ const AddFriend = () => {
     }
     const fetchUsers = async () => {
       try {
+        const res = await axiosClient.get("/api/my-friends", {
+          headers: {
+            //send authorization header for middleware to intercept
+            'Authorization': `Bearer ${user.token}`
+          }        
+        }); 
+        setFriends(res.data.friendDataArray);
+
         // FIXME: do not return sensitive information like email and password
         const response = await axiosClient.get("/api/dashboard", {
           //send authorization header for middleware to intercept
@@ -40,33 +49,20 @@ const AddFriend = () => {
       }
     };
     fetchUsers();
-  }, searchTerm);
+  }, []);
 
   useEffect(() => {
     let filtered = allUsers && allUsers.filter(u =>
       user.objectId !== u._id && u.email &&
+      !friends.includes(u.username) &&
       u.username.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    // if (tags.length) {
-    //   filtered = filtered.filter(u =>
-    //     tags.every(t => u.tags.includes(t))
-    //   );
-    // }
     setFilteredUsers(filtered);
-  }, [searchTerm, allUsers, tags]);
-
-  // tag options
-  const options = [
-    { value: 'mathematics', label: 'Mathematics' },
-    { value: 'physics', label: 'Physics' },
-    { value: 'political science', label: 'Political Science' },
-    { value: 'english', label: 'English' },
-    { value: 'computer engineering', label: 'Computer Engineering' },
-    { value: 'computer science', label: 'Computer Science' }
-  ]
+  }, [searchTerm, allUsers, tags, friends]);
 
   return (
     <div className="dashboard-container">
+      <Overlay />
       <div className="dashboard-content">
         <h1>Add Friend</h1>
         <div className="dashboard-search">

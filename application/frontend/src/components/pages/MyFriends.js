@@ -12,6 +12,7 @@ function MyFriends() {
   const [filteredUsers, setFilteredUsers] = useState([]);
   const { user } = useAuthContext();
   const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState([]);
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
@@ -62,6 +63,23 @@ function MyFriends() {
   //   { value: 'computer science', label: 'Computer Science' }
   // ]
 
+  // useEffect(() => {
+  //   let filtered = allUsers && allUsers.filter(user =>
+  //     user.toLowerCase().includes(searchTerm.toLowerCase())
+  //   );
+  //   setFilteredUsers(filtered);
+  // }, [searchTerm, allUsers]);
+
+  // // tag options
+  // const options = [
+  //   { value: 'mathematics', label: 'Mathematics' },
+  //   { value: 'physics', label: 'Physics' },
+  //   { value: 'political science', label: 'Political Science' },
+  //   { value: 'english', label: 'English' },
+  //   { value: 'computer engineering', label: 'Computer Engineering' },
+  //   { value: 'computer science', label: 'Computer Science' }
+  // ]
+
   useEffect(() => {
     let filtered = allUsers && allUsers.filter(u =>
       user.objectId !== u._id &&
@@ -76,6 +94,7 @@ function MyFriends() {
       );
     }
     setFilteredUsers(filtered);
+  }, [searchTerm, allUsers, tags]);
   }, [searchTerm, allUsers, tags]);
 
   // tag options
