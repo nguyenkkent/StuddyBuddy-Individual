@@ -52,7 +52,7 @@ const CreateNewGroup = () => {
         membersId: Array.from(selectedFriends),
         members: []
         };
-        const response = axiosClient.post("/api/add-group/",
+        const response = axiosClient.post("/api/my-groups/add-group/",
           {
             group
           },
@@ -63,7 +63,7 @@ const CreateNewGroup = () => {
           }
         );
         console.log('Creating group with:', group);
-        // Not sure if you want the form to reset or redirect the user
+        navigate("/api/my-groups/");
     };
 
   return (
