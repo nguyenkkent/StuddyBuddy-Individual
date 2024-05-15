@@ -21,6 +21,7 @@ function Chats() {
   const [messageContents, setMessageContents] = useState([]); //tracks the chat contents between two people
 
   const [receieveMessageDb, setReceieveMessageDb] = useState("");
+
   //get all messages when component loads
   useEffect(() => {
     const fetchMessages = async () => {
@@ -39,7 +40,7 @@ function Chats() {
         }); 
         //render the Messages documents as clickables
         setMessageDocuments(response.data.messages);
-
+        
       } catch (error) {
         console.error("Error fetching messages:", error);
       }
@@ -150,7 +151,7 @@ const handleMessageDocumentClick = (msg) => {
     
     <div className="chat-container"> {/* Chat container */}
       <div className="chat-content">
-        <h1>Chatting with &lt;Placeholder&gt;</h1>
+        <h1>Chatting with &lt;{recipient}&gt;</h1>
         {/* TODO: Chat scrolling */}
         <div className="chat-box">
           {/*display all received messages into each individual divs */}
