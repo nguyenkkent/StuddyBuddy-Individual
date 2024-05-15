@@ -13,6 +13,7 @@ function UserCard(props) {
 
   //handles starting the empty chat document
   const handleChatClick = async () => {
+    console.log(props);
     //grab the message recipient's email
     const recipientEmail = props.user.email;
 
@@ -25,14 +26,14 @@ function UserCard(props) {
           'Authorization': `Bearer ${user.token}`,
         }
       });
-      console.log('Chat initiation response:', response.data);
-      //show the input box once the Message
-      setShowInputBox(true);
+      navigate("/chats");
     } catch (error) {
       console.log('Error initiating chat:', error.response ? error.response.data : error.message);
       if (error.response && error.response.status === 409) {
         alert("Chat with this user already exists.");
-      } else {
+        navigate("/chats");
+      } 
+      else {
         alert("An error occurred while starting the chat.");
       }
     }
@@ -94,27 +95,7 @@ function UserCard(props) {
         {
           props.friend ?
           <button onClick={handleAddFriendClick}>Add Friend</button> :
-          <div>
-            {
-              // Show the "Chat" button if the input box is not visible
-              !showInputBox &&
-              <button onClick={handleChatClick}>Chat</button>
-            }
-            {
-              // Show the input box if it's visible
-              showInputBox &&
-              <div>
-                <input 
-                  type="text" 
-                  placeholder="Type your message..." 
-                  value={message} 
-                  onChange={(e) => setMessage(e.target.value)} 
-                  onKeyDown={handleKeyDown} 
-                />
-                <button onClick={handleSendMessage}>Send</button>
-              </div>
-            }
-          </div>
+          <button onClick={handleChatClick}>Chat</button>
         }
       </div>
     </div>

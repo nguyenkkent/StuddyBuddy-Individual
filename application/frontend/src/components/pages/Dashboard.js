@@ -30,6 +30,7 @@ function Dashboard() {
             'Authorization': `Bearer ${user.token}`
           }
         }); 
+        console.log(response);
         setAllUsers(response.data.userData);
         setFilteredUsers(response.data.userData);
       } catch (error) {
