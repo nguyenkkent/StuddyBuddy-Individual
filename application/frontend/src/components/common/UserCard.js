@@ -80,13 +80,15 @@ function UserCard(props) {
       <div className={`user-container ${props.group && "group-picker"}`}>
         {props.group &&
           <div
-            className={`group-selector ${(props.members.includes(props.user._id) || props.members.includes(props.user)) && "group-selected"}`}
+            className={`group-selector ${(props.membersId.includes(props.user._id) || props.membersId.includes(props.user)) && "group-selected"}`}
             onClick={() => {
-              if (props.members.includes(props.user._id) || props.members.includes(props.user)) {
-                props.members.splice(props.members.indexOf(props.user._id || props.user), 1);
-                props.setMembers([...props.members]);
+              if (props.membersId.includes(props.user._id) || props.membersId.includes(props.user)) {
+                props.membersId.splice(props.membersId.indexOf(props.user._id || props.user), 1);
+                props.members.splice(props.members.indexOf(props.user.username || props.user), 1);
+                props.setMembersId([...props.membersId]);
               } else {
-                props.setMembers([...props.members, (props.user._id || props.user)]);
+                props.setMembersId([...props.membersId, (props.user._id || props.user)]);
+                props.setMembers([...props.membersId, (props.user.username || props.user)]);
               }
             }}
           />

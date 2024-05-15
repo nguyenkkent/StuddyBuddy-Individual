@@ -4,18 +4,42 @@ import axiosClient from "../../axiosClient";
 import Select from 'react-select'
 import { useAuthContext } from "../../hooks/useAuthContext";
 import UserCard from "../common/UserCard";
+import Overlay from "../common/Overlay";
+import { useNavigate } from "react-router-dom";
 
 const CreateNewGroup = () => {
+  const navigate = useNavigate();
+
   const { user } = useAuthContext();
   const [searchTerm, setSearchTerm] = useState("");
   const [allUsers, setAllUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [tags, setTags] = useState([]);
-  const [members, setMembers] =useState([]);
+  const [membersId, setMembersId] = useState([]);
+  const [members, setMembers] = useState([])
 
   const handleChange = async (event) => {
     setSearchTerm(event.target.value);    
   };
+
+  const handleCreation = async () => {
+    try {
+      const response = await axiosClient.post("/api/add-group", {
+        "membersId": membersId,
+        "members": members
+      }, {
+        headers: {
+          "Authorization": `Bearer ${user.token}`,
+        }
+      });
+
+      console.log(response.data);
+      navigate("/my-groups");
+    } catch (error) {
+      console.error("Error creating group: ", error);
+    }
+  }
+
   useEffect(() => {
     //handles when user is not loaded property from the AuthContext
     if (!user){
@@ -24,14 +48,13 @@ const CreateNewGroup = () => {
     }
     const fetchUsers = async () => {
       try {
-        // FIXME: do not return sensitive information like email and password
         const response = await axiosClient.get("/api/dashboard", {
           //send authorization header for middleware to intercept
           headers: {
             'Authorization': `Bearer ${user.token}`,
             'searchTerm': searchTerm
           }
-        }); 
+        });
         setAllUsers(response.data.userData);
         setFilteredUsers(response.data.userData); 
       } catch (error) {
@@ -53,6 +76,7 @@ const CreateNewGroup = () => {
 
   return (
     <div className="dashboard-container">
+      <Overlay handler={handleCreation} />
       <div className="dashboard-content">
         <h1>Create Group</h1>
         <div className="group-name">
@@ -77,6 +101,8 @@ const CreateNewGroup = () => {
               user={user}
               members={members}
               setMembers={setMembers}
+              membersId={membersId}
+              setMembersId={setMembersId}
               group
             />
           ))}

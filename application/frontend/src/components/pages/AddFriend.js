@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import "../../css/Dashboard.css";
+import React, { useEffect, useState } from "react";
 import axiosClient from "../../axiosClient";
-import Select from 'react-select'
+import "../../css/Dashboard.css";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import Overlay from "../common/Overlay";
 import UserCard from "../common/UserCard";
 
 const AddFriend = () => {
@@ -52,6 +52,7 @@ const AddFriend = () => {
 
   return (
     <div className="dashboard-container">
+      <Overlay />
       <div className="dashboard-content">
         <h1>Add Friend</h1>
         <div className="dashboard-search">

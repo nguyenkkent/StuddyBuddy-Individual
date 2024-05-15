@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import "../../css/Overlay.css";
 
-function Overlay() {
+function Overlay(props) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -24,7 +24,13 @@ function Overlay() {
             Back
           </button>
           {groupPage &&
-            <button>Create Group</button>
+            <button
+              onClick={() => {
+                props.handler();
+              }}
+            >
+              Create Group
+            </button>
           }
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { useAuthContext } from './hooks/useAuthContext';
 import './App.css';
@@ -6,7 +6,6 @@ import './App.css';
 import Home from './components/pages/Home';
 import Navbar from './components/common/Navbar';
 import Sidebar from './components/common/Sidebar';
-import Overlay from './components/common/Overlay';
 import PleaseLogin from './components/common/PleaseLogin';
 
 import Ashley from './components/profiles/Ashley';
@@ -41,7 +40,6 @@ function App() {
         <div className="App-main-wrapper">
           <Sidebar />
           <div className="App-main">
-            <Overlay />
             <Routes>
               <Route path="/" element={<Home />} />
 
