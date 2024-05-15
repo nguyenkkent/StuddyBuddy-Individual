@@ -16,18 +16,27 @@ function UserCard(props) {
     //grab the message recipient's email
     const recipientEmail = props.user.email;
 
-    //send info for both parties to backend
-    const response = await axiosClient.post("/api/chats/start-chat/", {
-      recipient: recipientEmail
-    }, {
-      headers: {
-        'Authorization': `Bearer ${user.token}`,
+    try {
+      //send info for both parties to backend
+      const response = await axiosClient.post("/api/chats/start-chat/", {
+        recipient: recipientEmail
+      }, {
+        headers: {
+          'Authorization': `Bearer ${user.token}`,
+        }
+      });
+      console.log('Chat initiation response:', response.data);
+      //show the input box once the Message
+      setShowInputBox(true);
+    } catch (error) {
+      console.log('Error initiating chat:', error.response ? error.response.data : error.message);
+      if (error.response && error.response.status === 409) {
+        alert("Chat with this user already exists.");
+      } else {
+        alert("An error occurred while starting the chat.");
       }
-    });
-
-    //once the chat is initiated, show the input box
-    setShowInputBox(true);
-  }
+    }
+  };
 
   const handleSendMessage = async () => {
     //send the message using axiosClient
@@ -43,14 +52,15 @@ function UserCard(props) {
     setMessage("");
     //send user to /chats
     navigate('/chats');
-  }
+  };
 
   const handleKeyDown = (event) => {
     //if the "Enter" key is pressed (key code 13)
     if (event.keyCode === 13) {
       handleSendMessage();
     }
-  }
+  };
+
   const handleAddFriendClick = async () => {
     //console.log(props);
     const futureFriendEmail = props.user.email;
@@ -63,6 +73,7 @@ function UserCard(props) {
     });
     navigate("/my-friends");
   };
+
   return (
     <div key={props.user._id || props.user} className='user-entry'>
       <div className="user-container">
