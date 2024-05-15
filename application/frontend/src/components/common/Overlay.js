@@ -5,7 +5,11 @@ function Overlay() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const showOverlay = ["/create-group", "/add-friend"].includes(location.pathname);
+  const route = {
+    "/create-group": "/my-groups",
+    "/add-friend": "/my-friends"
+  }
+  const showOverlay = Object.keys(route).includes(location.pathname);
   const groupPage = location.pathname === "/create-group";
 
   return (
@@ -14,7 +18,7 @@ function Overlay() {
         <div className="overlay-container">
           <button
             onClick={() => {
-              navigate(-1);
+              navigate(route[location.pathname]);
             }}
           >
             Back
