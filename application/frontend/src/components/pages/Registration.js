@@ -100,7 +100,9 @@ function Registration() {
   };
   
 
-const handleGuestLogin = async () => {
+const handleGuestLogin = async (e) => {
+    e.preventDefault();
+    
     try {
       axiosClient.post('/api/register/guest', {
         username: "Guest",

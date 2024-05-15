@@ -7,7 +7,7 @@ function Navbar() {
   const { user } = useAuthContext();
   const location = useLocation();
 
-  const showProfilePages = ["/dashboard", "/chats", "/my-groups", "/my-friends", "/settings", "/add-friend", "/create-group"];
+  const showProfilePages = ["/dashboard", "/my-friends", "/my-groups", "/chats", "/groupchat", "/settings", "/add-friend", "/create-group"];
   const isLoginPage = location.pathname === "/login";
   const isRegisterPage = location.pathname === "/register";
   const isHomePage = location.pathname === "/";

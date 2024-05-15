@@ -1,0 +1,39 @@
+.overlay-wrapper {
+  position: absolute;
+  z-index: 9999;
+  pointer-events: none;
+  left: 174px;
+  right: 36px;
+  top: 20px;
+  bottom: 16px;
+}
+
+.overlay-wrapper a,
+.overlay-wrapper button {
+  color: black;
+  background: #8ed8fb;
+  border-width: 1px;
+  border-style: solid;
+  text-align: center;
+  padding: 12px 24px;
+  text-decoration: none;
+  font-size: 20px;
+  transition: color 0.3s, background-color 0.3s, transform 0.3s;
+  border-radius: 10px;
+  white-space: nowrap;
+  pointer-events: all;
+}
+
+.overlay-wrapper a:hover,
+.overlay-wrapper a:focus,
+.overlay-wrapper button:hover,
+.overlay-wrapper button:focus {
+  background: #99becf;
+  transform: scale(1.10);
+  border-radius: 10px;
+}
+
+.overlay-container {
+  display: flex;
+  justify-content: space-between;
+}

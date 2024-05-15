@@ -85,7 +85,7 @@ function GroupChat() {
     <div className="chat-container"> {/* Chat container */}
       <div className="chat-content">
         <h1>Chatting with &lt;Placeholder&gt;</h1>
-        <div className="chat-box" style={{ display: "flex", flexDirection: "column" }}>
+        <div className="chat-box">
           {/* Display all received messages into each individual divs */}
           {messages.map((msg, index) => (
             <div key={index}>{msg}</div>
