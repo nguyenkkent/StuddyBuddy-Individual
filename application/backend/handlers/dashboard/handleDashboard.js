@@ -2,6 +2,7 @@ import { Users } from "../../models/userSchema.js";
 
 export async function handleDashboard(request, response) {
     try{
+        console.log("handleDashboard was called @ ", Date.now());
         const userData = await Users.collection.find(request.body.username).toArray();
         // var jsonData = {};
         // jsonData.userData = userData;

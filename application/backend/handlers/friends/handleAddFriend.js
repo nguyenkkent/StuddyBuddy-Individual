@@ -3,7 +3,7 @@ import {ObjectId} from "mongodb";
 
 export async function handleAddFriend(request, response){
     try{
-
+        console.log("handleAddFriend called @ ", Date.now());
         //Grab the _id to identify the user's friend list
         //turn _id from string to mongoDB ObjectId class
         const userId = new ObjectId(request.user._id); 

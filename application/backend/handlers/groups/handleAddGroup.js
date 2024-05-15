@@ -23,7 +23,7 @@ export async function handleAddGroup(request, response){
         //     membersId: [userId],
         //     members: [user.username], 
         // };
-
+        console.log(request.body.group);
         //retrieve variables from request body parser and create new group document
         const newGroup = {
             name: request.body.group.groupName,

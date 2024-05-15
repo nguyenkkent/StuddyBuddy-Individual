@@ -47,23 +47,24 @@ const CreateNewGroup = () => {
     //the membersId will be how to locate the individual User documents.
     //I made a blank "members" array for now as a placeholder(no need to add the current user's Id) -Kent
     const handleCreateGroup = async () => {
-        const group = {
-        name: groupName,
-        membersId: Array.from(selectedFriends),
-        members: []
-        };
-        const response = await axiosClient.post("/api/my-groups/add-group/",
-          {
-            group
-          },
-          {
-            headers: {
-              'Authorization': `Bearer ${user.token}`
-            }    
-          }
-        );
-        console.log('Creating group with:', group);
-        navigate("/api/my-groups/");
+      const group = {
+      groupName: groupName,
+      membersId: Array.from(selectedFriends),
+      members: []
+      };
+      console.log(group);
+      const response = await axiosClient.post("/api/my-groups/add-group/",
+        {
+          group
+        },
+        {
+          headers: {
+            'Authorization': `Bearer ${user.token}`
+          }    
+        }
+      );
+      console.log('Creating group with:', group);
+      navigate("/my-groups/");
     };
 
   return (
