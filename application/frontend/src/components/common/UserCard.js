@@ -7,8 +7,8 @@ import { useState } from "react"; // Import useState hook
 function UserCard(props) {
   const navigate = useNavigate();
   const { user } = useAuthContext();
-  const [showInputBox, setShowInputBox] = useState(false); 
-  const [message, setMessage] = useState(""); 
+  const [showInputBox, setShowInputBox] = useState(false);
+  const [message, setMessage] = useState("");
 
 
   //handles starting the empty chat document
@@ -77,7 +77,20 @@ function UserCard(props) {
 
   return (
     <div key={props.user._id || props.user} className='user-entry'>
-      <div className="user-container">
+      <div className={`user-container ${props.group && "group-picker"}`}>
+        {props.group &&
+          <div
+            className={`group-selector ${(props.members.includes(props.user._id) || props.members.includes(props.user)) && "group-selected"}`}
+            onClick={() => {
+              if (props.members.includes(props.user._id) || props.members.includes(props.user)) {
+                props.members.splice(props.members.indexOf(props.user._id || props.user), 1);
+                props.setMembers([...props.members]);
+              } else {
+                props.setMembers([...props.members, (props.user._id || props.user)]);
+              }
+            }}
+          />
+        }
         <div>
           <div
             className='username'
@@ -92,10 +105,38 @@ function UserCard(props) {
             <div>Tags: {props.user.tags.join(", ") || "N/A"}</div>
           }
         </div>
-        {
-          props.friend ?
-          <button onClick={handleAddFriendClick}>Add Friend</button> :
-          <button onClick={handleChatClick}>Chat</button>
+        {props.friend &&
+          <button
+            onClick={() => {
+              alert("WIP");
+            }}
+          >
+            Add Friend
+          </button>
+
+        }
+        {!props.friend && !props.group &&
+          <div>
+            {
+              // Show the "Chat" button if the input box is not visible
+              !showInputBox &&
+              <button onClick={handleChatClick}>Chat</button>
+            }
+            {
+              // Show the input box if it's visible
+              showInputBox &&
+              <div>
+                <input
+                  type="text"
+                  placeholder="Type your message..."
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                />
+                <button onClick={handleSendMessage}>Send</button>
+              </div>
+            }
+          </div>
         }
       </div>
     </div>

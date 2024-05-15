@@ -211,3 +211,34 @@
   transform: scale(1.10);
   border-radius: 10px;
 }
+
+.group-name {
+  display: flex;
+  width: 80%;
+  margin: 0px auto;
+  column-gap: 1rem
+}
+
+.group-name p {
+  margin: 0px;
+}
+
+.group-name input {
+  flex-grow: 1;
+}
+
+.group-picker {
+  justify-content: start;
+  column-gap: 1rem;
+}
+
+.group-selector {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-style: solid;
+  border-radius: 9999px;
+}
+
+.group-selected {
+  background-color: gray;
+}
