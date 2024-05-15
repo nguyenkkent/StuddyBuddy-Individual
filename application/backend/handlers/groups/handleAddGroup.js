@@ -4,6 +4,7 @@ import { Users } from "../../models/userSchema.js";
 
 export async function handleAddGroup(request, response){
     try {
+        console.log("handleAddGroup was callled @ ", Date.now());
         //mongoDb ObjectId type
         const userId = new ObjectId(request.user._id); 
 
@@ -14,16 +15,22 @@ export async function handleAddGroup(request, response){
             return response.status(404).json({ error: "User not found" });
         }
 
-        //grab the group name from headers
-        const newGroupName = request.headers.groupname;
+        //create the new group from request body parser
         //const newGroupName = request.body.groupname;
         //create the new group document
+        // const newGroup = {
+        //     name: request.headers.group.groupName,
+        //     membersId: [userId],
+        //     members: [user.username], 
+        // };
+        console.log(request.body.group);
+        //retrieve variables from request body parser and create new group document
         const newGroup = {
-            name: newGroupName,
-            membersId: [userId],
-            members: [user.username], 
+            name: request.body.group.groupName,
+            //create new mongoDB ObjectId out of the Id strings
+            membersId: [userId, ...request.body.group.membersId.map(id => new ObjectId(id))],
+            members: [user.username, ...request.body.group.members],
         };
-
         const result = await Groups.collection.insertOne(newGroup);
 
         return response.status(200).json({ message: "Group created successfully" }); 

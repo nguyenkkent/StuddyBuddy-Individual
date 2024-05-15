@@ -3,10 +3,11 @@ import {ObjectId} from "mongodb";
 
 export async function handleDisplayAllFriends(request, response){
     try {
+        console.log("handleDisplayAllFriends was called @ ", Date.now());
         //Grab the _id to identify the user's friend list
         //turn _id from string to mongoDB ObjectId class
         const userId = new ObjectId(request.user._id); 
-        console.log("User ID:", userId);
+        //console.log("User ID:", userId);
 
         //Query MongoDB to find the user's document
         const user = await Users.collection.findOne({ _id: userId });
@@ -17,7 +18,7 @@ export async function handleDisplayAllFriends(request, response){
 
         //Retrieve the friend data from the user document
         const friendDataArray = user.friends;
-        console.log("Friend Data:", friendDataArray);
+        //console.log("Friend Data:", friendDataArray);
 
         //set to json and return 
         const jsonData = { friendDataArray };

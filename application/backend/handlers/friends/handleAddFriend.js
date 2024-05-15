@@ -3,7 +3,7 @@ import {ObjectId} from "mongodb";
 
 export async function handleAddFriend(request, response){
     try{
-
+        console.log("handleAddFriend called @ ", Date.now());
         //Grab the _id to identify the user's friend list
         //turn _id from string to mongoDB ObjectId class
         const userId = new ObjectId(request.user._id); 
@@ -20,7 +20,7 @@ export async function handleAddFriend(request, response){
         
         //identify the friend to add
         // const addFriendEmail = request.headers.addfriendemail;
-        const addFriendEmail = request.body.addfriendemail;
+        const addFriendEmail = request.body.addFriendEmail;
         //weird note here, the headers cant do camelcase
         const futureFriend = await Users.collection.findOne({ email : addFriendEmail });
 

@@ -1,19 +1,35 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axiosClient from "../../axiosClient";
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 const CreateNewGroup = () => {
+    const { user } = useAuthContext(); 
     const [groupName, setGroupName] = useState('');
     const [friends, setFriends] = useState([]); // Change this to the actual list of friends
     const [selectedFriends, setSelectedFriends] = useState(new Set());
     const navigate = useNavigate();
 
-    const handleGroupNameChange = (event) => {
+    const handleGroupNameChange = async (event) => {
         setGroupName(event.target.value);
     };
 
-    const handleSearchFriends = (searchTerm) => {
-        // REPLACE WITH THE ACTUAL API CALL - I don't want to put in something that isn't set up -yq
-        // Should return the friendlist that match the search term
+    //returns a list of friends that matches searchTerm
+    const handleSearchFriends = async (searchTerm) => {
+        try{
+          const response = await axiosClient.get("/api/my-groups/search-friend-list", 
+            {
+              searchTerm
+            },
+            {
+              headers: {
+                'Authorization': `Bearer ${user.token}`
+              }      
+            });
+            console.log(response);
+        }catch(error){
+          console.log("handleSearchFriends error: ", error);
+        }
     };
 
     const handleSelectFriend = (friendId) => {
@@ -27,15 +43,28 @@ const CreateNewGroup = () => {
         return newSelectedFriends;
         });
     };
-
-    const handleCreateGroup = () => {
-        const group = {
-        name: groupName,
-        members: Array.from(selectedFriends),
-        };
-        // REPLACE WITH THE ACTUAL API CALL - I don't want to put in something that isn't set up -yq
-        console.log('Creating group with:', group);
-        // Not sure if you want the form to reset or redirect the user
+    //need to also send all the usernames that will be in the group to back as well.
+    //the membersId will be how to locate the individual User documents.
+    //I made a blank "members" array for now as a placeholder(no need to add the current user's Id) -Kent
+    const handleCreateGroup = async () => {
+      const group = {
+      groupName: groupName,
+      membersId: Array.from(selectedFriends),
+      members: []
+      };
+      console.log(group);
+      const response = await axiosClient.post("/api/my-groups/add-group/",
+        {
+          group
+        },
+        {
+          headers: {
+            'Authorization': `Bearer ${user.token}`
+          }    
+        }
+      );
+      console.log('Creating group with:', group);
+      navigate("/my-groups/");
     };
 
   return (

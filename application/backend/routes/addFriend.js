@@ -1,13 +1,13 @@
-import express from "express";
-import requireAuth from "../middleware/requireAuth.js"
-import { handleSearchForUsers } from "../handlers/friends/handleSearchForUser.js";
-import { handleAddFriend } from "../handlers/friends/handleAddFriend.js";
+// import express from "express";
+// import requireAuth from "../middleware/requireAuth.js"
+// import { handleSearchForUsers } from "../handlers/friends/handleSearchForUser.js";
+// import { handleAddFriend } from "../handlers/friends/handleAddFriend.js";
 
-const router = express.Router();
-router.use(requireAuth);
+// const router = express.Router();
+// router.use(requireAuth);
 
-router.get("/", handleSearchForUsers);
-router.post("/", handleAddFriend);
+// router.get("/", handleSearchForUsers);
+// router.post("/", handleAddFriend);
 
-export default router;
+// export default router;
 

@@ -5,7 +5,7 @@ import { Users } from "../../models/userSchema.js";
 
 export async function handleAddMemberToGroup(request, response){
     try{
-
+        console.log("handleAddMemberToGroup was called @ ", Date.now());
         //console.log(request.headers);
         //search for current user document to get the username
         const userId = new ObjectId(request.user._id); 
