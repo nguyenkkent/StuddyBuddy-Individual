@@ -6,7 +6,7 @@ import { io } from "../../socket.js";
 export async function handleStartChats(request, response){
     try{
         console.log("handleStartChats was called @ ", Date.now());
-
+        console.log(request.body);
         //find the current user
         const userId = new ObjectId(request.user._id); 
         const currentUserDocument = await Users.findById(userId);
@@ -31,7 +31,7 @@ export async function handleStartChats(request, response){
             participants : [currentUserDocument.username, recipientDocument.username],
             isGroupMEssage: false
         })
-            //console.log(newMessage);
+        //console.log(newMessage);
             await newMessage.save();
             return response.status(200).json({ message: "Chat started successfully" });
         }

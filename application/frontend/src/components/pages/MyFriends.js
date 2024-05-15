@@ -29,6 +29,7 @@ function MyFriends() {
             'Authorization': `Bearer ${user.token}`
           }        
         }); 
+        console.log(response);
         setAllUsers(response.data.friendDataArray);
         setFilteredUsers(response.data.friendDataArray);
       } catch (error) {
@@ -39,7 +40,7 @@ function MyFriends() {
     };
     fetchUsers();
   }, []);
-
+  
   useEffect(() => {
     let filtered = allUsers && allUsers.filter(user =>
       user.toLowerCase().includes(searchTerm.toLowerCase())

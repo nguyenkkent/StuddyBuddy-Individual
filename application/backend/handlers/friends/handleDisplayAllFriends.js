@@ -16,14 +16,27 @@ export async function handleDisplayAllFriends(request, response){
             return response.status(404).json({ error: "User not found" });
         }
 
-        //Retrieve the friend data from the user document
-        const friendDataArray = user.friends;
-        //console.log("Friend Data:", friendDataArray);
+        // //Retrieve the friend data from the user document
+        // const friendDataArray = user.friends;
+        // console.log("Friend Data:", friendDataArray);
 
-        //set to json and return 
-        const jsonData = { friendDataArray };
-        //console.log(jsonData);
-        return response.status(200).json(jsonData);
+        // //set to json and return 
+        // const jsonData = { friendDataArray };
+        // //console.log(jsonData);
+        // return response.status(200).json(jsonData);
+
+        //retrieve the friend data from the user document
+        const friendsIdsArray = user.friendsIds;
+        let friends = [];
+
+        for (const friendId of friendsIdsArray) {
+            const friend = await Users.findById(friendId, { username: 1, email: 1 });
+            if (friend) {
+                friends.push(friend);
+            }
+        }
+        
+        return response.status(200).json({ friends });
 
     } catch (error) {
         console.log("Error:", error);
