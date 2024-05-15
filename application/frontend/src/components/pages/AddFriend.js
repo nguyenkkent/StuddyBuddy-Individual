@@ -47,23 +47,8 @@ const AddFriend = () => {
       user.objectId !== u._id && u.email &&
       u.username.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    // if (tags.length) {
-    //   filtered = filtered.filter(u =>
-    //     tags.every(t => u.tags.includes(t))
-    //   );
-    // }
     setFilteredUsers(filtered);
   }, [searchTerm, allUsers, tags]);
-
-  // tag options
-  const options = [
-    { value: 'mathematics', label: 'Mathematics' },
-    { value: 'physics', label: 'Physics' },
-    { value: 'political science', label: 'Political Science' },
-    { value: 'english', label: 'English' },
-    { value: 'computer engineering', label: 'Computer Engineering' },
-    { value: 'computer science', label: 'Computer Science' }
-  ]
 
   return (
     <div className="dashboard-container">
