@@ -52,8 +52,17 @@ function UserCard(props) {
     }
   }
   const handleAddFriendClick = async () => {
-    console.log(props);
-  }
+    //console.log(props);
+    const futureFriendEmail = props.user.email;
+    const response = await axiosClient.post("/api/my-friends/add-friend/", {
+      addFriendEmail : futureFriendEmail
+    }, {
+      headers: {
+        'Authorization': `Bearer ${user.token}`,
+      }
+    });
+    navigate("/my-friends");
+  };
   return (
     <div key={props.user._id || props.user} className='user-entry'>
       <div className="user-container">

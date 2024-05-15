@@ -52,7 +52,7 @@ const CreateNewGroup = () => {
         membersId: Array.from(selectedFriends),
         members: []
         };
-        const response = axiosClient.post("/api/my-groups/add-group/",
+        const response = await axiosClient.post("/api/my-groups/add-group/",
           {
             group
           },

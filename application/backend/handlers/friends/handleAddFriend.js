@@ -20,7 +20,7 @@ export async function handleAddFriend(request, response){
         
         //identify the friend to add
         // const addFriendEmail = request.headers.addfriendemail;
-        const addFriendEmail = request.body.addfriendemail;
+        const addFriendEmail = request.body.addFriendEmail;
         //weird note here, the headers cant do camelcase
         const futureFriend = await Users.collection.findOne({ email : addFriendEmail });
 
