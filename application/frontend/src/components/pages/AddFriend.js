@@ -9,6 +9,7 @@ const AddFriend = () => {
   const { user } = useAuthContext();
   const [searchTerm, setSearchTerm] = useState("");
   const [allUsers, setAllUsers] = useState([]);
+  const [friends, setFriends] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [tags, setTags] = useState([]);
 
@@ -23,6 +24,14 @@ const AddFriend = () => {
     }
     const fetchUsers = async () => {
       try {
+        const res = await axiosClient.get("/api/my-friends", {
+          headers: {
+            //send authorization header for middleware to intercept
+            'Authorization': `Bearer ${user.token}`
+          }        
+        }); 
+        setFriends(res.data.friendDataArray);
+
         // FIXME: do not return sensitive information like email and password
         const response = await axiosClient.get("/api/dashboard", {
           //send authorization header for middleware to intercept
@@ -45,10 +54,11 @@ const AddFriend = () => {
   useEffect(() => {
     let filtered = allUsers && allUsers.filter(u =>
       user.objectId !== u._id && u.email &&
+      !friends.includes(u.username) &&
       u.username.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredUsers(filtered);
-  }, [searchTerm, allUsers, tags]);
+  }, [searchTerm, allUsers, tags, friends]);
 
   return (
     <div className="dashboard-container">
