@@ -56,9 +56,10 @@ function Chats() {
       //spreads the 'messages' array into a new array and appending 'data.message' to the end
       //of the new array
       console.log(data);
-      if (data.recipientId == recipientId){
-        setMessageContents(prevMessages => [...prevMessages, data.message]);
-      }
+      // if (data.recipientId == recipientId){
+      //   setMessageContents(prevMessages => [...prevMessages, data.message]);
+      // }
+      setMessageContents(prevMessages => [...prevMessages, data.message]);
     });
     return () => {
       socket.off("receiveMessageDB");
