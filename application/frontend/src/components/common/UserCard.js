@@ -10,7 +10,6 @@ function UserCard(props) {
   const [showInputBox, setShowInputBox] = useState(false);
   const [message, setMessage] = useState("");
 
-
   //handles starting the empty chat document
   const handleChatClick = async () => {
     console.log(props);
@@ -75,6 +74,23 @@ function UserCard(props) {
     navigate("/my-friends");
   };
 
+  const addFriendHandler = async () => {
+    try {
+      const response = await axiosClient.post("/api/add-friend", {
+        "addfriendemail": props.user.email
+      }, {
+        headers: {
+          "Authorization": `Bearer ${user.token}`,
+        }
+      });
+
+      console.log(response.data);
+      navigate("/my-friends");
+    } catch (error) {
+      console.error("Error adding friend: ", error);
+    }
+  }
+
   return (
     <div key={props.user._id || props.user} className='user-entry'>
       <div className={`user-container ${props.group && "group-picker"}`}>
@@ -110,9 +126,7 @@ function UserCard(props) {
         </div>
         {props.friend &&
           <button
-            onClick={() => {
-              alert("WIP");
-            }}
+            onClick={addFriendHandler}
           >
             Add Friend
           </button>
