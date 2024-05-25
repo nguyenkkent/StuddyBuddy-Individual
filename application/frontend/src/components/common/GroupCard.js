@@ -14,7 +14,7 @@ function GroupCard(props) {
 
     try {
       //send info for both parties to backend
-      const response = await axiosClient.post("/api/chats/start-chat/", {
+      const response = await axiosClient.post("/api/chats/start-group-chat/", {
         recipients: recipientEmails
       }, {
         headers: {
