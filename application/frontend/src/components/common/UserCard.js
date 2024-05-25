@@ -62,34 +62,39 @@ function UserCard(props) {
   };
 
   const handleAddFriendClick = async () => {
-    //console.log(props);
-    const futureFriendEmail = props.user.email;
-    const response = await axiosClient.post("/api/my-friends/add-friend/", {
-      addFriendEmail : futureFriendEmail
-    }, {
-      headers: {
-        'Authorization': `Bearer ${user.token}`,
-      }
-    });
-    navigate("/my-friends");
-  };
-
-  const addFriendHandler = async () => {
-    try {
-      const response = await axiosClient.post("/api/add-friend", {
-        "addfriendemail": props.user.email
+    try{
+      console.log(props);
+      const futureFriendEmail = props.user.email;
+      const response = await axiosClient.post("/api/my-friends/add-friend/", {
+        addFriendEmail : futureFriendEmail
       }, {
         headers: {
-          "Authorization": `Bearer ${user.token}`,
+          'Authorization': `Bearer ${user.token}`,
         }
       });
-
-      console.log(response.data);
       navigate("/my-friends");
-    } catch (error) {
+    }catch(error){
       console.error("Error adding friend: ", error);
     }
-  }
+
+  };
+
+  // const addFriendHandler = async () => {
+  //   try {
+  //     const response = await axiosClient.post("/api/add-friend", {
+  //       "addfriendemail": props.user.email
+  //     }, {
+  //       headers: {
+  //         "Authorization": `Bearer ${user.token}`,
+  //       }
+  //     });
+
+  //     console.log(response.data);
+  //     navigate("/my-friends");
+  //   } catch (error) {
+  //     console.error("Error adding friend: ", error);
+  //   }
+  // }
 
   return (
     <div key={props.user._id || props.user} className='user-entry'>
@@ -126,7 +131,7 @@ function UserCard(props) {
         </div>
         {props.friend &&
           <button
-            onClick={addFriendHandler}
+            onClick={handleAddFriendClick}
           >
             Add Friend
           </button>

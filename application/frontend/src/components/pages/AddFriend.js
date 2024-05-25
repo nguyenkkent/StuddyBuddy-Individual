@@ -40,6 +40,7 @@ const AddFriend = () => {
             'searchTerm': searchTerm
           }
         }); 
+        console.log(response);
         setAllUsers(response.data.userData);
         setFilteredUsers(response.data.userData); 
       } catch (error) {
@@ -51,14 +52,15 @@ const AddFriend = () => {
     fetchUsers();
   }, []);
 
-  useEffect(() => {
-    let filtered = allUsers && allUsers.filter(u =>
-      user.objectId !== u._id && u.email &&
-      !friends.includes(u.username) &&
-      u.username.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredUsers(filtered);
-  }, [searchTerm, allUsers, tags, friends]);
+  //this looks like it's used for adding multiple people to groups, it's incomplete -kent
+  // useEffect(() => {
+  //   let filtered = allUsers && allUsers.filter(u =>
+  //     user.objectId !== u._id && u.email &&
+  //     !friends.includes(u.username) &&
+  //     u.username.toLowerCase().includes(searchTerm.toLowerCase())
+  //   );
+  //   setFilteredUsers(filtered);
+  // }, [searchTerm, allUsers, tags, friends]);
 
   return (
     <div className="dashboard-container">
