@@ -22,12 +22,25 @@ const io = new Server(server, {
 	},
 });
 
+
+let usersInChat = [];
+
 io.on('connection', (socket) => {
 
-  // console.log(`User connected: ${socket.id}`);
+  console.log(`User connected: ${socket.id}`);
+
+  socket.on('joinGroupChat', (data) => {
+    const { userId, username } = data;
+    const user = { socketId: socket.id, userId, username };
+    usersInChat.push(user);
+
+    io.emit('updateUserList', { users: usersInChat });
+  });
 
   socket.on('disconnect', () => {
-    // console.log('user disconnected');
+    usersInChat = usersInChat.filter(user => user.socketId !== socket.id);
+    io.emit('updateUserList', { users: usersInChat });
+    console.log('user disconnected');
   });
 
   //handles public groupchat

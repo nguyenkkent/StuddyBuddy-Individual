@@ -4,11 +4,13 @@ import { useEffect, useState, useRef } from 'react';
 import "../../css/Chats.css"
 import Sidebar from '../common/Sidebar';
 import Webcam from "react-webcam"; 
-
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const socket = io(process.env.NODE_ENV == 'production' ? '/' : 'http://localhost:3001/');
 
 function GroupChat() {
+  const {user} = useAuthContext();
+
   const webcamRef = useRef(null);
   const [webcamEnabled, setWebcamEnabled] = useState(false); 
 
@@ -16,35 +18,57 @@ function GroupChat() {
   const [messages, setMessages] = useState([]);
 
   const [roomId, setRoomId] = useState(null);
+  const [users, setUsers] = useState(null);
+  const [loading, setLoading] = useState(true);
+  console.log(users);
 
+//update the users array whenever a new user joins the groupchat endpoint
+useEffect(() => {
+  if (user) {
+    const token = JSON.parse(localStorage.getItem("user"));
+    if (token) {
+      socket.emit("joinGroupChat", { userId: token._id, username: token.username });
+    }
+  }
+}, [user]);
+
+  //handles receiving when socketIO emits from backend
   useEffect(() => {
-    // Listen for the event emitted by the backend when a room is created
-    socket.on("roomCreated", (data) => {
-        setRoomId(data.roomId);
-        console.log("roomId: " + roomId);
-        // Join the Socket.IO room with the roomId
-        socket.emit("joinRoom", { roomId: data.roomId });
-    });
-    
-    return () => {
-        socket.off("roomCreated");
-    };
-}, []);
 
-
-  //handles receiving messages from backend
-  useEffect(() => {
     //listen for incoming messages from the backend
     socket.on("receiveMessage", (data) => {
-      //spreads the 'messages' array into a new array and appending 'data.message' to the end
-      //of the new array
       setMessages(prevMessages => [...prevMessages, data.message]);
     });
-    //Clean up event listener when component unmounts
+
+    //listen for updated user list from the backend
+    // socket.on("updateUserList", (data) => {
+    //   const uniqueUsers = Array.from(new Set(data.users.map(user => user.userId)))
+    //     .map(id => data.users.find(user => user.userId === id));
+    //   setUsers(uniqueUsers, ...uniqueUsers);
+    //   setLoading(false);
+    // });
+    // socket.on("updateUserList", (data) => {
+    //   setUsers(data.users);
+    // setLoading(false);
+    // });
+
+    socket.on("updateUserList", (data) => {
+      // Use a Map to filter out duplicates based on socketId
+      const uniqueUsersMap = new Map();
+      data.users.forEach(user => uniqueUsersMap.set(user.socketId, user));
+      const uniqueUsers = Array.from(uniqueUsersMap.values());
+
+      setUsers(uniqueUsers);
+      setLoading(false); // Set loading to false once users are fetched
+    });
+    
+    //clean up event listener when component unmounts
     return () => {
       socket.off("receiveMessage");
+      socket.off("updateUserList");
     };
   }, []);
+
 
   //sending message to the backend
   const sendMessage = () => {
@@ -84,7 +108,21 @@ function GroupChat() {
 
     <div className="chat-container"> {/* Chat container */}
       <div className="chat-content">
-        <h1>Chatting with &lt;Placeholder&gt;</h1>
+        {/* <h1>Chatting with &lt;Placeholder&gt;</h1> */}
+
+        <div className="user-list">
+          <h2>Users in Chat</h2>
+          {loading ? (
+            <p>Loading users...</p>
+          ) : (
+            <l>
+              {users.map((user, index) => (
+                <li key={index}>{user.username}</li>
+              ))}
+            </l>
+          )}
+        </div>
+
         <div className="chat-box">
           {/* Display all received messages into each individual divs */}
           {messages.map((msg, index) => (

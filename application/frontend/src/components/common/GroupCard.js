@@ -8,7 +8,7 @@ function GroupCard(props) {
   const { user } = useAuthContext();
 
   const handleChatClick = async () => {
-    console.log(props.group.membersId);
+    //console.log(props.group.membersId);
     //array of _id of all members in the groupchat 
     const recipientEmails = props.group.membersId; 
 
@@ -33,7 +33,7 @@ function GroupCard(props) {
       }
     }
   };
-
+  
   return (
     <div key={props.group._id} className='group-entry'>
       <div className="group-container">
