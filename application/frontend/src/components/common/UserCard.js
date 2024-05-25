@@ -14,12 +14,11 @@ function UserCard(props) {
   const handleChatClick = async () => {
     console.log(props);
     //grab the message recipient's email
-    const recipientEmail = props.user.email; // FIXME: null -> friend list returns a list of strings | user is the username (a string)
-
+    const recipientEmail = props.user.email; 
     try {
       //send info for both parties to backend
       const response = await axiosClient.post("/api/chats/start-chat/", {
-        recipient: recipientEmail
+        recipients: recipientEmail
       }, {
         headers: {
           'Authorization': `Bearer ${user.token}`,
@@ -38,28 +37,28 @@ function UserCard(props) {
     }
   };
 
-  const handleSendMessage = async () => {
-    //send the message using axiosClient
-    await axiosClient.post("/api/chats/send-message/", {
-      recipient: props.user.email,
-      message: message
-    }, {
-      headers: {
-        'Authorization': `Bearer ${user.token}`,
-      }
-    });
-    //clear the message input box after sending
-    setMessage("");
-    //send user to /chats
-    navigate('/chats');
-  };
+  // const handleSendMessage = async () => {
+  //   //send the message using axiosClient
+  //   await axiosClient.post("/api/chats/send-message/", {
+  //     recipient: props.user.email,
+  //     message: message
+  //   }, {
+  //     headers: {
+  //       'Authorization': `Bearer ${user.token}`,
+  //     }
+  //   });
+  //   //clear the message input box after sending
+  //   setMessage("");
+  //   //send user to /chats
+  //   navigate('/chats');
+  // };
 
-  const handleKeyDown = (event) => {
-    //if the "Enter" key is pressed (key code 13)
-    if (event.keyCode === 13) {
-      handleSendMessage();
-    }
-  };
+  // const handleKeyDown = (event) => {
+  //   //if the "Enter" key is pressed (key code 13)
+  //   if (event.keyCode === 13) {
+  //     handleSendMessage();
+  //   }
+  // };
 
   const handleAddFriendClick = async () => {
     try{
@@ -79,22 +78,6 @@ function UserCard(props) {
 
   };
 
-  // const addFriendHandler = async () => {
-  //   try {
-  //     const response = await axiosClient.post("/api/add-friend", {
-  //       "addfriendemail": props.user.email
-  //     }, {
-  //       headers: {
-  //         "Authorization": `Bearer ${user.token}`,
-  //       }
-  //     });
-
-  //     console.log(response.data);
-  //     navigate("/my-friends");
-  //   } catch (error) {
-  //     console.error("Error adding friend: ", error);
-  //   }
-  // }
 
   return (
     <div key={props.user._id || props.user} className='user-entry'>
@@ -144,7 +127,7 @@ function UserCard(props) {
               !showInputBox &&
               <button onClick={handleChatClick}>Chat</button>
             }
-            {
+            {/* {
               // Show the input box if it's visible
               showInputBox &&
               <div>
@@ -157,7 +140,7 @@ function UserCard(props) {
                 />
                 <button onClick={handleSendMessage}>Send</button>
               </div>
-            }
+            } */}
           </div>
         }
       </div>
