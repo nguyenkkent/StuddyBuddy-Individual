@@ -16,17 +16,10 @@ export async function handleAddGroup(request, response){
         }
 
         //create the new group from request body parser
-        //const newGroupName = request.body.groupname;
-        //create the new group document
-        // const newGroup = {
-        //     name: request.headers.group.groupName,
-        //     membersId: [userId],
-        //     members: [user.username], 
-        // };
-        console.log(request.body.group);
+        console.log(request.body);
         //retrieve variables from request body parser and create new group document
         const newGroup = {
-            name: request.body.groupName,
+            name: request.body.groupname,
             //create new mongoDB ObjectId out of the Id strings
             membersId: [userId, ...request.body.membersId.map(id => new ObjectId(id))],
             members: [user.username, ...request.body.members],

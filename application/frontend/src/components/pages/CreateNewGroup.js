@@ -30,7 +30,7 @@ const CreateNewGroup = () => {
     }
 
     try {
-      const response = await axiosClient.post("/api/add-group", {
+      const response = await axiosClient.post("/api/my-groups/add-group", {
         "groupname": groupName,
         "membersId": membersId,
         "members": members
