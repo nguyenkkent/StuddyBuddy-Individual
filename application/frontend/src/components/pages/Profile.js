@@ -21,7 +21,7 @@ function Profile() {
     const fetchUser = async () => {
       try {
         // FIXME: do not return sensitive information like email and password
-        const response = await axiosClient.get("/api/add-friend", {
+        const response = await axiosClient.get("/api/my-friends/search-for-users", {
           //send authorization header for middleware to intercept
           headers: {
             'Authorization': `Bearer ${user.token}`,
