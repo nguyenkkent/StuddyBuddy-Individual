@@ -19,16 +19,15 @@ export async function handleStartGroupChat(request, response){
             return response.status(404).json({ message: "Some recipients not found" });
         }
 
-        const allMembers = [currentUserDocument, ...recipients];
-        const allMemberIds = allMembers.map(member => member._id);
-        const allMemberUsernames = allMembers.map(member => member.username);
+        const allMemberIds = recipients.map(member => member._id);
+        const allMemberUsernames = recipients.map(member => member.username);
 
         //check if groupchat between all members exists
         const existingGroupChat = await Messages.findOne({ participantsId: { $all: allMemberIds } });
 
-        if (existingGroupChat) {
-            return response.status(409).json({ message: "Group chat with these members already exists" });
-        }
+        // if (existingGroupChat) {
+        //     return response.status(409).json({ message: "Group chat with these members already exists" });
+        // }
 
         //create new groupchat
         const newGroupChat = new Messages({
